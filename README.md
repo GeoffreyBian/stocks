@@ -18,7 +18,19 @@ Wealthsimple. Your password and 2FA code are typed at the terminal and never
 written to disk; only the resulting session token is saved, in the macOS
 Keychain (service name `wealthsimple-stocks-folder`), not in this repo.
 
-## Workflow
+## Refreshing everything
+
+```bash
+.venv/bin/python scripts/check_auth.py    # is the session still valid? (never prompts)
+.venv/bin/python scripts/auth.py          # only if the above says NEEDS_AUTH
+.venv/bin/python scripts/refresh_all.py   # the whole pipeline in one command
+```
+
+`refresh_all.py` checks auth first and stops with instructions if you need to
+log in again, rather than hanging on a password prompt halfway through. Pass
+`--skip-watchlist` to skip the (slow) valuation screener.
+
+## The individual steps
 
 ```bash
 .venv/bin/python scripts/fetch_data.py               # pull latest data from Wealthsimple
