@@ -21,11 +21,16 @@ Keychain (service name `wealthsimple-stocks-folder`), not in this repo.
 ## Workflow
 
 ```bash
-.venv/bin/python scripts/fetch_data.py         # pull latest data from Wealthsimple
-.venv/bin/python scripts/build_trades.py       # FIFO-match buys/sells into closed trades
-.venv/bin/python scripts/detect_bad_trades.py  # flag quick losses, big losses, bad timing, overtrading
-.venv/bin/python scripts/detect_dips.py        # find market/holding dips, check if you traded them
+.venv/bin/python scripts/fetch_data.py               # pull latest data from Wealthsimple
+.venv/bin/python scripts/build_trades.py             # FIFO-match buys/sells into closed trades
+.venv/bin/python scripts/detect_bad_trades.py        # flag quick losses, big losses, bad timing, overtrading
+.venv/bin/python scripts/detect_dips.py              # find market/holding dips, check if you traded them
+.venv/bin/python scripts/build_dashboard_snapshot.py # aggregate everything into dashboard/dashboard_data.json
+.venv/bin/python scripts/render_dashboard_html.py    # inject that JSON into dashboard/dashboard.html
 ```
+
+Then publish `dashboard/dashboard.html` via Claude's Artifact tool (ask Claude
+to do this - it redeploys to the same URL on repeat runs).
 
 ## Data layout
 
@@ -45,7 +50,9 @@ data/
 journal/
   notes.md      # freeform trade rationale notes
 dashboard/
-  dashboard_data.json  # snapshot embedded into the published dashboard - gitignored
+  dashboard_template.html  # static template with a data placeholder - tracked in git
+  dashboard_data.json      # snapshot embedded into the published dashboard - gitignored
+  dashboard.html            # template + snapshot merged, ready to publish - gitignored
 ```
 
 **Nothing under `data/` or `dashboard/dashboard_data.json` is committed to

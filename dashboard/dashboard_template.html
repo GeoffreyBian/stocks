@@ -1,0 +1,336 @@
+<title>Portfolio Dashboard</title>
+<style>
+  :root {
+    color-scheme: light;
+    --surface-1:      #fcfcfb;
+    --page:           #f9f9f7;
+    --text-primary:   #0b0b0b;
+    --text-secondary: #52514e;
+    --text-muted:     #898781;
+    --gridline:       #e1e0d9;
+    --baseline:       #c3c2b7;
+    --border:         rgba(11,11,11,0.10);
+    --seq-1:          #2a78d6; /* sequential blue, magnitude bars */
+    --div-pos:        #2a78d6; /* diverging: gain */
+    --div-neg:        #e34948; /* diverging: loss */
+    --div-mid:        #f0efec;
+    --status-good:     #0ca30c;
+    --status-warning:  #fab219;
+    --status-serious:  #ec835a;
+    --status-critical: #d03b3b;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      color-scheme: dark;
+      --surface-1:      #1a1a19;
+      --page:           #0d0d0d;
+      --text-primary:   #ffffff;
+      --text-secondary: #c3c2b7;
+      --text-muted:     #898781;
+      --gridline:       #2c2c2a;
+      --baseline:       #383835;
+      --border:         rgba(255,255,255,0.10);
+      --seq-1:          #3987e5;
+      --div-pos:        #3987e5;
+      --div-neg:        #e66767;
+      --div-mid:        #383835;
+      --status-good:     #0ca30c;
+      --status-warning:  #fab219;
+      --status-serious:  #ec835a;
+      --status-critical: #d03b3b;
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --surface-1:      #1a1a19;
+    --page:           #0d0d0d;
+    --text-primary:   #ffffff;
+    --text-secondary: #c3c2b7;
+    --text-muted:     #898781;
+    --gridline:       #2c2c2a;
+    --baseline:       #383835;
+    --border:         rgba(255,255,255,0.10);
+    --seq-1:          #3987e5;
+    --div-pos:        #3987e5;
+    --div-neg:        #e66767;
+    --div-mid:        #383835;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    background: var(--page);
+    color: var(--text-primary);
+    font: 14px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif;
+    padding: 24px 20px 64px;
+  }
+  .wrap { max-width: 960px; margin: 0 auto; }
+
+  header.page-head { margin-bottom: 24px; }
+  header.page-head h1 { font-size: 20px; font-weight: 600; margin: 0 0 4px; }
+  header.page-head .meta { color: var(--text-muted); font-size: 12.5px; }
+
+  section { margin-bottom: 40px; }
+  section > h2 {
+    font-size: 13px; font-weight: 600; text-transform: uppercase;
+    letter-spacing: 0.04em; color: var(--text-secondary);
+    margin: 0 0 12px;
+  }
+  section > p.sub { color: var(--text-muted); font-size: 12.5px; margin: -8px 0 14px; }
+
+  /* Stat tiles */
+  .tiles {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1px; background: var(--gridline); border: 1px solid var(--gridline);
+    border-radius: 10px; overflow: hidden;
+  }
+  .tile { background: var(--surface-1); padding: 16px 18px; }
+  .tile .label { color: var(--text-secondary); font-size: 12px; margin-bottom: 6px; }
+  .tile .value { font-size: 24px; font-weight: 600; font-variant-numeric: proportional-nums; }
+  .tile .value.good { color: var(--status-good); }
+  .tile .value.critical { color: var(--status-critical); }
+  .tile .sub { color: var(--text-muted); font-size: 11.5px; margin-top: 4px; }
+
+  /* Holdings / realized bar rows */
+  .barlist { border: 1px solid var(--gridline); border-radius: 10px; background: var(--surface-1); }
+  .barrow {
+    display: grid; grid-template-columns: 76px 1fr 92px 74px; align-items: center;
+    gap: 10px; padding: 8px 14px; border-bottom: 1px solid var(--gridline);
+    position: relative;
+  }
+  .barrow:last-child { border-bottom: none; }
+  .barrow .sym { font-weight: 600; font-size: 13px; }
+  .barrow .name { color: var(--text-muted); font-size: 11px; display: block; margin-top: 1px; }
+  .bartrack { height: 16px; background: var(--gridline); border-radius: 3px; overflow: hidden; }
+  .barfill { height: 100%; border-radius: 3px 0 0 3px; }
+  .barrow .val { text-align: right; font-variant-numeric: tabular-nums; font-size: 12.5px; white-space: nowrap; }
+  .badge {
+    display: inline-flex; align-items: center; gap: 3px; justify-content: flex-end;
+    font-size: 12px; font-weight: 600; font-variant-numeric: tabular-nums; white-space: nowrap;
+  }
+  .badge.good { color: var(--status-good); }
+  .badge.critical { color: var(--status-critical); }
+
+  .divrow { display: grid; grid-template-columns: 76px 1fr 92px; align-items: center; gap: 10px; padding: 7px 14px; border-bottom: 1px solid var(--gridline); }
+  .divrow:last-child { border-bottom: none; }
+  .divtrack { position: relative; height: 14px; background: var(--div-mid); border-radius: 3px; }
+  .divfill { position: absolute; top: 0; bottom: 0; border-radius: 2px; }
+  .divrow .val { text-align: right; font-variant-numeric: tabular-nums; font-size: 12.5px; }
+
+  [data-tooltip] { cursor: default; }
+  [data-tooltip]:hover::after {
+    content: attr(data-tooltip);
+    position: absolute; left: 14px; right: 14px; bottom: 100%; margin-bottom: 4px;
+    background: var(--text-primary); color: var(--surface-1);
+    font-size: 11px; padding: 5px 8px; border-radius: 6px; z-index: 5;
+    white-space: normal; line-height: 1.4;
+  }
+
+  /* Cards for bad trades / dips */
+  .cards { display: flex; flex-direction: column; gap: 8px; }
+  .card {
+    border: 1px solid var(--gridline); border-radius: 10px; background: var(--surface-1);
+    padding: 12px 14px;
+  }
+  .card .card-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; margin-bottom: 4px; }
+  .card .card-head .who { font-weight: 600; font-size: 13.5px; }
+  .card .card-head .pnl { font-variant-numeric: tabular-nums; font-size: 13px; font-weight: 600; }
+  .card .dates { color: var(--text-muted); font-size: 11.5px; margin-bottom: 6px; }
+  .tag-row { display: flex; flex-wrap: wrap; gap: 6px; }
+  .tag {
+    display: inline-flex; align-items: center; gap: 4px;
+    font-size: 11px; font-weight: 600; padding: 3px 8px; border-radius: 999px;
+    border: 1px solid currentColor;
+  }
+  .tag.critical { color: var(--status-critical); }
+  .tag.serious { color: var(--status-serious); }
+  .tag.warning { color: #9a6a00; }
+  :root:not([data-theme="light"]) .tag.warning,
+  :root[data-theme="dark"] .tag.warning { color: var(--status-warning); }
+
+  table.plain { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+  table.plain th {
+    text-align: left; font-weight: 600; color: var(--text-secondary);
+    font-size: 11px; text-transform: uppercase; letter-spacing: 0.03em;
+    padding: 6px 10px; border-bottom: 1px solid var(--gridline);
+  }
+  table.plain td { padding: 7px 10px; border-bottom: 1px solid var(--gridline); vertical-align: top; }
+  table.plain tr:last-child td { border-bottom: none; }
+  table.plain td.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .table-wrap { border: 1px solid var(--gridline); border-radius: 10px; background: var(--surface-1); overflow-x: auto; }
+
+  .empty { color: var(--text-muted); font-size: 12.5px; padding: 14px; }
+  .legend-note { color: var(--text-muted); font-size: 11.5px; margin-top: 8px; }
+</style>
+
+<div class="wrap">
+  <header class="page-head">
+    <h1>Portfolio Dashboard</h1>
+    <div class="meta" id="generated-at"></div>
+  </header>
+
+  <section id="sec-summary">
+    <h2>Overview</h2>
+    <div class="tiles" id="tiles-summary"></div>
+  </section>
+
+  <section id="sec-holdings">
+    <h2>Current holdings</h2>
+    <p class="sub">Aggregated across all accounts, sorted by market value. Bar length = market value; badge = unrealized gain/loss.</p>
+    <div class="barlist" id="holdings-list"></div>
+  </section>
+
+  <section id="sec-realized">
+    <h2>Realized P&amp;L by security (all-time)</h2>
+    <p class="sub">Every closed position, from Wealthsimple's own realized-returns figures.</p>
+    <div class="barlist" id="realized-list"></div>
+  </section>
+
+  <section id="sec-badtrades">
+    <h2>Flagged trades</h2>
+    <p class="sub">Closed trades that tripped a heuristic worth a second look &mdash; not verdicts, prompts for the trade journal.</p>
+    <div class="cards" id="badtrades-list"></div>
+  </section>
+
+  <section id="sec-dips">
+    <h2>Market dips</h2>
+    <p class="sub" id="dips-summary"></p>
+    <div class="table-wrap" style="margin-bottom:14px;">
+      <table class="plain" id="dips-activity-table"></table>
+    </div>
+    <h2 style="margin-top:20px;">Notable dips you sat out (still-held symbols)</h2>
+    <div class="table-wrap">
+      <table class="plain" id="dips-missed-table"></table>
+    </div>
+  </section>
+</div>
+
+<script id="dashboard-data" type="application/json">__DASHBOARD_DATA_JSON__</script>
+<script>
+(function () {
+  const data = JSON.parse(document.getElementById('dashboard-data').textContent);
+
+  const fmtMoney = (n, opts) => {
+    if (n === null || n === undefined) return '—';
+    const abs = Math.abs(n);
+    const sign = n < 0 ? '-' : '';
+    return sign + '$' + abs.toLocaleString('en-US', { maximumFractionDigits: 0, ...opts });
+  };
+  const fmtPct = (n) => (n === null || n === undefined) ? '—' : (n >= 0 ? '+' : '') + n.toFixed(1) + '%';
+  const esc = (s) => (s ?? '').toString().replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+  document.getElementById('generated-at').textContent =
+    'Generated ' + new Date(data.generated_at).toLocaleString('en-US', { dateStyle: 'medium', timeStyle: 'short' });
+
+  // ---- Summary tiles ----
+  const s = data.portfolio_summary || {};
+  const wr = data.win_rate || {};
+  const tiles = [
+    { label: 'Total portfolio value', value: fmtMoney(s.total_market_value) },
+    { label: 'Unrealized P&L', value: fmtMoney(s.total_unrealized_pnl), cls: (s.total_unrealized_pnl >= 0 ? 'good' : 'critical') },
+    { label: 'Realized P&L (all-time)', value: fmtMoney(data.realized?.total), cls: ((data.realized?.total ?? 0) >= 0 ? 'good' : 'critical') },
+    { label: 'Win rate', value: (wr.win_rate_pct != null ? wr.win_rate_pct + '%' : '—'), sub: wr.wins != null ? `${wr.wins}W / ${wr.losses}L over ${wr.closed_trades} closed trades` : '' },
+    { label: 'Avg win / avg loss', value: fmtMoney(wr.avg_win) + ' / ' + fmtMoney(wr.avg_loss), sub: wr.avg_holding_days != null ? `avg hold ${wr.avg_holding_days}d` : '' },
+  ];
+  document.getElementById('tiles-summary').innerHTML = tiles.map(t => `
+    <div class="tile">
+      <div class="label">${esc(t.label)}</div>
+      <div class="value ${t.cls || ''}">${t.value}</div>
+      ${t.sub ? `<div class="sub">${esc(t.sub)}</div>` : ''}
+    </div>`).join('');
+
+  // ---- Holdings ----
+  const holdings = data.holdings || [];
+  const maxHoldingValue = Math.max(...holdings.map(h => h.market_value || 0), 1);
+  document.getElementById('holdings-list').innerHTML = holdings.length ? holdings.map(h => {
+    const pctCls = (h.unrealized_pnl_pct ?? 0) >= 0 ? 'good' : 'critical';
+    const arrow = (h.unrealized_pnl_pct ?? 0) >= 0 ? '▲' : '▼';
+    return `
+    <div class="barrow" data-tooltip="${esc(h.name)} — ${h.position_count} position${h.position_count === 1 ? '' : 's'} — ${fmtPct(h.pct_of_portfolio)} of portfolio">
+      <div><span class="sym">${esc(h.symbol)}</span><span class="name">${esc((h.name||'').slice(0,22))}</span></div>
+      <div class="bartrack"><div class="barfill" style="width:${(h.market_value / maxHoldingValue * 100).toFixed(1)}%; background:var(--seq-1);"></div></div>
+      <div class="val">${fmtMoney(h.market_value)}</div>
+      <div class="badge ${pctCls}">${arrow} ${fmtPct(h.unrealized_pnl_pct)}</div>
+    </div>`;
+  }).join('') : '<div class="empty">No holdings data.</div>';
+
+  // ---- Realized P&L by security ----
+  const realized = (data.realized?.by_security || []);
+  const maxAbsRealized = Math.max(...realized.map(r => Math.abs(r.realized_pnl)), 1);
+  document.getElementById('realized-list').innerHTML = realized.length ? realized.map(r => {
+    const pos = r.realized_pnl >= 0;
+    const widthPct = Math.abs(r.realized_pnl) / maxAbsRealized * 50;
+    const style = pos
+      ? `left:50%; width:${widthPct}%; background:var(--div-pos); border-radius:2px 3px 3px 2px;`
+      : `right:50%; width:${widthPct}%; background:var(--div-neg); border-radius:3px 2px 2px 3px;`;
+    return `
+    <div class="divrow">
+      <div class="sym">${esc(r.symbol)}</div>
+      <div class="divtrack"><div class="divfill" style="${style}"></div></div>
+      <div class="val" style="color:${pos ? 'var(--status-good)' : 'var(--status-critical)'}">${fmtMoney(r.realized_pnl)}</div>
+    </div>`;
+  }).join('') : '<div class="empty">No realized trades yet.</div>';
+
+  // ---- Bad trades ----
+  const flagMeta = {
+    big_loss: { cls: 'critical', icon: '⚠' },
+    quick_loss: { cls: 'serious', icon: '⚡' },
+    bad_entry: { cls: 'serious', icon: '↓' },
+    sold_too_early: { cls: 'warning', icon: '↑' },
+    overtrading: { cls: 'warning', icon: '↻' },
+  };
+  const badTrades = data.bad_trades || [];
+  document.getElementById('badtrades-list').innerHTML = badTrades.length ? badTrades.map(t => {
+    const flagList = (t.flags || '').split(';').map(f => f.trim()).filter(Boolean);
+    const tags = flagList.map(f => {
+      const key = f.split(':')[0].trim();
+      const meta = flagMeta[key] || { cls: 'warning', icon: '•' };
+      return `<span class="tag ${meta.cls}">${meta.icon} ${esc(f)}</span>`;
+    }).join('');
+    const pnl = t.realized_pnl;
+    const dateRange = t.buy_date ? `${t.buy_date} → ${t.sell_date}` : `sold ${t.sell_date} (no matching buy in fetched history)`;
+    return `
+    <div class="card">
+      <div class="card-head">
+        <span class="who">${esc(t.symbol)}</span>
+        ${pnl != null ? `<span class="pnl" style="color:${pnl >= 0 ? 'var(--status-good)' : 'var(--status-critical)'}">${fmtMoney(pnl)} (${fmtPct(t.realized_pnl_pct)})</span>` : ''}
+      </div>
+      <div class="dates">${esc(dateRange)}</div>
+      <div class="tag-row">${tags}</div>
+    </div>`;
+  }).join('') : '<div class="empty">No flagged trades.</div>';
+
+  // ---- Dips ----
+  const dips = data.dips || {};
+  document.getElementById('dips-summary').innerHTML =
+    `Across everything you've traded: <strong style="color:var(--status-good)">${dips.dips_bought || 0} dips bought into</strong>, ` +
+    `<strong style="color:var(--status-critical)">${dips.dips_sold_into || 0} sold into</strong>, and ` +
+    `${dips.dips_sat_out || 0} sat out entirely. A "dip" here is a ≥10% drawdown from a trailing 1-year high.`;
+
+  const activityRows = dips.dips_with_activity || [];
+  document.getElementById('dips-activity-table').innerHTML = `
+    <thead><tr><th>Symbol</th><th>Dip start</th><th>Low</th><th class="num">Magnitude</th><th>Recovered</th><th>Your activity</th></tr></thead>
+    <tbody>${activityRows.length ? activityRows.map(d => `
+      <tr>
+        <td><strong>${esc(d.symbol)}</strong></td>
+        <td>${esc(d.dip_start)}</td>
+        <td>${esc(d.dip_low_date)}</td>
+        <td class="num" style="color:var(--status-critical)">${d.dip_low_pct}%</td>
+        <td>${esc(d.recovered_date || 'ongoing')}</td>
+        <td>${esc(d.your_activity)}</td>
+      </tr>`).join('') : `<tr><td colspan="6" class="empty">No dip/trade overlaps found.</td></tr>`}
+    </tbody>`;
+
+  const missedRows = dips.notable_dips_missed || [];
+  document.getElementById('dips-missed-table').innerHTML = `
+    <thead><tr><th>Symbol</th><th>Dip start</th><th>Low</th><th class="num">Magnitude</th><th>Recovered</th></tr></thead>
+    <tbody>${missedRows.length ? missedRows.map(d => `
+      <tr>
+        <td><strong>${esc(d.symbol)}</strong></td>
+        <td>${esc(d.dip_start)}</td>
+        <td>${esc(d.dip_low_date)}</td>
+        <td class="num" style="color:var(--status-critical)">${d.dip_low_pct}%</td>
+        <td>${esc(d.recovered_date || 'ongoing')}</td>
+      </tr>`).join('') : `<tr><td colspan="5" class="empty">Nothing notable.</td></tr>`}
+    </tbody>`;
+})();
+</script>
