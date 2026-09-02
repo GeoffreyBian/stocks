@@ -22,6 +22,8 @@ from pathlib import Path
 import pandas as pd
 import yfinance as yf
 
+from market_data import resolve_yf_symbol
+
 ROOT = Path(__file__).resolve().parent.parent
 PROCESSED_DIR = ROOT / "data" / "processed"
 
@@ -42,9 +44,12 @@ def load_trades() -> pd.DataFrame:
     return df.dropna(subset=["buy_date", "sell_date"])  # need both ends to flag
 
 
-def _price_change_pct(symbol: str, start, days: int) -> float | None:
+def _price_change_pct(symbol: str, start, days: int, is_crypto: bool = False) -> float | None:
+    yf_symbol = resolve_yf_symbol(symbol, is_crypto=is_crypto)
+    if not yf_symbol:
+        return None
     try:
-        hist = yf.Ticker(symbol).history(
+        hist = yf.Ticker(yf_symbol).history(
             start=start.date(), end=(start + pd.Timedelta(days=days + 3)).date()
         )
         if hist.empty:
@@ -67,11 +72,12 @@ def flag_trades(trades: pd.DataFrame) -> pd.DataFrame:
             if t["realized_pnl_pct"] is not None and t["realized_pnl_pct"] <= BIG_LOSS_PCT:
                 reasons.append(f"big_loss: {t['realized_pnl_pct']:.1f}% realized loss")
 
-        post_sale = _price_change_pct(t["symbol"], t["sell_date"], LOOKAHEAD_DAYS)
+        is_crypto = bool(t.get("is_crypto", False))
+        post_sale = _price_change_pct(t["symbol"], t["sell_date"], LOOKAHEAD_DAYS, is_crypto)
         if post_sale is not None and post_sale >= POST_SALE_REGRET_PCT:
             reasons.append(f"sold_too_early: {t['symbol']} rose {post_sale:.1f}% in the {LOOKAHEAD_DAYS}d after you sold")
 
-        post_buy = _price_change_pct(t["symbol"], t["buy_date"], LOOKAHEAD_DAYS)
+        post_buy = _price_change_pct(t["symbol"], t["buy_date"], LOOKAHEAD_DAYS, is_crypto)
         if post_buy is not None and post_buy <= POST_BUY_DROP_PCT:
             reasons.append(f"bad_entry: {t['symbol']} dropped {post_buy:.1f}% in the {LOOKAHEAD_DAYS}d after you bought")
 

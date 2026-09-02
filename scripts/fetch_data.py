@@ -37,30 +37,30 @@ def _json_default(o):
 TRADE_TYPES = {
     "DIY_BUY", "DIY_SELL", "MANAGED_BUY", "MANAGED_SELL",
     "CRYPTO_BUY", "CRYPTO_SELL", "NEW_ISSUE_BUY",
+    "OPTIONS_BUY", "OPTIONS_SELL",
 }
 
 
-def _enrich_activities_with_symbols(api, activities: list) -> None:
-    """Add a resolved ticker symbol + per-share price to each trade activity,
-    since raw activities only carry an opaque securityId + total dollar amount."""
-    symbol_cache: dict[str, str] = {}
-    for act in activities:
-        security_id = act.get("securityId")
-        if not security_id:
-            continue
-        if security_id not in symbol_cache:
-            try:
-                symbol_cache[security_id] = api.security_id_to_symbol(security_id)
-            except Exception:
-                symbol_cache[security_id] = None
-        act["symbol"] = symbol_cache[security_id]
+def _enrich_activities_with_symbols(activities: list) -> None:
+    """Add a plain ticker symbol + per-share price to each trade activity.
 
-        if act.get("type") in TRADE_TYPES:
-            qty = act.get("assetQuantity")
-            amount = act.get("amount")
-            if qty and amount:
-                act["side"] = "BUY" if act["type"].endswith("_BUY") else "SELL"
-                act["price_per_share"] = float(amount) / float(qty)
+    Raw trade activities already carry `assetSymbol` (a real ticker, e.g.
+    "NVDA") directly from Wealthsimple - no extra API calls needed. (An
+    earlier version of this tried resolving `securityId` via
+    `api.security_id_to_symbol()`, but that call is case-sensitive and
+    Wealthsimple's activity feed returns securityId in a different case than
+    the lookup expects, so it silently failed for every security. Don't
+    reintroduce that path - assetSymbol is simpler and already correct.)
+    """
+    for act in activities:
+        if act.get("type") not in TRADE_TYPES:
+            continue
+        act["symbol"] = act.get("assetSymbol")
+        qty = act.get("assetQuantity")
+        amount = act.get("amount")
+        if qty and amount:
+            act["side"] = "BUY" if act["type"].endswith("_BUY") else "SELL"
+            act["price_per_share"] = float(amount) / float(qty)
 
 
 def fetch_raw(api) -> dict:
@@ -92,7 +92,7 @@ def fetch_raw(api) -> dict:
 
     try:
         raw["activities"] = api.get_activities(account_ids, load_all=True)
-        _enrich_activities_with_symbols(api, raw["activities"])
+        _enrich_activities_with_symbols(raw["activities"])
     except Exception as e:
         print(f"  ! activities failed: {e}")
 
@@ -113,8 +113,8 @@ def fetch_raw(api) -> dict:
 
     try:
         raw["identity_historical_financials"] = api.get_identity_historical_financials(
-            currency=CURRENCY, resolution="WEEKLY"
-        ) if hasattr(api, "get_identity_historical_financials") else None
+            currency=CURRENCY
+        )
     except Exception as e:
         print(f"  ! historical financials failed: {e}")
 

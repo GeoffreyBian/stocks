@@ -35,13 +35,17 @@ def fifo_match(df: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFrame]:
     open_lots: dict[tuple, deque] = defaultdict(deque)
 
     for _, row in df.iterrows():
-        key = (row.get(group_key) if group_key else None, row["symbol"])
+        # Match by securityId, not the display symbol - two different option
+        # contracts on the same underlying can share a symbol but are
+        # different instruments, while securityId is unique per instrument.
+        key = (row.get(group_key) if group_key else None, row.get("securityId"), row["symbol"])
         qty = float(row["assetQuantity"])
         price = float(row["price_per_share"])
         date = row["occurredAt"]
+        is_crypto = str(row.get("type", "")).startswith("CRYPTO")
 
         if row["side"] == "BUY":
-            open_lots[key].append({"qty": qty, "price": price, "date": date})
+            open_lots[key].append({"qty": qty, "price": price, "date": date, "is_crypto": is_crypto})
             continue
 
         # SELL: consume open lots FIFO
@@ -54,6 +58,7 @@ def fifo_match(df: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFrame]:
             closed_rows.append({
                 "account_id": key[0],
                 "symbol": row["symbol"],
+                "is_crypto": is_crypto,
                 "buy_date": lot["date"],
                 "sell_date": date,
                 "quantity": matched_qty,
@@ -73,6 +78,7 @@ def fifo_match(df: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFrame]:
             closed_rows.append({
                 "account_id": key[0],
                 "symbol": row["symbol"],
+                "is_crypto": is_crypto,
                 "buy_date": None,
                 "sell_date": date,
                 "quantity": remaining,
@@ -90,7 +96,8 @@ def fifo_match(df: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFrame]:
             if lot["qty"] > 1e-9:
                 open_rows.append({
                     "account_id": key[0],
-                    "symbol": key[1],
+                    "symbol": key[2],
+                    "is_crypto": lot["is_crypto"],
                     "buy_date": lot["date"],
                     "quantity": lot["qty"],
                     "buy_price": lot["price"],

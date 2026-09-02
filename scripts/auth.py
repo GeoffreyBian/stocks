@@ -17,6 +17,18 @@ import keyring
 from ws_api import OTPRequiredException, WealthsimpleAPI, WSAPISession
 
 KEYRING_SERVICE = "wealthsimple-stocks-folder"
+# The email isn't secret, but storing it lets later runs (including
+# non-interactive ones, e.g. Claude running fetch_data.py on your behalf
+# once a session already exists) reuse a saved session without prompting.
+_USERNAME_KEY = "_default_username"
+
+
+def _load_username() -> str | None:
+    return keyring.get_password(KEYRING_SERVICE, _USERNAME_KEY)
+
+
+def _save_username(username: str) -> None:
+    keyring.set_password(KEYRING_SERVICE, _USERNAME_KEY, username)
 
 
 def _load_session(username: str) -> str | None:
@@ -36,7 +48,10 @@ def get_api(username: str | None = None) -> WealthsimpleAPI:
     """Return an authenticated WealthsimpleAPI client, prompting interactively
     only if there's no valid saved session."""
     if username is None:
+        username = _load_username()
+    if username is None:
         username = input("Wealthsimple email: ").strip()
+    _save_username(username)
 
     persist = _make_persist_fct(username)
 

@@ -17,6 +17,8 @@ from pathlib import Path
 import pandas as pd
 import yfinance as yf
 
+from market_data import resolve_yf_symbol
+
 ROOT = Path(__file__).resolve().parent.parent
 PROCESSED_DIR = ROOT / "data" / "processed"
 
@@ -27,18 +29,26 @@ RECOVERY_PCT = -2.0  # "recovered" once within 2% of the prior high
 HISTORY_PERIOD = "5y"
 
 
-def traded_symbols() -> set[str]:
+def traded_symbols() -> dict[str, bool]:
+    """Return {symbol: is_crypto} for everything ever traded."""
     path = PROCESSED_DIR / "activities.csv"
     if not path.exists():
-        return set()
+        return {}
     df = pd.read_csv(path)
     if "symbol" not in df.columns:
-        return set()
-    return set(df["symbol"].dropna().unique())
+        return {}
+    df = df.dropna(subset=["symbol"])
+    df["is_crypto"] = df["type"].astype(str).str.startswith("CRYPTO")
+    # If a symbol shows up as crypto in any row, treat it as crypto everywhere.
+    return df.groupby("symbol")["is_crypto"].any().to_dict()
 
 
-def find_dips(symbol: str) -> pd.DataFrame:
-    hist = yf.Ticker(symbol).history(period=HISTORY_PERIOD)
+def find_dips(symbol: str, is_crypto: bool = False) -> pd.DataFrame:
+    yf_symbol = resolve_yf_symbol(symbol, is_crypto=is_crypto)
+    if not yf_symbol:
+        print(f"  ! could not resolve {symbol} on Yahoo Finance, skipping")
+        return pd.DataFrame()
+    hist = yf.Ticker(yf_symbol).history(period=HISTORY_PERIOD)
     if hist.empty:
         return pd.DataFrame()
 
@@ -115,11 +125,12 @@ def cross_reference_with_trades(dips: pd.DataFrame) -> pd.DataFrame:
 
 
 def main():
-    symbols = BENCHMARKS.keys() | traded_symbols()
+    crypto_by_symbol = traded_symbols()
+    symbols = {s: False for s in BENCHMARKS} | crypto_by_symbol
     all_dips = []
-    for symbol in symbols:
+    for symbol, is_crypto in symbols.items():
         print(f"Scanning {symbol} for dips...")
-        d = find_dips(symbol)
+        d = find_dips(symbol, is_crypto=is_crypto)
         if not d.empty:
             all_dips.append(d)
 
