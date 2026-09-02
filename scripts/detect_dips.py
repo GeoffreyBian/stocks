@@ -29,6 +29,17 @@ RECOVERY_PCT = -2.0  # "recovered" once within 2% of the prior high
 HISTORY_PERIOD = "5y"
 
 
+def first_invested_date() -> str | None:
+    """The date the portfolio was first funded. Dips that bottomed out before
+    this are noise - they were never opportunities the user could have taken."""
+    path = PROCESSED_DIR / "performance.csv"
+    if not path.exists():
+        return None
+    perf = pd.read_csv(path)
+    funded = perf[perf["net_liquidation_value"] > 0]
+    return str(funded.iloc[0]["date"]) if not funded.empty else None
+
+
 def traded_symbols() -> dict[str, bool]:
     """Return {symbol: is_crypto} for everything ever traded."""
     path = PROCESSED_DIR / "activities.csv"
@@ -139,6 +150,16 @@ def main():
         return
 
     combined = pd.concat(all_dips, ignore_index=True)
+
+    # Only keep dips that bottomed out after the portfolio was first funded -
+    # a 2021 crash isn't an opportunity someone who started investing in 2024
+    # could have acted on.
+    cutoff = first_invested_date()
+    if cutoff:
+        before = len(combined)
+        combined = combined[combined["dip_low_date"].astype(str) >= cutoff]
+        print(f"Filtered to dips bottoming on/after {cutoff}: {before} -> {len(combined)}")
+
     combined = cross_reference_with_trades(combined)
     combined.to_csv(PROCESSED_DIR / "dip_events.csv", index=False)
     print(f"dip_events.csv: {len(combined)} dip events across {len(symbols)} symbols")

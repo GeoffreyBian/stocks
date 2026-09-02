@@ -112,8 +112,11 @@ def fetch_raw(api) -> dict:
         print(f"  ! dividends failed: {e}")
 
     try:
+        # account_ids is required in practice - calling this without it returns
+        # an empty list rather than erroring, which silently costs you the
+        # entire portfolio-value time series.
         raw["identity_historical_financials"] = api.get_identity_historical_financials(
-            currency=CURRENCY
+            account_ids=account_ids, currency=CURRENCY
         )
     except Exception as e:
         print(f"  ! historical financials failed: {e}")
@@ -152,18 +155,51 @@ def update_processed(raw: dict) -> None:
         combined.to_csv(act_path, index=False)
         print(f"  activities.csv: {len(combined)} total rows")
 
-    # positions.csv - append one dated snapshot per run (time series of holdings)
+    # positions.csv - ONE snapshot per calendar day. Rerunning on the same day
+    # replaces that day's rows rather than appending a second copy: appending
+    # would double-count every holding for anyone summing the latest snapshot.
     if raw["positions"]:
         pos_df = pd.json_normalize(raw["positions"])
         pos_df["snapshot_date"] = today
         pos_path = PROCESSED_DIR / "positions.csv"
         if pos_path.exists():
             existing = pd.read_csv(pos_path)
+            existing = existing[existing["snapshot_date"] != today]
             combined = pd.concat([existing, pos_df], ignore_index=True)
         else:
             combined = pos_df
         combined.to_csv(pos_path, index=False)
-        print(f"  positions.csv: snapshot for {today} added")
+        print(f"  positions.csv: snapshot for {today} ({len(pos_df)} positions)")
+
+    # performance.csv - the portfolio value time series (weekly), overwritten.
+    # netLiquidationValue is the authoritative total portfolio value; netDeposits
+    # is money you put in, so the gap between them is your actual gain.
+    hist = raw.get("identity_historical_financials") or []
+    if hist:
+        perf = pd.DataFrame([{
+            "date": h["date"],
+            "net_liquidation_value": float(h["netLiquidationValueV2"]["amount"]),
+            "net_deposits": float(h["netDepositsV2"]["amount"]),
+        } for h in hist]).sort_values("date")
+        perf.to_csv(PROCESSED_DIR / "performance.csv", index=False)
+        print(f"  performance.csv: {len(perf)} points, latest "
+              f"${perf.iloc[-1]['net_liquidation_value']:,.0f}")
+
+    # cash.csv - cash balances per account (positions cover securities only)
+    cash_rows = []
+    for aid, bal in (raw.get("balances") or {}).items():
+        if not isinstance(bal, dict):
+            continue
+        for key, amount in bal.items():
+            if key.startswith("sec-c-"):  # sec-c-cad / sec-c-usd are cash
+                cash_rows.append({
+                    "account_id": aid,
+                    "currency": key.replace("sec-c-", "").upper(),
+                    "amount": float(amount),
+                })
+    if cash_rows:
+        pd.DataFrame(cash_rows).to_csv(PROCESSED_DIR / "cash.csv", index=False)
+        print(f"  cash.csv: {len(cash_rows)} balances")
 
     # realized_returns.csv / dividends.csv - overwritten, current view
     if raw["realized_returns"]:

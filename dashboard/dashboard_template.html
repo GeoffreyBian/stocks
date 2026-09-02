@@ -10,156 +10,164 @@
     --gridline:       #e1e0d9;
     --baseline:       #c3c2b7;
     --border:         rgba(11,11,11,0.10);
-    --seq-1:          #2a78d6; /* sequential blue, magnitude bars */
-    --div-pos:        #2a78d6; /* diverging: gain */
-    --div-neg:        #e34948; /* diverging: loss */
-    --div-mid:        #f0efec;
-    --status-good:     #0ca30c;
-    --status-warning:  #fab219;
-    --status-serious:  #ec835a;
+    --s1: #2a78d6; --s2: #eb6834; --s3: #1baf7a; --s4: #eda100;
+    --s5: #e87ba4; --s6: #008300; --s7: #4a3aa7; --s8: #e34948;
+    --other: #a9a8a2;
+    --div-pos: #2a78d6;
+    --div-neg: #e34948;
+    --div-mid: #f0efec;
+    --status-good: #0ca30c;
+    --status-warning-text: #9a6a00;
+    --status-serious: #ec835a;
     --status-critical: #d03b3b;
+    --success-text: #006300;
   }
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]) {
       color-scheme: dark;
-      --surface-1:      #1a1a19;
-      --page:           #0d0d0d;
-      --text-primary:   #ffffff;
-      --text-secondary: #c3c2b7;
-      --text-muted:     #898781;
-      --gridline:       #2c2c2a;
-      --baseline:       #383835;
-      --border:         rgba(255,255,255,0.10);
-      --seq-1:          #3987e5;
-      --div-pos:        #3987e5;
-      --div-neg:        #e66767;
-      --div-mid:        #383835;
-      --status-good:     #0ca30c;
-      --status-warning:  #fab219;
-      --status-serious:  #ec835a;
-      --status-critical: #d03b3b;
+      --surface-1: #1a1a19; --page: #0d0d0d;
+      --text-primary: #ffffff; --text-secondary: #c3c2b7; --text-muted: #898781;
+      --gridline: #2c2c2a; --baseline: #383835; --border: rgba(255,255,255,0.10);
+      --s1: #3987e5; --s2: #d95926; --s3: #199e70; --s4: #c98500;
+      --s5: #d55181; --s6: #008300; --s7: #9085e9; --s8: #e66767;
+      --other: #6b6a66;
+      --div-pos: #3987e5; --div-neg: #e66767; --div-mid: #383835;
+      --status-warning-text: #fab219;
+      --success-text: #0ca30c;
     }
   }
   :root[data-theme="dark"] {
     color-scheme: dark;
-    --surface-1:      #1a1a19;
-    --page:           #0d0d0d;
-    --text-primary:   #ffffff;
-    --text-secondary: #c3c2b7;
-    --text-muted:     #898781;
-    --gridline:       #2c2c2a;
-    --baseline:       #383835;
-    --border:         rgba(255,255,255,0.10);
-    --seq-1:          #3987e5;
-    --div-pos:        #3987e5;
-    --div-neg:        #e66767;
-    --div-mid:        #383835;
+    --surface-1: #1a1a19; --page: #0d0d0d;
+    --text-primary: #ffffff; --text-secondary: #c3c2b7; --text-muted: #898781;
+    --gridline: #2c2c2a; --baseline: #383835; --border: rgba(255,255,255,0.10);
+    --s1: #3987e5; --s2: #d95926; --s3: #199e70; --s4: #c98500;
+    --s5: #d55181; --s6: #008300; --s7: #9085e9; --s8: #e66767;
+    --other: #6b6a66;
+    --div-pos: #3987e5; --div-neg: #e66767; --div-mid: #383835;
+    --status-warning-text: #fab219;
+    --success-text: #0ca30c;
   }
 
   * { box-sizing: border-box; }
   body {
-    background: var(--page);
-    color: var(--text-primary);
+    background: var(--page); color: var(--text-primary);
     font: 14px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif;
-    padding: 24px 20px 64px;
+    padding: 24px 20px 72px;
   }
-  .wrap { max-width: 960px; margin: 0 auto; }
+  .wrap { max-width: 1000px; margin: 0 auto; }
 
-  header.page-head { margin-bottom: 24px; }
+  header.page-head { margin-bottom: 22px; }
   header.page-head h1 { font-size: 20px; font-weight: 600; margin: 0 0 4px; }
   header.page-head .meta { color: var(--text-muted); font-size: 12.5px; }
 
-  section { margin-bottom: 40px; }
-  section > h2 {
-    font-size: 13px; font-weight: 600; text-transform: uppercase;
-    letter-spacing: 0.04em; color: var(--text-secondary);
-    margin: 0 0 12px;
+  section { margin-bottom: 36px; }
+  h2.sec {
+    font-size: 12px; font-weight: 600; text-transform: uppercase;
+    letter-spacing: 0.05em; color: var(--text-secondary); margin: 0 0 10px;
   }
-  section > p.sub { color: var(--text-muted); font-size: 12.5px; margin: -8px 0 14px; }
+  p.sub { color: var(--text-muted); font-size: 12.5px; margin: -4px 0 14px; }
 
-  /* Stat tiles */
+  /* Hero */
+  .hero {
+    background: var(--surface-1); border: 1px solid var(--gridline);
+    border-radius: 12px; padding: 20px 22px; margin-bottom: 12px;
+  }
+  .hero .label { color: var(--text-secondary); font-size: 12.5px; }
+  .hero .figure { font-size: 44px; font-weight: 600; line-height: 1.1; margin: 4px 0 2px; }
+  .hero .delta { font-size: 14px; font-weight: 600; }
+  .hero .delta.up { color: var(--success-text); }
+  .hero .delta.down { color: var(--status-critical); }
+  .hero .asof { color: var(--text-muted); font-size: 11.5px; margin-top: 6px; }
+
   .tiles {
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 1px; background: var(--gridline); border: 1px solid var(--gridline);
-    border-radius: 10px; overflow: hidden;
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(148px, 1fr));
+    gap: 1px; background: var(--gridline);
+    border: 1px solid var(--gridline); border-radius: 12px; overflow: hidden;
   }
-  .tile { background: var(--surface-1); padding: 16px 18px; }
-  .tile .label { color: var(--text-secondary); font-size: 12px; margin-bottom: 6px; }
-  .tile .value { font-size: 24px; font-weight: 600; font-variant-numeric: proportional-nums; }
-  .tile .value.good { color: var(--status-good); }
-  .tile .value.critical { color: var(--status-critical); }
-  .tile .sub { color: var(--text-muted); font-size: 11.5px; margin-top: 4px; }
+  .tile { background: var(--surface-1); padding: 14px 16px; }
+  .tile .label { color: var(--text-secondary); font-size: 11.5px; margin-bottom: 5px; }
+  .tile .value { font-size: 21px; font-weight: 600; }
+  .tile .value.good { color: var(--success-text); }
+  .tile .value.bad { color: var(--status-critical); }
+  .tile .sub { color: var(--text-muted); font-size: 11px; margin-top: 3px; }
 
-  /* Holdings / realized bar rows */
-  .barlist { border: 1px solid var(--gridline); border-radius: 10px; background: var(--surface-1); }
+  /* Chart cards */
+  figure.chart {
+    margin: 0; background: var(--surface-1); border: 1px solid var(--gridline);
+    border-radius: 12px; padding: 16px 18px 12px; position: relative;
+  }
+  figure.chart figcaption { margin-bottom: 2px; }
+  figure.chart .title { font-size: 14px; font-weight: 600; }
+  figure.chart .note { color: var(--text-muted); font-size: 11.5px; margin-top: 2px; }
+  .chart-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  @media (max-width: 720px) { .chart-grid { grid-template-columns: 1fr; } }
+  svg.plot { width: 100%; height: auto; display: block; margin-top: 8px; overflow: visible; }
+  .legend { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 8px; }
+  .legend .item { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; color: var(--text-secondary); }
+  .legend .key { width: 14px; height: 3px; border-radius: 2px; flex: none; }
+
+  .tip {
+    position: absolute; pointer-events: none; opacity: 0; transition: opacity .08s;
+    background: var(--text-primary); color: var(--surface-1);
+    font-size: 11.5px; line-height: 1.45; padding: 6px 9px; border-radius: 7px;
+    white-space: nowrap; z-index: 10; font-variant-numeric: tabular-nums;
+  }
+
+  /* Allocation stacked bar */
+  .alloc-bar { display: flex; gap: 2px; height: 26px; margin: 4px 0 10px; }
+  .alloc-seg { border-radius: 3px; min-width: 2px; }
+  .alloc-key { display: flex; flex-wrap: wrap; gap: 6px 14px; }
+  .alloc-key .item { display: inline-flex; align-items: center; gap: 6px; font-size: 11.5px; color: var(--text-secondary); }
+  .alloc-key .swatch { width: 10px; height: 10px; border-radius: 3px; flex: none; }
+
+  /* Bar rows */
+  .barlist { border: 1px solid var(--gridline); border-radius: 12px; background: var(--surface-1); }
   .barrow {
-    display: grid; grid-template-columns: 76px 1fr 92px 74px; align-items: center;
-    gap: 10px; padding: 8px 14px; border-bottom: 1px solid var(--gridline);
-    position: relative;
+    display: grid; grid-template-columns: 84px 1fr 92px 78px; align-items: center;
+    gap: 10px; padding: 8px 14px; border-bottom: 1px solid var(--gridline); position: relative;
   }
   .barrow:last-child { border-bottom: none; }
   .barrow .sym { font-weight: 600; font-size: 13px; }
-  .barrow .name { color: var(--text-muted); font-size: 11px; display: block; margin-top: 1px; }
+  .barrow .name { color: var(--text-muted); font-size: 10.5px; display: block; }
   .bartrack { height: 16px; background: var(--gridline); border-radius: 3px; overflow: hidden; }
-  .barfill { height: 100%; border-radius: 3px 0 0 3px; }
+  .barfill { height: 100%; border-radius: 3px 4px 4px 3px; background: var(--s1); }
   .barrow .val { text-align: right; font-variant-numeric: tabular-nums; font-size: 12.5px; white-space: nowrap; }
-  .badge {
-    display: inline-flex; align-items: center; gap: 3px; justify-content: flex-end;
-    font-size: 12px; font-weight: 600; font-variant-numeric: tabular-nums; white-space: nowrap;
-  }
-  .badge.good { color: var(--status-good); }
-  .badge.critical { color: var(--status-critical); }
+  .badge { display: inline-flex; align-items: center; gap: 3px; justify-content: flex-end;
+           font-size: 12px; font-weight: 600; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .badge.good { color: var(--success-text); }
+  .badge.bad { color: var(--status-critical); }
 
-  .divrow { display: grid; grid-template-columns: 76px 1fr 92px; align-items: center; gap: 10px; padding: 7px 14px; border-bottom: 1px solid var(--gridline); }
+  .divrow { display: grid; grid-template-columns: 84px 1fr 96px; align-items: center; gap: 10px;
+            padding: 7px 14px; border-bottom: 1px solid var(--gridline); }
   .divrow:last-child { border-bottom: none; }
   .divtrack { position: relative; height: 14px; background: var(--div-mid); border-radius: 3px; }
-  .divfill { position: absolute; top: 0; bottom: 0; border-radius: 2px; }
+  .divfill { position: absolute; top: 0; bottom: 0; }
   .divrow .val { text-align: right; font-variant-numeric: tabular-nums; font-size: 12.5px; }
 
-  [data-tooltip] { cursor: default; }
-  [data-tooltip]:hover::after {
-    content: attr(data-tooltip);
-    position: absolute; left: 14px; right: 14px; bottom: 100%; margin-bottom: 4px;
-    background: var(--text-primary); color: var(--surface-1);
-    font-size: 11px; padding: 5px 8px; border-radius: 6px; z-index: 5;
-    white-space: normal; line-height: 1.4;
-  }
-
-  /* Cards for bad trades / dips */
-  .cards { display: flex; flex-direction: column; gap: 8px; }
-  .card {
-    border: 1px solid var(--gridline); border-radius: 10px; background: var(--surface-1);
-    padding: 12px 14px;
-  }
-  .card .card-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; margin-bottom: 4px; }
-  .card .card-head .who { font-weight: 600; font-size: 13.5px; }
-  .card .card-head .pnl { font-variant-numeric: tabular-nums; font-size: 13px; font-weight: 600; }
-  .card .dates { color: var(--text-muted); font-size: 11.5px; margin-bottom: 6px; }
-  .tag-row { display: flex; flex-wrap: wrap; gap: 6px; }
-  .tag {
-    display: inline-flex; align-items: center; gap: 4px;
-    font-size: 11px; font-weight: 600; padding: 3px 8px; border-radius: 999px;
-    border: 1px solid currentColor;
-  }
+  /* Cards */
+  .cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 8px; }
+  .card { border: 1px solid var(--gridline); border-radius: 12px; background: var(--surface-1); padding: 12px 14px; }
+  .card .card-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+  .card .who { font-weight: 600; font-size: 13.5px; }
+  .card .pnl { font-variant-numeric: tabular-nums; font-size: 13px; font-weight: 600; }
+  .card .dates { color: var(--text-muted); font-size: 11.5px; margin: 2px 0 7px; }
+  .tag-row { display: flex; flex-wrap: wrap; gap: 5px; }
+  .tag { display: inline-flex; align-items: center; gap: 4px; font-size: 11px; font-weight: 600;
+         padding: 3px 8px; border-radius: 999px; border: 1px solid currentColor; }
   .tag.critical { color: var(--status-critical); }
   .tag.serious { color: var(--status-serious); }
-  .tag.warning { color: #9a6a00; }
-  :root:not([data-theme="light"]) .tag.warning,
-  :root[data-theme="dark"] .tag.warning { color: var(--status-warning); }
+  .tag.warning { color: var(--status-warning-text); }
 
   table.plain { width: 100%; border-collapse: collapse; font-size: 12.5px; }
-  table.plain th {
-    text-align: left; font-weight: 600; color: var(--text-secondary);
-    font-size: 11px; text-transform: uppercase; letter-spacing: 0.03em;
-    padding: 6px 10px; border-bottom: 1px solid var(--gridline);
-  }
+  table.plain th { text-align: left; font-weight: 600; color: var(--text-secondary); font-size: 11px;
+                   text-transform: uppercase; letter-spacing: 0.03em; padding: 7px 10px;
+                   border-bottom: 1px solid var(--gridline); white-space: nowrap; }
   table.plain td { padding: 7px 10px; border-bottom: 1px solid var(--gridline); vertical-align: top; }
   table.plain tr:last-child td { border-bottom: none; }
   table.plain td.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
-  .table-wrap { border: 1px solid var(--gridline); border-radius: 10px; background: var(--surface-1); overflow-x: auto; }
-
+  .table-wrap { border: 1px solid var(--gridline); border-radius: 12px; background: var(--surface-1); overflow-x: auto; }
   .empty { color: var(--text-muted); font-size: 12.5px; padding: 14px; }
-  .legend-note { color: var(--text-muted); font-size: 11.5px; margin-top: 8px; }
 </style>
 
 <div class="wrap">
@@ -168,36 +176,83 @@
     <div class="meta" id="generated-at"></div>
   </header>
 
-  <section id="sec-summary">
-    <h2>Overview</h2>
-    <div class="tiles" id="tiles-summary"></div>
+  <section>
+    <div class="hero" id="hero"></div>
+    <div class="tiles" id="tiles"></div>
   </section>
 
-  <section id="sec-holdings">
-    <h2>Current holdings</h2>
-    <p class="sub">Aggregated across all accounts, sorted by market value. Bar length = market value; badge = unrealized gain/loss.</p>
+  <section>
+    <h2 class="sec">Growth</h2>
+    <figure class="chart" id="fig-equity">
+      <figcaption>
+        <div class="title">Portfolio value vs money invested</div>
+        <div class="note">The gap between the two lines is your gain. Deposits rising means you added money &mdash; not performance.</div>
+      </figcaption>
+      <div class="legend" id="legend-equity"></div>
+      <svg class="plot" id="plot-equity" viewBox="0 0 860 280" role="img"></svg>
+      <div class="tip" id="tip-equity"></div>
+    </figure>
+  </section>
+
+  <section>
+    <div class="chart-grid">
+      <figure class="chart" id="fig-twr">
+        <figcaption>
+          <div class="title">Your return vs the S&amp;P 500</div>
+          <div class="note">Time-weighted, both indexed to 100 at your first deposit &mdash; deposits stripped out so this is performance only.</div>
+        </figcaption>
+        <div class="legend" id="legend-twr"></div>
+        <svg class="plot" id="plot-twr" viewBox="0 0 420 250" role="img"></svg>
+        <div class="tip" id="tip-twr"></div>
+      </figure>
+      <figure class="chart" id="fig-dd">
+        <figcaption>
+          <div class="title">Drawdown from peak</div>
+          <div class="note">How far performance sat below its best point. Withdrawals excluded.</div>
+        </figcaption>
+        <svg class="plot" id="plot-dd" viewBox="0 0 420 250" role="img"></svg>
+        <div class="tip" id="tip-dd"></div>
+      </figure>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="sec">Allocation</h2>
+    <p class="sub">Share of securities value by position. Cash is held separately.</p>
+    <div class="alloc-bar" id="alloc-bar"></div>
+    <div class="alloc-key" id="alloc-key"></div>
+  </section>
+
+  <section>
+    <h2 class="sec">Holdings</h2>
+    <p class="sub">Bar length = market value; badge = unrealized gain/loss on that position.</p>
     <div class="barlist" id="holdings-list"></div>
   </section>
 
-  <section id="sec-realized">
-    <h2>Realized P&amp;L by security (all-time)</h2>
-    <p class="sub">Every closed position, from Wealthsimple's own realized-returns figures.</p>
+  <section>
+    <h2 class="sec">Realized P&amp;L</h2>
+    <figure class="chart" style="margin-bottom:12px;">
+      <figcaption><div class="title">By month closed</div></figcaption>
+      <svg class="plot" id="plot-monthly" viewBox="0 0 860 220" role="img"></svg>
+      <div class="tip" id="tip-monthly"></div>
+    </figure>
     <div class="barlist" id="realized-list"></div>
   </section>
 
-  <section id="sec-badtrades">
-    <h2>Flagged trades</h2>
-    <p class="sub">Closed trades that tripped a heuristic worth a second look &mdash; not verdicts, prompts for the trade journal.</p>
+  <section>
+    <h2 class="sec">Flagged trades</h2>
+    <p class="sub">Closed trades that tripped a heuristic worth a second look &mdash; prompts for the journal, not verdicts.</p>
     <div class="cards" id="badtrades-list"></div>
   </section>
 
-  <section id="sec-dips">
-    <h2>Market dips</h2>
+  <section>
+    <h2 class="sec">Market dips</h2>
     <p class="sub" id="dips-summary"></p>
-    <div class="table-wrap" style="margin-bottom:14px;">
+    <div class="table-wrap" style="margin-bottom:16px;">
       <table class="plain" id="dips-activity-table"></table>
     </div>
-    <h2 style="margin-top:20px;">Notable dips you sat out (still-held symbols)</h2>
+    <h2 class="sec" style="margin-top:18px;">Big dips you sat out</h2>
+    <p class="sub">Symbols you still hold, that fell hard while you owned them and you didn't add.</p>
     <div class="table-wrap">
       <table class="plain" id="dips-missed-table"></table>
     </div>
@@ -208,129 +263,340 @@
 <script>
 (function () {
   const data = JSON.parse(document.getElementById('dashboard-data').textContent);
+  const cssVar = (n) => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
 
-  const fmtMoney = (n, opts) => {
-    if (n === null || n === undefined) return '—';
-    const abs = Math.abs(n);
-    const sign = n < 0 ? '-' : '';
-    return sign + '$' + abs.toLocaleString('en-US', { maximumFractionDigits: 0, ...opts });
-  };
-  const fmtPct = (n) => (n === null || n === undefined) ? '—' : (n >= 0 ? '+' : '') + n.toFixed(1) + '%';
-  const esc = (s) => (s ?? '').toString().replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+  const money = (n, d = 0) => n == null ? '—'
+    : (n < 0 ? '-' : '') + '$' + Math.abs(n).toLocaleString('en-US', { maximumFractionDigits: d, minimumFractionDigits: d });
+  const moneyK = (n) => n == null ? '—'
+    : (n < 0 ? '-' : '') + '$' + (Math.abs(n) >= 1000 ? (Math.abs(n) / 1000).toFixed(0) + 'k' : Math.abs(n).toFixed(0));
+  const pct = (n, d = 1) => n == null ? '—' : (n >= 0 ? '+' : '') + n.toFixed(d) + '%';
+  const esc = (s) => (s ?? '').toString().replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  const shortDate = (iso) => new Date(iso + 'T00:00:00').toLocaleDateString('en-US', { month: 'short', year: '2-digit' });
+  const fullDate = (iso) => new Date(iso + 'T00:00:00').toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
 
   document.getElementById('generated-at').textContent =
     'Generated ' + new Date(data.generated_at).toLocaleString('en-US', { dateStyle: 'medium', timeStyle: 'short' });
 
-  // ---- Summary tiles ----
-  const s = data.portfolio_summary || {};
+  const S = data.portfolio_summary || {};
+
+  // ---------- Hero + tiles ----------
+  const gainUp = (S.total_gain ?? 0) >= 0;
+  document.getElementById('hero').innerHTML = `
+    <div class="label">Total portfolio value</div>
+    <div class="figure">${money(S.total_value)}</div>
+    <div class="delta ${gainUp ? 'up' : 'down'}">${gainUp ? '▲' : '▼'} ${money(S.total_gain)} (${pct(S.total_gain_pct)}) on ${money(S.net_deposits)} invested</div>
+    <div class="asof">As of ${S.as_of ? fullDate(S.as_of) : '—'} · investing since ${S.first_invested ? fullDate(S.first_invested) : '—'}</div>`;
+
   const wr = data.win_rate || {};
+  const twrSeries = (data.twr?.series) || [];
+  const lastTwr = twrSeries[twrSeries.length - 1] || {};
+  const outperf = (lastTwr.portfolio != null && lastTwr.benchmark != null)
+    ? lastTwr.portfolio - lastTwr.benchmark : null;
+  const worstDd = (data.drawdown || []).reduce((m, d) => Math.min(m, d.drawdown_pct), 0);
+  const cash = S.cash || {};
+  const cashStr = Object.keys(cash).length
+    ? Object.entries(cash).map(([c, v]) => `${money(v)} ${c}`).join(' · ') : '—';
+
   const tiles = [
-    { label: 'Total portfolio value', value: fmtMoney(s.total_market_value) },
-    { label: 'Unrealized P&L', value: fmtMoney(s.total_unrealized_pnl), cls: (s.total_unrealized_pnl >= 0 ? 'good' : 'critical') },
-    { label: 'Realized P&L (all-time)', value: fmtMoney(data.realized?.total), cls: ((data.realized?.total ?? 0) >= 0 ? 'good' : 'critical') },
-    { label: 'Win rate', value: (wr.win_rate_pct != null ? wr.win_rate_pct + '%' : '—'), sub: wr.wins != null ? `${wr.wins}W / ${wr.losses}L over ${wr.closed_trades} closed trades` : '' },
-    { label: 'Avg win / avg loss', value: fmtMoney(wr.avg_win) + ' / ' + fmtMoney(wr.avg_loss), sub: wr.avg_holding_days != null ? `avg hold ${wr.avg_holding_days}d` : '' },
+    { label: 'Time-weighted return', value: lastTwr.portfolio != null ? pct(lastTwr.portfolio - 100) : '—',
+      cls: (lastTwr.portfolio ?? 100) >= 100 ? 'good' : 'bad',
+      sub: outperf != null ? `${outperf >= 0 ? 'beating' : 'trailing'} S&P 500 by ${Math.abs(outperf).toFixed(1)} pts` : '' },
+    { label: 'Unrealized P&L', value: money(S.total_unrealized_pnl), cls: (S.total_unrealized_pnl ?? 0) >= 0 ? 'good' : 'bad',
+      sub: 'on current holdings' },
+    { label: 'Realized P&L', value: money(data.realized?.total), cls: (data.realized?.total ?? 0) >= 0 ? 'good' : 'bad',
+      sub: 'all-time, closed positions' },
+    { label: 'Win rate', value: wr.win_rate_pct != null ? wr.win_rate_pct + '%' : '—',
+      sub: wr.wins != null ? `${wr.wins}W / ${wr.losses}L · avg hold ${wr.avg_holding_days}d` : '' },
+    { label: 'Worst drawdown', value: worstDd ? worstDd.toFixed(1) + '%' : '—', cls: 'bad', sub: 'peak to trough' },
+    { label: 'Cash', value: cashStr.split(' · ')[0], sub: cashStr.split(' · ')[1] || '' },
   ];
-  document.getElementById('tiles-summary').innerHTML = tiles.map(t => `
+  document.getElementById('tiles').innerHTML = tiles.map(t => `
     <div class="tile">
       <div class="label">${esc(t.label)}</div>
       <div class="value ${t.cls || ''}">${t.value}</div>
       ${t.sub ? `<div class="sub">${esc(t.sub)}</div>` : ''}
     </div>`).join('');
 
-  // ---- Holdings ----
-  const holdings = data.holdings || [];
-  const maxHoldingValue = Math.max(...holdings.map(h => h.market_value || 0), 1);
-  document.getElementById('holdings-list').innerHTML = holdings.length ? holdings.map(h => {
-    const pctCls = (h.unrealized_pnl_pct ?? 0) >= 0 ? 'good' : 'critical';
-    const arrow = (h.unrealized_pnl_pct ?? 0) >= 0 ? '▲' : '▼';
-    return `
-    <div class="barrow" data-tooltip="${esc(h.name)} — ${h.position_count} position${h.position_count === 1 ? '' : 's'} — ${fmtPct(h.pct_of_portfolio)} of portfolio">
-      <div><span class="sym">${esc(h.symbol)}</span><span class="name">${esc((h.name||'').slice(0,22))}</span></div>
-      <div class="bartrack"><div class="barfill" style="width:${(h.market_value / maxHoldingValue * 100).toFixed(1)}%; background:var(--seq-1);"></div></div>
-      <div class="val">${fmtMoney(h.market_value)}</div>
-      <div class="badge ${pctCls}">${arrow} ${fmtPct(h.unrealized_pnl_pct)}</div>
-    </div>`;
-  }).join('') : '<div class="empty">No holdings data.</div>';
+  // ---------- Generic line-chart renderer ----------
+  function niceTicks(min, max, count) {
+    const span = max - min || 1;
+    const raw = span / count;
+    const mag = Math.pow(10, Math.floor(Math.log10(raw)));
+    const step = [1, 2, 2.5, 5, 10].map(m => m * mag).find(s => s >= raw) || mag * 10;
+    const start = Math.ceil(min / step) * step;
+    const ticks = [];
+    for (let v = start; v <= max + 1e-9; v += step) ticks.push(v);
+    return ticks;
+  }
 
-  // ---- Realized P&L by security ----
-  const realized = (data.realized?.by_security || []);
-  const maxAbsRealized = Math.max(...realized.map(r => Math.abs(r.realized_pnl)), 1);
+  function lineChart({ svgId, tipId, points, series, yFormat, yZeroFloor, areaBetween, fillToZero }) {
+    const svg = document.getElementById(svgId);
+    const tip = document.getElementById(tipId);
+    if (!points.length) { svg.innerHTML = ''; return; }
+    const vb = svg.viewBox.baseVal;
+    const W = vb.width, H = vb.height;
+    const M = { t: 10, r: 52, b: 26, l: 6 };
+    const plotW = W - M.l - M.r, plotH = H - M.t - M.b;
+
+    const allVals = [];
+    series.forEach(s => points.forEach(p => { if (p[s.key] != null) allVals.push(p[s.key]); }));
+    let minV = Math.min(...allVals), maxV = Math.max(...allVals);
+    if (yZeroFloor) minV = Math.min(0, minV);
+    const pad = (maxV - minV) * 0.08 || 1;
+    minV -= pad; maxV += pad;
+
+    const x = (i) => M.l + (i / (points.length - 1)) * plotW;
+    const y = (v) => M.t + plotH - ((v - minV) / (maxV - minV)) * plotH;
+
+    let out = '';
+    niceTicks(minV, maxV, 4).forEach(t => {
+      out += `<line x1="${M.l}" y1="${y(t).toFixed(1)}" x2="${M.l + plotW}" y2="${y(t).toFixed(1)}" stroke="${cssVar('--gridline')}" stroke-width="1"/>`;
+      out += `<text x="${M.l + plotW + 6}" y="${(y(t) + 3.5).toFixed(1)}" font-size="10.5" fill="${cssVar('--text-muted')}">${yFormat(t)}</text>`;
+    });
+
+    const step = Math.max(1, Math.floor(points.length / 5));
+    for (let i = 0; i < points.length; i += step) {
+      out += `<text x="${x(i).toFixed(1)}" y="${H - 8}" font-size="10.5" fill="${cssVar('--text-muted')}" text-anchor="${i === 0 ? 'start' : 'middle'}">${shortDate(points[i].date)}</text>`;
+    }
+
+    if (areaBetween) {
+      const [ka, kb] = areaBetween.keys;
+      const top = points.map((p, i) => `${x(i).toFixed(1)},${y(p[ka]).toFixed(1)}`).join(' ');
+      const bottom = points.map((p, i) => `${x(i).toFixed(1)},${y(p[kb]).toFixed(1)}`).reverse().join(' ');
+      out += `<polygon points="${top} ${bottom}" fill="${cssVar(areaBetween.color)}" opacity="0.10"/>`;
+    }
+
+    if (fillToZero) {
+      const k = series[0].key;
+      const line = points.map((p, i) => `${x(i).toFixed(1)},${y(p[k]).toFixed(1)}`).join(' ');
+      out += `<polygon points="${x(0).toFixed(1)},${y(0).toFixed(1)} ${line} ${x(points.length - 1).toFixed(1)},${y(0).toFixed(1)}"
+        fill="${cssVar(series[0].color)}" opacity="0.10"/>`;
+    }
+
+    series.forEach(s => {
+      const pts = points.map((p, i) => p[s.key] == null ? null : `${x(i).toFixed(1)},${y(p[s.key]).toFixed(1)}`).filter(Boolean);
+      out += `<polyline points="${pts.join(' ')}" fill="none" stroke="${cssVar(s.color)}" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"${s.dashed ? ' stroke-dasharray="5 4"' : ''}/>`;
+      const last = points[points.length - 1];
+      if (last[s.key] != null) {
+        out += `<circle cx="${x(points.length - 1).toFixed(1)}" cy="${y(last[s.key]).toFixed(1)}" r="4.5" fill="${cssVar(s.color)}" stroke="${cssVar('--surface-1')}" stroke-width="2"/>`;
+      }
+    });
+
+    out += `<g id="${svgId}-cross" opacity="0">
+      <line y1="${M.t}" y2="${M.t + plotH}" stroke="${cssVar('--baseline')}" stroke-width="1"/></g>`;
+    out += `<rect x="${M.l}" y="${M.t}" width="${plotW}" height="${plotH}" fill="transparent" id="${svgId}-hit"/>`;
+    svg.innerHTML = out;
+
+    const cross = svg.querySelector(`#${svgId}-cross`);
+    const crossLine = cross.querySelector('line');
+    const hit = svg.querySelector(`#${svgId}-hit`);
+    const fig = svg.closest('figure');
+
+    hit.addEventListener('mousemove', (ev) => {
+      const r = svg.getBoundingClientRect();
+      const svgX = (ev.clientX - r.left) / r.width * W;
+      let idx = Math.round((svgX - M.l) / plotW * (points.length - 1));
+      idx = Math.max(0, Math.min(points.length - 1, idx));
+      const p = points[idx];
+      cross.setAttribute('opacity', '1');
+      crossLine.setAttribute('x1', x(idx).toFixed(1));
+      crossLine.setAttribute('x2', x(idx).toFixed(1));
+      tip.innerHTML = `<strong>${fullDate(p.date)}</strong><br>` +
+        series.filter(s => p[s.key] != null)
+          .map(s => `${s.label}: ${s.tipFormat ? s.tipFormat(p[s.key]) : yFormat(p[s.key])}`).join('<br>');
+      tip.style.opacity = '1';
+      const figRect = fig.getBoundingClientRect();
+      let left = ev.clientX - figRect.left + 12;
+      if (left + tip.offsetWidth > figRect.width - 8) left = ev.clientX - figRect.left - tip.offsetWidth - 12;
+      tip.style.left = left + 'px';
+      tip.style.top = (ev.clientY - figRect.top - 8) + 'px';
+    });
+    hit.addEventListener('mouseleave', () => { cross.setAttribute('opacity', '0'); tip.style.opacity = '0'; });
+  }
+
+  function legendHTML(series) {
+    return series.map(s => `<span class="item"><span class="key" style="background:${cssVar(s.color)}"></span>${esc(s.label)}</span>`).join('');
+  }
+
+  // ---------- Equity curve ----------
+  const perf = data.performance || [];
+  const equitySeries = [
+    { key: 'value', label: 'Portfolio value', color: '--s1' },
+    { key: 'deposits', label: 'Money invested', color: '--s2' },
+  ];
+  document.getElementById('legend-equity').innerHTML = legendHTML(equitySeries);
+  lineChart({
+    svgId: 'plot-equity', tipId: 'tip-equity', points: perf, series: equitySeries,
+    yFormat: moneyK, tipFormat: money, yZeroFloor: true,
+    areaBetween: { keys: ['value', 'deposits'], color: '--s1' },
+  });
+
+  // ---------- TWR vs benchmark ----------
+  const twrChartSeries = [
+    { key: 'portfolio', label: 'You', color: '--s1' },
+    { key: 'benchmark', label: data.twr?.benchmark_label || 'Benchmark', color: '--s2', dashed: true },
+  ];
+  document.getElementById('legend-twr').innerHTML = legendHTML(twrChartSeries);
+  lineChart({
+    svgId: 'plot-twr', tipId: 'tip-twr', points: twrSeries, series: twrChartSeries,
+    yFormat: (v) => v.toFixed(0),
+  });
+
+  // ---------- Drawdown ----------
+  const dd = data.drawdown || [];
+  lineChart({
+    svgId: 'plot-dd', tipId: 'tip-dd', points: dd,
+    series: [{ key: 'drawdown_pct', label: 'Drawdown', color: '--div-neg' }],
+    yFormat: (v) => v.toFixed(0) + '%', fillToZero: true,
+  });
+
+  // ---------- Allocation stacked bar ----------
+  const holdings = data.holdings || [];
+  const SLOTS = ['--s1', '--s2', '--s3', '--s4', '--s5', '--s6', '--s7'];
+  const topAlloc = holdings.slice(0, 7);
+  const otherVal = holdings.slice(7).reduce((a, h) => a + (h.market_value || 0), 0);
+  const allocTotal = holdings.reduce((a, h) => a + (h.market_value || 0), 0) || 1;
+  const allocItems = topAlloc.map((h, i) => ({ label: h.symbol, value: h.market_value, color: SLOTS[i] }));
+  if (otherVal > 0) allocItems.push({ label: `Other (${holdings.length - 7})`, value: otherVal, color: '--other' });
+  document.getElementById('alloc-bar').innerHTML = allocItems.map(a => `
+    <div class="alloc-seg" style="flex:${(a.value / allocTotal * 100).toFixed(2)}; background:${cssVar(a.color)}"
+         title="${esc(a.label)}: ${money(a.value)} (${(a.value / allocTotal * 100).toFixed(1)}%)"></div>`).join('');
+  document.getElementById('alloc-key').innerHTML = allocItems.map(a => `
+    <span class="item"><span class="swatch" style="background:${cssVar(a.color)}"></span>${esc(a.label)} ${(a.value / allocTotal * 100).toFixed(1)}%</span>`).join('');
+
+  // ---------- Holdings ----------
+  const maxHold = Math.max(...holdings.map(h => h.market_value || 0), 1);
+  document.getElementById('holdings-list').innerHTML = holdings.length ? holdings.map(h => {
+    const up = (h.unrealized_pnl_pct ?? 0) >= 0;
+    return `
+    <div class="barrow" title="${esc(h.name)} — ${money(h.unrealized_pnl)} unrealized — ${h.pct_of_portfolio}% of securities">
+      <div><span class="sym">${esc(h.symbol)}</span><span class="name">${esc((h.name || '').slice(0, 20))}</span></div>
+      <div class="bartrack"><div class="barfill" style="width:${(h.market_value / maxHold * 100).toFixed(1)}%"></div></div>
+      <div class="val">${money(h.market_value)}</div>
+      <div class="badge ${up ? 'good' : 'bad'}">${up ? '▲' : '▼'} ${pct(h.unrealized_pnl_pct)}</div>
+    </div>`;
+  }).join('') : '<div class="empty">No holdings.</div>';
+
+  // ---------- Monthly realized P&L (diverging columns) ----------
+  (function monthlyChart() {
+    const rows = data.monthly_realized || [];
+    const svg = document.getElementById('plot-monthly');
+    const tip = document.getElementById('tip-monthly');
+    if (!rows.length) { svg.innerHTML = ''; return; }
+    const vb = svg.viewBox.baseVal, W = vb.width, H = vb.height;
+    const M = { t: 12, r: 56, b: 26, l: 6 };
+    const plotW = W - M.l - M.r, plotH = H - M.t - M.b;
+    const vals = rows.map(r => r.realized_pnl);
+    // Scale to the actual range (always including zero) rather than forcing
+    // symmetry - a symmetric scale wastes half the plot when wins dwarf losses.
+    const maxV = Math.max(0, ...vals) * 1.08 || 1;
+    const minV = Math.min(0, ...vals) * 1.08;
+    const y = (v) => M.t + plotH - ((v - minV) / (maxV - minV)) * plotH;
+    const band = plotW / rows.length;
+    const barW = Math.min(24, band - 2);
+
+    let out = '';
+    niceTicks(minV, maxV, 4).forEach(t => {
+      out += `<line x1="${M.l}" y1="${y(t).toFixed(1)}" x2="${M.l + plotW}" y2="${y(t).toFixed(1)}" stroke="${cssVar('--gridline')}" stroke-width="1"/>`;
+      out += `<text x="${M.l + plotW + 6}" y="${(y(t) + 3.5).toFixed(1)}" font-size="10.5" fill="${cssVar('--text-muted')}">${moneyK(t)}</text>`;
+    });
+    out += `<line x1="${M.l}" y1="${y(0).toFixed(1)}" x2="${M.l + plotW}" y2="${y(0).toFixed(1)}" stroke="${cssVar('--baseline')}" stroke-width="1"/>`;
+
+    rows.forEach((r, i) => {
+      const cx = M.l + band * i + band / 2;
+      const v = r.realized_pnl;
+      const top = v >= 0 ? y(v) : y(0);
+      const h = Math.abs(y(v) - y(0));
+      const color = cssVar(v >= 0 ? '--div-pos' : '--div-neg');
+      const rx = Math.min(4, barW / 2);
+      out += `<rect x="${(cx - barW / 2).toFixed(1)}" y="${top.toFixed(1)}" width="${barW.toFixed(1)}" height="${Math.max(h, 1).toFixed(1)}"
+        fill="${color}" rx="${rx}" data-i="${i}" class="mbar"/>`;
+      if (i % Math.ceil(rows.length / 6) === 0) {
+        out += `<text x="${cx.toFixed(1)}" y="${H - 8}" font-size="10.5" fill="${cssVar('--text-muted')}" text-anchor="middle">${esc(r.month.slice(2))}</text>`;
+      }
+    });
+    svg.innerHTML = out;
+
+    const fig = svg.closest('figure');
+    svg.querySelectorAll('.mbar').forEach(bar => {
+      bar.addEventListener('mousemove', (ev) => {
+        const r = rows[+bar.dataset.i];
+        tip.innerHTML = `<strong>${esc(r.month)}</strong><br>Realized: ${money(r.realized_pnl)}`;
+        tip.style.opacity = '1';
+        const figRect = fig.getBoundingClientRect();
+        let left = ev.clientX - figRect.left + 12;
+        if (left + tip.offsetWidth > figRect.width - 8) left = ev.clientX - figRect.left - tip.offsetWidth - 12;
+        tip.style.left = left + 'px';
+        tip.style.top = (ev.clientY - figRect.top - 8) + 'px';
+      });
+      bar.addEventListener('mouseleave', () => { tip.style.opacity = '0'; });
+    });
+  })();
+
+  // ---------- Realized by security ----------
+  const realized = data.realized?.by_security || [];
+  const maxAbsR = Math.max(...realized.map(r => Math.abs(r.realized_pnl)), 1);
   document.getElementById('realized-list').innerHTML = realized.length ? realized.map(r => {
     const pos = r.realized_pnl >= 0;
-    const widthPct = Math.abs(r.realized_pnl) / maxAbsRealized * 50;
+    const w = Math.abs(r.realized_pnl) / maxAbsR * 50;
     const style = pos
-      ? `left:50%; width:${widthPct}%; background:var(--div-pos); border-radius:2px 3px 3px 2px;`
-      : `right:50%; width:${widthPct}%; background:var(--div-neg); border-radius:3px 2px 2px 3px;`;
+      ? `left:50%; width:${w}%; background:${cssVar('--div-pos')}; border-radius:2px 4px 4px 2px;`
+      : `right:50%; width:${w}%; background:${cssVar('--div-neg')}; border-radius:4px 2px 2px 4px;`;
     return `
     <div class="divrow">
       <div class="sym">${esc(r.symbol)}</div>
       <div class="divtrack"><div class="divfill" style="${style}"></div></div>
-      <div class="val" style="color:${pos ? 'var(--status-good)' : 'var(--status-critical)'}">${fmtMoney(r.realized_pnl)}</div>
+      <div class="val" style="color:${pos ? 'var(--success-text)' : 'var(--status-critical)'}">${money(r.realized_pnl)}</div>
     </div>`;
-  }).join('') : '<div class="empty">No realized trades yet.</div>';
+  }).join('') : '<div class="empty">No realized trades.</div>';
 
-  // ---- Bad trades ----
+  // ---------- Flagged trades ----------
   const flagMeta = {
-    big_loss: { cls: 'critical', icon: '⚠' },
-    quick_loss: { cls: 'serious', icon: '⚡' },
-    bad_entry: { cls: 'serious', icon: '↓' },
-    sold_too_early: { cls: 'warning', icon: '↑' },
+    big_loss: { cls: 'critical', icon: '⚠' }, quick_loss: { cls: 'serious', icon: '⚡' },
+    bad_entry: { cls: 'serious', icon: '↓' }, sold_too_early: { cls: 'warning', icon: '↑' },
     overtrading: { cls: 'warning', icon: '↻' },
   };
-  const badTrades = data.bad_trades || [];
-  document.getElementById('badtrades-list').innerHTML = badTrades.length ? badTrades.map(t => {
-    const flagList = (t.flags || '').split(';').map(f => f.trim()).filter(Boolean);
-    const tags = flagList.map(f => {
-      const key = f.split(':')[0].trim();
-      const meta = flagMeta[key] || { cls: 'warning', icon: '•' };
+  const bad = data.bad_trades || [];
+  document.getElementById('badtrades-list').innerHTML = bad.length ? bad.map(t => {
+    const tags = (t.flags || '').split(';').map(f => f.trim()).filter(Boolean).map(f => {
+      const meta = flagMeta[f.split(':')[0].trim()] || { cls: 'warning', icon: '•' };
       return `<span class="tag ${meta.cls}">${meta.icon} ${esc(f)}</span>`;
     }).join('');
-    const pnl = t.realized_pnl;
-    const dateRange = t.buy_date ? `${t.buy_date} → ${t.sell_date}` : `sold ${t.sell_date} (no matching buy in fetched history)`;
+    const dr = t.buy_date ? `${t.buy_date} → ${t.sell_date}` : `pattern over ${t.window_start} → ${t.window_end}`;
     return `
     <div class="card">
       <div class="card-head">
         <span class="who">${esc(t.symbol)}</span>
-        ${pnl != null ? `<span class="pnl" style="color:${pnl >= 0 ? 'var(--status-good)' : 'var(--status-critical)'}">${fmtMoney(pnl)} (${fmtPct(t.realized_pnl_pct)})</span>` : ''}
+        ${t.realized_pnl != null ? `<span class="pnl" style="color:${t.realized_pnl >= 0 ? 'var(--success-text)' : 'var(--status-critical)'}">${money(t.realized_pnl)} (${pct(t.realized_pnl_pct)})</span>` : ''}
       </div>
-      <div class="dates">${esc(dateRange)}</div>
+      <div class="dates">${esc(dr)}</div>
       <div class="tag-row">${tags}</div>
     </div>`;
   }).join('') : '<div class="empty">No flagged trades.</div>';
 
-  // ---- Dips ----
+  // ---------- Dips ----------
   const dips = data.dips || {};
   document.getElementById('dips-summary').innerHTML =
-    `Across everything you've traded: <strong style="color:var(--status-good)">${dips.dips_bought || 0} dips bought into</strong>, ` +
-    `<strong style="color:var(--status-critical)">${dips.dips_sold_into || 0} sold into</strong>, and ` +
-    `${dips.dips_sat_out || 0} sat out entirely. A "dip" here is a ≥10% drawdown from a trailing 1-year high.`;
+    `Since you started investing: <strong style="color:var(--success-text)">${dips.dips_bought || 0} dips you bought into</strong>, ` +
+    `<strong style="color:var(--status-critical)">${dips.dips_sold_into || 0} you sold into</strong>, ` +
+    `${dips.dips_sat_out || 0} you sat out. A dip = a ≥10% fall from a trailing 1-year high.`;
 
-  const activityRows = dips.dips_with_activity || [];
   document.getElementById('dips-activity-table').innerHTML = `
-    <thead><tr><th>Symbol</th><th>Dip start</th><th>Low</th><th class="num">Magnitude</th><th>Recovered</th><th>Your activity</th></tr></thead>
-    <tbody>${activityRows.length ? activityRows.map(d => `
-      <tr>
-        <td><strong>${esc(d.symbol)}</strong></td>
-        <td>${esc(d.dip_start)}</td>
-        <td>${esc(d.dip_low_date)}</td>
-        <td class="num" style="color:var(--status-critical)">${d.dip_low_pct}%</td>
-        <td>${esc(d.recovered_date || 'ongoing')}</td>
-        <td>${esc(d.your_activity)}</td>
-      </tr>`).join('') : `<tr><td colspan="6" class="empty">No dip/trade overlaps found.</td></tr>`}
+    <thead><tr><th>Symbol</th><th>Dip start</th><th>Bottom</th><th class="num">Fall</th><th>Recovered</th><th>What you did</th></tr></thead>
+    <tbody>${(dips.dips_with_activity || []).length ? dips.dips_with_activity.map(d => `
+      <tr><td><strong>${esc(d.symbol)}</strong></td><td>${esc(d.dip_start)}</td><td>${esc(d.dip_low_date)}</td>
+      <td class="num" style="color:var(--status-critical)">${d.dip_low_pct}%</td>
+      <td>${esc(d.recovered_date || 'ongoing')}</td><td>${esc(d.your_activity)}</td></tr>`).join('')
+      : `<tr><td colspan="6" class="empty">No dip/trade overlaps.</td></tr>`}
     </tbody>`;
 
-  const missedRows = dips.notable_dips_missed || [];
   document.getElementById('dips-missed-table').innerHTML = `
-    <thead><tr><th>Symbol</th><th>Dip start</th><th>Low</th><th class="num">Magnitude</th><th>Recovered</th></tr></thead>
-    <tbody>${missedRows.length ? missedRows.map(d => `
-      <tr>
-        <td><strong>${esc(d.symbol)}</strong></td>
-        <td>${esc(d.dip_start)}</td>
-        <td>${esc(d.dip_low_date)}</td>
-        <td class="num" style="color:var(--status-critical)">${d.dip_low_pct}%</td>
-        <td>${esc(d.recovered_date || 'ongoing')}</td>
-      </tr>`).join('') : `<tr><td colspan="5" class="empty">Nothing notable.</td></tr>`}
+    <thead><tr><th>Symbol</th><th>Dip start</th><th>Bottom</th><th class="num">Fall</th><th>Recovered</th></tr></thead>
+    <tbody>${(dips.notable_dips_missed || []).length ? dips.notable_dips_missed.map(d => `
+      <tr><td><strong>${esc(d.symbol)}</strong></td><td>${esc(d.dip_start)}</td><td>${esc(d.dip_low_date)}</td>
+      <td class="num" style="color:var(--status-critical)">${d.dip_low_pct}%</td>
+      <td>${esc(d.recovered_date || 'ongoing')}</td></tr>`).join('')
+      : `<tr><td colspan="5" class="empty">Nothing notable.</td></tr>`}
     </tbody>`;
 })();
 </script>

@@ -15,6 +15,10 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 import pandas as pd
+import yfinance as yf
+
+BENCHMARK_SYMBOL = "^GSPC"
+BENCHMARK_LABEL = "S&P 500"
 
 ROOT = Path(__file__).resolve().parent.parent
 PROCESSED_DIR = ROOT / "data" / "processed"
@@ -78,6 +82,9 @@ def build_holdings(symbol_map: dict) -> list[dict]:
         return []
     latest_date = df["snapshot_date"].max()
     df = df[df["snapshot_date"] == latest_date].copy()
+    # Belt-and-braces against duplicate rows for the same position within a
+    # snapshot - summing those silently multiplies the whole portfolio.
+    df = df.drop_duplicates(subset=["id"], keep="last")
 
     df["symbol"] = df["security.id"].apply(
         lambda s: symbol_map.get(_sec_id_norm(s), {"symbol": _sec_id_norm(s)[:12]})["symbol"]
@@ -134,6 +141,110 @@ def build_realized_summary(symbol_map: dict) -> dict:
         })
     by_security.sort(key=lambda r: r["realized_pnl"], reverse=True)
     return {"total": round(total, 2), "by_security": by_security}
+
+
+def load_performance() -> pd.DataFrame:
+    path = PROCESSED_DIR / "performance.csv"
+    if not path.exists():
+        return pd.DataFrame()
+    perf = pd.read_csv(path).sort_values("date")
+    # Drop the pre-funding zero rows so charts start where investing started.
+    funded = perf[perf["net_liquidation_value"] > 0]
+    return funded.reset_index(drop=True)
+
+
+def build_performance_series(perf: pd.DataFrame) -> list[dict]:
+    """Portfolio value vs money actually put in - the gap between them is gain."""
+    if perf.empty:
+        return []
+    return [{
+        "date": row["date"],
+        "value": round(float(row["net_liquidation_value"]), 2),
+        "deposits": round(float(row["net_deposits"]), 2),
+    } for _, row in perf.iterrows()]
+
+
+def build_twr_vs_benchmark(perf: pd.DataFrame) -> dict:
+    """Time-weighted return indexed to 100, against the benchmark over the same
+    window. TWR strips out the effect of deposits, which is what makes the
+    comparison honest - raw portfolio value grows just from adding money, and
+    charting that against an index would flatter the portfolio enormously."""
+    if perf.empty or len(perf) < 2:
+        return {"series": [], "benchmark_label": BENCHMARK_LABEL}
+
+    index_value = 100.0
+    rows = [{"date": perf.iloc[0]["date"], "portfolio": 100.0}]
+    for i in range(1, len(perf)):
+        prev_val = float(perf.iloc[i - 1]["net_liquidation_value"])
+        curr_val = float(perf.iloc[i]["net_liquidation_value"])
+        flow = float(perf.iloc[i]["net_deposits"]) - float(perf.iloc[i - 1]["net_deposits"])
+        if prev_val > 0:
+            period_return = (curr_val - prev_val - flow) / prev_val
+            index_value *= (1 + period_return)
+        rows.append({"date": perf.iloc[i]["date"], "portfolio": round(index_value, 2)})
+
+    start_date, end_date = perf.iloc[0]["date"], perf.iloc[-1]["date"]
+    try:
+        hist = yf.Ticker(BENCHMARK_SYMBOL).history(start=start_date, end=end_date)
+    except Exception:
+        hist = None
+
+    if hist is not None and not hist.empty:
+        closes = hist["Close"]
+        base = float(closes.iloc[0])
+        by_date = {d.date().isoformat(): float(v) for d, v in closes.items()}
+        sorted_dates = sorted(by_date)
+        for row in rows:
+            # weekly portfolio points won't land exactly on trading days -
+            # carry the most recent close at or before each point
+            candidates = [d for d in sorted_dates if d <= row["date"]]
+            if candidates:
+                row["benchmark"] = round(by_date[candidates[-1]] / base * 100, 2)
+
+    return {"series": rows, "benchmark_label": BENCHMARK_LABEL}
+
+
+def build_drawdown_series(twr_series: list[dict]) -> list[dict]:
+    """How far below its running peak *performance* sat at each point.
+
+    Computed from the time-weighted index, NOT raw portfolio value. Raw value
+    falls when you withdraw money, which would show a withdrawal as a crash -
+    this portfolio had a ~$10k withdrawal in Mar-Apr 2025 that looked like a
+    -69% drawdown on raw value but was nothing of the sort.
+    """
+    peak = 0.0
+    out = []
+    for row in twr_series:
+        value = float(row["portfolio"])
+        peak = max(peak, value)
+        out.append({
+            "date": row["date"],
+            "drawdown_pct": round((value - peak) / peak * 100, 2) if peak else 0.0,
+        })
+    return out
+
+
+def build_monthly_realized() -> list[dict]:
+    """Realized P&L bucketed by the month the position was closed."""
+    path = PROCESSED_DIR / "trades.csv"
+    if not path.exists():
+        return []
+    df = pd.read_csv(path, parse_dates=["sell_date"]).dropna(subset=["realized_pnl", "sell_date"])
+    if df.empty:
+        return []
+    df["month"] = df["sell_date"].dt.to_period("M").astype(str)
+    grouped = df.groupby("month", as_index=False)["realized_pnl"].sum().sort_values("month")
+    return [{"month": r["month"], "realized_pnl": round(float(r["realized_pnl"]), 2)}
+            for _, r in grouped.iterrows()]
+
+
+def build_cash() -> dict:
+    path = PROCESSED_DIR / "cash.csv"
+    if not path.exists():
+        return {}
+    df = pd.read_csv(path)
+    return {row["currency"]: round(float(row["amount"]), 2)
+            for _, row in df.groupby("currency", as_index=False)["amount"].sum().iterrows()}
 
 
 def build_win_rate() -> dict:
@@ -225,13 +336,33 @@ def main():
     symbol_map = build_symbol_map()
     holdings = build_holdings(symbol_map)
 
+    perf = load_performance()
+    twr = build_twr_vs_benchmark(perf)
+    latest_value = float(perf.iloc[-1]["net_liquidation_value"]) if not perf.empty else None
+    latest_deposits = float(perf.iloc[-1]["net_deposits"]) if not perf.empty else None
+    total_gain = (latest_value - latest_deposits) if latest_value is not None else None
+
     snapshot = {
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "accounts": build_accounts(),
         "portfolio_summary": {
-            "total_market_value": round(sum(h["market_value"] or 0 for h in holdings), 2),
+            # Authoritative total from Wealthsimple's own net liquidation value,
+            # not a sum of position rows.
+            "total_value": round(latest_value, 2) if latest_value is not None else None,
+            "as_of": str(perf.iloc[-1]["date"]) if not perf.empty else None,
+            "net_deposits": round(latest_deposits, 2) if latest_deposits is not None else None,
+            "total_gain": round(total_gain, 2) if total_gain is not None else None,
+            "total_gain_pct": round(total_gain / latest_deposits * 100, 1)
+                if latest_deposits else None,
+            "securities_value": round(sum(h["market_value"] or 0 for h in holdings), 2),
             "total_unrealized_pnl": round(sum(h["unrealized_pnl"] or 0 for h in holdings), 2),
+            "first_invested": str(perf.iloc[0]["date"]) if not perf.empty else None,
+            "cash": build_cash(),
         },
+        "performance": build_performance_series(perf),
+        "twr": twr,
+        "drawdown": build_drawdown_series(twr["series"]),
+        "monthly_realized": build_monthly_realized(),
         "holdings": holdings,
         "realized": build_realized_summary(symbol_map),
         "win_rate": build_win_rate(),
