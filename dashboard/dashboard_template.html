@@ -159,6 +159,56 @@
   .tag.serious { color: var(--status-serious); }
   .tag.warning { color: var(--status-warning-text); }
 
+  /* Screener controls */
+  .controls { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; }
+  .segmented { display: inline-flex; border: 1px solid var(--gridline); border-radius: 8px; overflow: hidden; background: var(--surface-1); }
+  .segmented button {
+    font: inherit; font-size: 12px; padding: 5px 11px; border: 0; cursor: pointer;
+    background: transparent; color: var(--text-secondary); border-right: 1px solid var(--gridline);
+  }
+  .segmented button:last-child { border-right: 0; }
+  .segmented button.on { background: var(--s1); color: #fff; font-weight: 600; }
+
+  .scalekey { display: flex; align-items: center; gap: 8px; font-size: 11px; color: var(--text-muted); margin-bottom: 8px; }
+  .scalekey .ramp {
+    width: 120px; height: 8px; border-radius: 4px;
+    background: linear-gradient(90deg, var(--div-pos), var(--div-mid), var(--div-neg));
+  }
+
+  /* Valuation band row */
+  .wlrow {
+    display: grid; grid-template-columns: 92px 1fr 128px 96px; align-items: center;
+    gap: 12px; padding: 9px 14px; border-bottom: 1px solid var(--gridline);
+  }
+  .wlrow:last-child { border-bottom: none; }
+  .wlrow .sym { font-weight: 600; font-size: 13px; }
+  .wlrow .name { color: var(--text-muted); font-size: 10.5px; display: block; }
+  .heldpill {
+    display: inline-block; font-size: 9px; font-weight: 700; letter-spacing: .04em;
+    padding: 1px 5px; border-radius: 4px; background: var(--gridline); color: var(--text-secondary);
+    vertical-align: middle; margin-left: 4px;
+  }
+  .band { position: relative; height: 28px; }
+  .bandtrack {
+    position: absolute; top: 4px; left: 0; right: 0; height: 5px; border-radius: 3px;
+    background: linear-gradient(90deg, var(--div-pos), var(--div-mid), var(--div-neg)); opacity: .35;
+  }
+  .bandmed { position: absolute; top: 0; width: 1px; height: 13px; background: var(--text-muted); }
+  .bandmark {
+    position: absolute; top: 0; width: 12px; height: 12px; border-radius: 50%;
+    border: 2px solid var(--surface-1); transform: translateX(-6px);
+  }
+  /* Range labels sit BELOW the track - on the track they collide with the
+     marker whenever a stock sits at the very cheap or very pricey end. */
+  .bandends { position: absolute; top: 14px; left: 0; right: 0; display: flex; justify-content: space-between;
+              font-size: 9.5px; color: var(--text-muted); }
+  .wlrow .verdict { font-size: 11.5px; font-weight: 600; line-height: 1.25; }
+  .wlrow .verdict .pe { display: block; font-weight: 400; color: var(--text-muted); font-size: 10.5px; }
+  .wlrow .dip { text-align: right; font-variant-numeric: tabular-nums; font-size: 12.5px; }
+  .wlrow .dip small { display: block; color: var(--text-muted); font-size: 10px; }
+
+  .minihead { font-size: 12px; font-weight: 600; color: var(--text-secondary); margin-bottom: 6px; }
+
   table.plain { width: 100%; border-collapse: collapse; font-size: 12.5px; }
   table.plain th { text-align: left; font-weight: 600; color: var(--text-secondary); font-size: 11px;
                    text-transform: uppercase; letter-spacing: 0.03em; padding: 7px 10px;
@@ -213,6 +263,54 @@
         <svg class="plot" id="plot-dd" viewBox="0 0 420 250" role="img"></svg>
         <div class="tip" id="tip-dd"></div>
       </figure>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="sec">Valuation &amp; dip finder</h2>
+    <p class="sub">
+      Where each stock's P/E sits inside <em>its own</em> 5-year range &mdash; 0% = the cheapest it's been, 100% = the priciest.
+      An absolute P/E means little on its own; this asks whether the market is paying more or less than it usually does for this company.
+      Descriptive only, not advice.
+    </p>
+    <div class="controls">
+      <div class="segmented" id="wl-scope">
+        <button data-scope="all" class="on">All</button>
+        <button data-scope="held">Held</button>
+        <button data-scope="watch">Watchlist</button>
+      </div>
+      <div class="segmented" id="wl-sort">
+        <button data-sort="valuation" class="on">Cheapest first</button>
+        <button data-sort="dip">Biggest dip</button>
+        <button data-sort="expensive">Priciest first</button>
+      </div>
+    </div>
+    <div class="scalekey">
+      <span>cheap vs own history</span>
+      <span class="ramp"></span>
+      <span>expensive vs own history</span>
+    </div>
+    <div class="barlist" id="watchlist-list"></div>
+    <p class="sub" style="margin-top:10px;">
+      Edit <code>watchlist.txt</code> in the repo to add or remove names, then re-run <code>build_watchlist.py</code>.
+    </p>
+  </section>
+
+  <section>
+    <h2 class="sec">Earnings</h2>
+    <div class="chart-grid">
+      <div>
+        <div class="minihead">Next reports</div>
+        <div class="table-wrap">
+          <table class="plain" id="earnings-upcoming"></table>
+        </div>
+      </div>
+      <div>
+        <div class="minihead">Recent beat / miss record</div>
+        <div class="table-wrap">
+          <table class="plain" id="earnings-surprises"></table>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -449,6 +547,104 @@
     series: [{ key: 'drawdown_pct', label: 'Drawdown', color: '--div-neg' }],
     yFormat: (v) => v.toFixed(0) + '%', fillToZero: true,
   });
+
+  // ---------- Valuation & dip finder ----------
+  (function screener() {
+    const rows = data.watchlist || [];
+    const listEl = document.getElementById('watchlist-list');
+    if (!rows.length) { listEl.innerHTML = '<div class="empty">No watchlist data. Run build_watchlist.py.</div>'; return; }
+
+    let scope = 'all', sortBy = 'valuation';
+
+    // Diverging colour by percentile: low = cheap pole, high = expensive pole.
+    const bandColor = (p) => {
+      if (p == null) return cssVar('--other');
+      if (p < 20) return cssVar('--div-pos');
+      if (p < 40) return cssVar('--div-pos');
+      if (p < 60) return cssVar('--text-muted');
+      if (p < 80) return cssVar('--div-neg');
+      return cssVar('--div-neg');
+    };
+
+    function render() {
+      let view = rows.filter(r => scope === 'all' ? true : scope === 'held' ? r.held : !r.held);
+      view = view.slice().sort((a, b) => {
+        if (sortBy === 'dip') return (a.pct_from_52w_high ?? 0) - (b.pct_from_52w_high ?? 0);
+        const av = a.pe_percentile, bv = b.pe_percentile;
+        if (av == null && bv == null) return 0;
+        if (av == null) return 1;
+        if (bv == null) return -1;
+        return sortBy === 'expensive' ? bv - av : av - bv;
+      });
+
+      listEl.innerHTML = view.map(r => {
+        const p = r.pe_percentile;
+        const hasBand = p != null && r.pe_low != null && r.pe_high != null;
+        const color = bandColor(p);
+        const medPos = (r.pe_median != null && r.pe_high > r.pe_low)
+          ? Math.max(0, Math.min(100, (r.pe_median - r.pe_low) / (r.pe_high - r.pe_low) * 100)) : null;
+        const band = hasBand ? `
+          <div class="band" title="P/E ${r.pe_used} · 5y range ${r.pe_low}–${r.pe_high} · median ${r.pe_median}">
+            <div class="bandends"><span>${r.pe_low}</span><span>${r.pe_high}</span></div>
+            <div class="bandtrack"></div>
+            ${medPos != null ? `<div class="bandmed" style="left:${medPos}%"></div>` : ''}
+            <div class="bandmark" style="left:${p}%; background:${color}"></div>
+          </div>`
+          : `<div class="band"><div class="bandends"><span style="color:var(--text-muted)">no earnings-based P/E (fund or unprofitable)</span></div></div>`;
+
+        const dip = r.pct_from_52w_high;
+        return `
+        <div class="wlrow">
+          <div>
+            <span class="sym">${esc(r.symbol)}</span>${r.held ? '<span class="heldpill">HELD</span>' : ''}
+            <span class="name">${esc((r.name || '').slice(0, 18))}</span>
+          </div>
+          ${band}
+          <div class="verdict" style="color:${p == null ? 'var(--text-muted)' : color}">
+            ${esc(r.valuation_label)}
+            <span class="pe">${r.pe_used != null ? 'P/E ' + r.pe_used + (p != null ? ` · ${p.toFixed(0)}% of range` : '') : '—'}</span>
+          </div>
+          <div class="dip">
+            ${dip != null ? dip.toFixed(1) + '%' : '—'}
+            <small>from 52w high</small>
+          </div>
+        </div>`;
+      }).join('') || '<div class="empty">Nothing matches.</div>';
+    }
+
+    document.querySelectorAll('#wl-scope button').forEach(b => b.addEventListener('click', () => {
+      document.querySelectorAll('#wl-scope button').forEach(x => x.classList.remove('on'));
+      b.classList.add('on'); scope = b.dataset.scope; render();
+    }));
+    document.querySelectorAll('#wl-sort button').forEach(b => b.addEventListener('click', () => {
+      document.querySelectorAll('#wl-sort button').forEach(x => x.classList.remove('on'));
+      b.classList.add('on'); sortBy = b.dataset.sort; render();
+    }));
+    render();
+  })();
+
+  // ---------- Earnings ----------
+  (function earnings() {
+    const up = data.earnings?.upcoming || [];
+    document.getElementById('earnings-upcoming').innerHTML = `
+      <thead><tr><th>Symbol</th><th>Date</th><th class="num">EPS est.</th></tr></thead>
+      <tbody>${up.length ? up.map(e => `
+        <tr><td><strong>${esc(e.symbol)}</strong></td><td>${fullDate(e.date)}</td>
+        <td class="num">${e.eps_estimate != null ? '$' + e.eps_estimate.toFixed(2) : '—'}</td></tr>`).join('')
+        : '<tr><td colspan="3" class="empty">No upcoming dates.</td></tr>'}</tbody>`;
+
+    const sr = data.earnings?.recent_surprises || [];
+    document.getElementById('earnings-surprises').innerHTML = `
+      <thead><tr><th>Symbol</th><th class="num">Beats</th><th>Last report</th><th class="num">Surprise</th></tr></thead>
+      <tbody>${sr.length ? sr.map(e => {
+        const s = e.last_surprise_pct;
+        const col = s == null ? 'var(--text-muted)' : s >= 0 ? 'var(--success-text)' : 'var(--status-critical)';
+        return `<tr><td><strong>${esc(e.symbol)}</strong></td>
+          <td class="num">${e.beats}/${e.of}</td>
+          <td>${fullDate(e.last_date)}</td>
+          <td class="num" style="color:${col}">${s != null ? (s >= 0 ? '+' : '') + s.toFixed(1) + '%' : '—'}</td></tr>`;
+      }).join('') : '<tr><td colspan="4" class="empty">No reported earnings.</td></tr>'}</tbody>`;
+  })();
 
   // ---------- Allocation stacked bar ----------
   const holdings = data.holdings || [];

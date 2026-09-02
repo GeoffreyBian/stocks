@@ -25,6 +25,7 @@ Keychain (service name `wealthsimple-stocks-folder`), not in this repo.
 .venv/bin/python scripts/build_trades.py             # FIFO-match buys/sells into closed trades
 .venv/bin/python scripts/detect_bad_trades.py        # flag quick losses, big losses, bad timing, overtrading
 .venv/bin/python scripts/detect_dips.py              # find market/holding dips, check if you traded them
+.venv/bin/python scripts/build_watchlist.py          # screen holdings + watchlist.txt for valuation/dips/earnings
 .venv/bin/python scripts/build_dashboard_snapshot.py # aggregate everything into dashboard/dashboard_data.json
 .venv/bin/python scripts/render_dashboard_html.py    # inject that JSON into dashboard/dashboard.html
 ```
@@ -47,6 +48,7 @@ data/
     open_positions.csv     # still-open lots
     bad_trade_flags.csv    # output of detect_bad_trades.py
     dip_events.csv         # output of detect_dips.py
+watchlist.txt   # symbols to screen but not (yet) own - edit freely, tracked in git
 journal/
   notes.md      # freeform trade rationale notes
 dashboard/

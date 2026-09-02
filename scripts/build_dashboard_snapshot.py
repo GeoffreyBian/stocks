@@ -238,6 +238,51 @@ def build_monthly_realized() -> list[dict]:
             for _, r in grouped.iterrows()]
 
 
+def build_watchlist() -> list[dict]:
+    path = PROCESSED_DIR / "watchlist.csv"
+    if not path.exists():
+        return []
+    df = pd.read_csv(path)
+    df = df.where(pd.notna(df), None)
+    return json.loads(df.to_json(orient="records"))
+
+
+def build_earnings() -> dict:
+    """Upcoming earnings dates, plus the recent beat/miss record per symbol."""
+    path = PROCESSED_DIR / "earnings_calendar.csv"
+    if not path.exists():
+        return {"upcoming": [], "recent_surprises": []}
+    df = pd.read_csv(path)
+    today = pd.Timestamp.now().date().isoformat()
+
+    upcoming = df[(df["date"] >= today)].sort_values("date")
+    # One row per symbol - the next report, not every future placeholder.
+    upcoming = upcoming.drop_duplicates(subset=["symbol"], keep="first").head(25)
+
+    reported = df[df["reported_eps"].notna() & (df["date"] < today)].sort_values("date", ascending=False)
+    recent = reported.groupby("symbol").head(4)
+    beats = recent[recent["surprise_pct"] > 0].groupby("symbol").size()
+    total = recent.groupby("symbol").size()
+    record = []
+    for symbol in total.index:
+        last = reported[reported["symbol"] == symbol].iloc[0]
+        record.append({
+            "symbol": symbol,
+            "beats": int(beats.get(symbol, 0)),
+            "of": int(total[symbol]),
+            "last_date": last["date"],
+            "last_surprise_pct": None if pd.isna(last["surprise_pct"]) else float(last["surprise_pct"]),
+            "last_reported_eps": None if pd.isna(last["reported_eps"]) else float(last["reported_eps"]),
+            "last_estimate": None if pd.isna(last["eps_estimate"]) else float(last["eps_estimate"]),
+        })
+    record.sort(key=lambda r: r["last_date"], reverse=True)
+
+    return {
+        "upcoming": json.loads(upcoming.to_json(orient="records")),
+        "recent_surprises": record,
+    }
+
+
 def build_cash() -> dict:
     path = PROCESSED_DIR / "cash.csv"
     if not path.exists():
@@ -368,6 +413,8 @@ def main():
         "win_rate": build_win_rate(),
         "bad_trades": build_bad_trades(),
         "dips": build_dip_summary({h["symbol"] for h in holdings}),
+        "watchlist": build_watchlist(),
+        "earnings": build_earnings(),
     }
 
     out_path = DASHBOARD_DIR / "dashboard_data.json"

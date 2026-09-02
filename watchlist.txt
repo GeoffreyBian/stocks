@@ -1,0 +1,33 @@
+# Symbols to screen for valuation / dips, one per line. Comments with #.
+# Everything you currently hold is included automatically - this file is for
+# names you want to WATCH but don't own yet.
+#
+# Seeded with large caps you've traded before plus widely-followed names.
+# Edit freely: add a ticker, delete one, whatever. Re-run build_watchlist.py.
+
+# --- previously traded, no longer held ---
+SCHG
+SCHD
+VOO
+MCO
+SPGI
+RIVN
+INTU
+SOXL
+
+# --- watch candidates ---
+AAPL
+MSFT
+COST
+LLY
+UNH
+JPM
+V
+BRK-B
+ASML
+AMD
+TSM
+NOW
+PANW
+SHOP
+ISRG
