@@ -1,0 +1,4 @@
+ws-api
+keyring
+pandas
+yfinance

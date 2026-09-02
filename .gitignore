@@ -1,0 +1,13 @@
+.venv/
+__pycache__/
+*.pyc
+
+# Financial data never goes into git history, even locally-only.
+data/raw/
+data/processed/
+dashboard/dashboard_data.json
+dashboard/dashboard.html
+
+# Just in case anything credential-shaped ends up on disk.
+.env
+*.session
