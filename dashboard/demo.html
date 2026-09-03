@@ -368,7 +368,7 @@
 
 <script id="dashboard-data" type="application/json">{
   "demo_notice": "Demo data \u2014 every figure on this page is randomly generated, not a real portfolio.",
-  "generated_at": "2026-09-02T23:59:22.899778+00:00",
+  "generated_at": "2026-09-03T01:53:22.497160+00:00",
   "accounts": [
     {
       "label": "TFSA",
@@ -2336,9 +2336,12 @@
         "your_activity": "no trades during this dip"
       }
     ],
-    "dips_bought": 14,
-    "dips_sold_into": 6,
-    "dips_sat_out": 31
+    "dips_bought": 9,
+    "dips_sold_into": 4,
+    "dips_both": 2,
+    "dips_recovery_only": 7,
+    "dips_sat_out": 29,
+    "dips_total": 51
   },
   "watchlist": [
     {
@@ -3500,10 +3503,18 @@
 
   // ---------- Dips ----------
   const dips = data.dips || {};
+  const dipParts = [
+    `<strong style="color:var(--success-text)">${dips.dips_bought || 0} you bought into</strong>`,
+    `<strong style="color:var(--status-critical)">${dips.dips_sold_into || 0} you sold into</strong>`,
+    dips.dips_both ? `${dips.dips_both} both` : null,
+    dips.dips_recovery_only ? `${dips.dips_recovery_only} traded only on the way back up` : null,
+    `${dips.dips_sat_out || 0} you sat out`,
+  ].filter(Boolean);
   document.getElementById('dips-summary').innerHTML =
-    `Since you started investing: <strong style="color:var(--success-text)">${dips.dips_bought || 0} dips you bought into</strong>, ` +
-    `<strong style="color:var(--status-critical)">${dips.dips_sold_into || 0} you sold into</strong>, ` +
-    `${dips.dips_sat_out || 0} you sat out. A dip = a ≥10% fall from a trailing 1-year high.`;
+    `Since you started investing, ${dips.dips_total || 0} dips in symbols you've traded: ` +
+    dipParts.join(', ') + '. ' +
+    `A dip = a ≥10% fall from a trailing 1-year high. "Bought"/"sold" means acting ` +
+    `before the bottom, not on the recovery.`;
 
   document.getElementById('dips-activity-table').innerHTML = `
     <thead><tr><th>Symbol</th><th>Dip start</th><th>Bottom</th><th class="num">Fall</th><th>Recovered</th><th>What you did</th></tr></thead>

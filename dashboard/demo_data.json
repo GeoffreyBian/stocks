@@ -1,6 +1,6 @@
 {
   "demo_notice": "Demo data \u2014 every figure on this page is randomly generated, not a real portfolio.",
-  "generated_at": "2026-09-02T23:59:22.899778+00:00",
+  "generated_at": "2026-09-03T01:53:22.497160+00:00",
   "accounts": [
     {
       "label": "TFSA",
@@ -1968,9 +1968,12 @@
         "your_activity": "no trades during this dip"
       }
     ],
-    "dips_bought": 14,
-    "dips_sold_into": 6,
-    "dips_sat_out": 31
+    "dips_bought": 9,
+    "dips_sold_into": 4,
+    "dips_both": 2,
+    "dips_recovery_only": 7,
+    "dips_sat_out": 29,
+    "dips_total": 51
   },
   "watchlist": [
     {

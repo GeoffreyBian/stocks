@@ -787,10 +787,18 @@
 
   // ---------- Dips ----------
   const dips = data.dips || {};
+  const dipParts = [
+    `<strong style="color:var(--success-text)">${dips.dips_bought || 0} you bought into</strong>`,
+    `<strong style="color:var(--status-critical)">${dips.dips_sold_into || 0} you sold into</strong>`,
+    dips.dips_both ? `${dips.dips_both} both` : null,
+    dips.dips_recovery_only ? `${dips.dips_recovery_only} traded only on the way back up` : null,
+    `${dips.dips_sat_out || 0} you sat out`,
+  ].filter(Boolean);
   document.getElementById('dips-summary').innerHTML =
-    `Since you started investing: <strong style="color:var(--success-text)">${dips.dips_bought || 0} dips you bought into</strong>, ` +
-    `<strong style="color:var(--status-critical)">${dips.dips_sold_into || 0} you sold into</strong>, ` +
-    `${dips.dips_sat_out || 0} you sat out. A dip = a ≥10% fall from a trailing 1-year high.`;
+    `Since you started investing, ${dips.dips_total || 0} dips in symbols you've traded: ` +
+    dipParts.join(', ') + '. ' +
+    `A dip = a ≥10% fall from a trailing 1-year high. "Bought"/"sold" means acting ` +
+    `before the bottom, not on the recovery.`;
 
   document.getElementById('dips-activity-table').innerHTML = `
     <thead><tr><th>Symbol</th><th>Dip start</th><th>Bottom</th><th class="num">Fall</th><th>Recovered</th><th>What you did</th></tr></thead>

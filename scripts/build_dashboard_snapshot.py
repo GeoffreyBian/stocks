@@ -334,9 +334,23 @@ def build_dip_summary(current_symbols: set[str]) -> dict:
 
     held = df[~df["symbol"].isin(["^GSPC", "^GSPTSE"])].copy()
 
-    bought_count = int(held["your_activity"].str.contains("BUY", na=False).sum())
-    sold_count = int(held["your_activity"].str.contains("SELL", na=False).sum())
-    sat_out_count = int((held["your_activity"] == "no trades during this dip").sum())
+    # These four buckets partition the dips: every dip lands in exactly one, so
+    # the numbers add up to the total. The previous version tested the activity
+    # string for "BUY" and "SELL" separately, so a dip where you did both was
+    # counted twice and the three figures summed to more dips than existed.
+    #
+    # "Bought"/"sold" mean acting on the decline leg, before the bottom. Trades
+    # on the way back up are real but are a different decision, so they don't
+    # count as meeting the dip.
+    bought = held.get("buys_on_decline", pd.Series(0, index=held.index)).fillna(0) > 0
+    sold = held.get("sells_on_decline", pd.Series(0, index=held.index)).fillna(0) > 0
+    traded_at_all = held["your_activity"] != "no trades during this dip"
+
+    bought_count = int((bought & ~sold).sum())
+    sold_count = int((sold & ~bought).sum())
+    both_count = int((bought & sold).sum())
+    recovery_only_count = int((traded_at_all & ~bought & ~sold).sum())
+    sat_out_count = int((~traded_at_all).sum())
 
     # The interesting rows for a dashboard: dips you actually traded during
     # (small, high-signal), plus the biggest dips you sat out - but only for
@@ -357,7 +371,10 @@ def build_dip_summary(current_symbols: set[str]) -> dict:
         "notable_dips_missed": json.loads(missed.to_json(orient="records")),
         "dips_bought": bought_count,
         "dips_sold_into": sold_count,
+        "dips_both": both_count,
+        "dips_recovery_only": recovery_only_count,
         "dips_sat_out": sat_out_count,
+        "dips_total": int(len(held)),
     }
 
 

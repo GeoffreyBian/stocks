@@ -224,9 +224,13 @@ def build_dips(rng, today):
             dip("ISRG", 10, -22.8, "no trades during this dip"),
             dip("SHOP", 6, -31.5, "no trades during this dip", recovered=False),
         ],
-        "dips_bought": 14,
-        "dips_sold_into": 6,
-        "dips_sat_out": 31,
+        # These five buckets partition the dips - they must sum to dips_total.
+        "dips_bought": 9,
+        "dips_sold_into": 4,
+        "dips_both": 2,
+        "dips_recovery_only": 7,
+        "dips_sat_out": 29,
+        "dips_total": 51,
     }
 
 

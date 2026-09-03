@@ -69,6 +69,7 @@ def find_dips(symbol: str, is_crypto: bool = False) -> pd.DataFrame:
     events = []
     in_dip = False
     dip_start = None
+    dip_peak = None
     dip_low = None
     dip_low_date = None
 
@@ -79,9 +80,17 @@ def find_dips(symbol: str, is_crypto: bool = False) -> pd.DataFrame:
         if not in_dip and dd <= DIP_THRESHOLD_PCT:
             in_dip = True
             dip_start = date
+            # Freeze the peak this dip fell from. Measuring against the *rolling*
+            # high instead lets a long dip "recover" without the price going
+            # anywhere, simply because the old peak ages out of the 252-day
+            # window: SOXL was called recovered while still 38% below the high
+            # it fell from, ASML while 20% below. Holding the reference fixed is
+            # the standard drawdown definition and makes recovery mean recovery.
+            dip_peak = row["rolling_high"]
             dip_low = dd
             dip_low_date = date
         elif in_dip:
+            dd = (row["Close"] - dip_peak) / dip_peak * 100
             if dd < dip_low:
                 dip_low = dd
                 dip_low_date = date
@@ -118,20 +127,41 @@ def cross_reference_with_trades(dips: pd.DataFrame) -> pd.DataFrame:
     trades["occurredAt"] = pd.to_datetime(trades["occurredAt"]).dt.date
 
     activity_notes = []
+    leg_counts = []
     for _, dip in dips.iterrows():
         symbol = dip["symbol"]
-        start, end = dip["dip_start"], dip["dip_low_date"]
+        start, low = dip["dip_start"], dip["dip_low_date"]
+        end = dip["recovered_date"]
+        if end is None or pd.isna(end):
+            end = pd.Timestamp.now().date()
         window_trades = trades[
             (trades["symbol"] == symbol)
             & (trades["occurredAt"] >= start)
-            & (trades["occurredAt"] <= (dip["recovered_date"] or pd.Timestamp.now().date()))
+            & (trades["occurredAt"] <= end)
         ]
         if window_trades.empty:
             activity_notes.append("no trades during this dip")
         else:
             parts = [f"{r['side']} {r['assetQuantity']} on {r['occurredAt']}" for _, r in window_trades.iterrows()]
             activity_notes.append("; ".join(parts))
+
+        # Split the dip into its decline leg (start -> bottom) and its recovery
+        # leg (bottom -> recovered). Buying anywhere in the whole window used to
+        # count as "buying the dip", but 67% of those fills actually landed
+        # after the bottom, on the way back up - which is a different act, at a
+        # higher price. The headline counts now use the decline leg only.
+        decline = window_trades[window_trades["occurredAt"] <= low]
+        recovery = window_trades[window_trades["occurredAt"] > low]
+        leg_counts.append({
+            "buys_on_decline": int((decline["side"] == "BUY").sum()),
+            "sells_on_decline": int((decline["side"] == "SELL").sum()),
+            "buys_on_recovery": int((recovery["side"] == "BUY").sum()),
+            "sells_on_recovery": int((recovery["side"] == "SELL").sum()),
+        })
+
     dips["your_activity"] = activity_notes
+    for col in ("buys_on_decline", "sells_on_decline", "buys_on_recovery", "sells_on_recovery"):
+        dips[col] = [c[col] for c in leg_counts]
     return dips
 
 
