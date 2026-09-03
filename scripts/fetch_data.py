@@ -119,9 +119,10 @@ def fetch_raw(api) -> dict:
         # end_date is required too, for a subtler reason: the endpoint always
         # downsamples a multi-year range to ~110 points (weekly), and with no
         # end_date it anchors that last point to the previous completed week.
-        # That left the headline total up to 7 days stale - it read $207,310
-        # (Aug 26) while the app showed $209,802 (Sep 2). Passing end_date=now
-        # keeps the same weekly resolution but ends the series on today.
+        # That left the headline total up to 7 days stale - it reported the
+        # previous week's closing value while the Wealthsimple app showed the
+        # current one. Passing end_date=now keeps the same weekly resolution
+        # but ends the series on today.
         raw["identity_historical_financials"] = api.get_identity_historical_financials(
             account_ids=account_ids,
             currency=CURRENCY,
