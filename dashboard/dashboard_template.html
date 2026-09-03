@@ -218,9 +218,18 @@
   table.plain td.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
   .table-wrap { border: 1px solid var(--gridline); border-radius: 12px; background: var(--surface-1); overflow-x: auto; }
   .empty { color: var(--text-muted); font-size: 12.5px; padding: 14px; }
+
+  /* Shown only when the snapshot carries a demo_notice, so a page built from
+     synthetic data can never be mistaken for someone's real account. */
+  .demo-banner {
+    border: 1px solid var(--status-warning-text); border-radius: 10px;
+    padding: 9px 13px; margin-bottom: 18px; font-size: 12.5px; font-weight: 600;
+    color: var(--status-warning-text);
+  }
 </style>
 
 <div class="wrap">
+  <div class="demo-banner" id="demo-banner" hidden></div>
   <header class="page-head">
     <h1>Portfolio Dashboard</h1>
     <div class="meta" id="generated-at"></div>
@@ -374,6 +383,12 @@
 
   document.getElementById('generated-at').textContent =
     'Generated ' + new Date(data.generated_at).toLocaleString('en-US', { dateStyle: 'medium', timeStyle: 'short' });
+
+  if (data.demo_notice) {
+    const banner = document.getElementById('demo-banner');
+    banner.textContent = data.demo_notice;
+    banner.hidden = false;
+  }
 
   const S = data.portfolio_summary || {};
 

@@ -1,0 +1,2714 @@
+{
+  "demo_notice": "Demo data \u2014 every figure on this page is randomly generated, not a real portfolio.",
+  "generated_at": "2026-09-02T23:59:22.899778+00:00",
+  "accounts": [
+    {
+      "label": "TFSA",
+      "currency": "CAD"
+    },
+    {
+      "label": "RRSP",
+      "currency": "CAD"
+    },
+    {
+      "label": "Non-registered",
+      "currency": "CAD"
+    },
+    {
+      "label": "Cash (USD)",
+      "currency": "USD"
+    }
+  ],
+  "portfolio_summary": {
+    "total_value": 40677.2,
+    "as_of": "2025-07-09",
+    "net_deposits": 34650.0,
+    "total_gain": 6027.2,
+    "total_gain_pct": 17.4,
+    "securities_value": 38599.67,
+    "total_unrealized_pnl": 5187.8,
+    "first_invested": "2023-06-07",
+    "cash": {
+      "CAD": 812.44,
+      "USD": 1265.09
+    }
+  },
+  "performance": [
+    {
+      "date": "2023-06-07",
+      "value": 497.23,
+      "deposits": 500.0
+    },
+    {
+      "date": "2023-06-14",
+      "value": 494.89,
+      "deposits": 500.0
+    },
+    {
+      "date": "2023-06-21",
+      "value": 944.26,
+      "deposits": 900.0
+    },
+    {
+      "date": "2023-06-28",
+      "value": 933.8,
+      "deposits": 900.0
+    },
+    {
+      "date": "2023-07-05",
+      "value": 1332.9,
+      "deposits": 1300.0
+    },
+    {
+      "date": "2023-07-12",
+      "value": 1314.4,
+      "deposits": 1300.0
+    },
+    {
+      "date": "2023-07-19",
+      "value": 1772.94,
+      "deposits": 1800.0
+    },
+    {
+      "date": "2023-07-26",
+      "value": 1699.27,
+      "deposits": 1800.0
+    },
+    {
+      "date": "2023-08-02",
+      "value": 2195.08,
+      "deposits": 2300.0
+    },
+    {
+      "date": "2023-08-09",
+      "value": 2189.03,
+      "deposits": 2300.0
+    },
+    {
+      "date": "2023-08-16",
+      "value": 2610.72,
+      "deposits": 2700.0
+    },
+    {
+      "date": "2023-08-23",
+      "value": 2621.11,
+      "deposits": 2700.0
+    },
+    {
+      "date": "2023-08-30",
+      "value": 3027.64,
+      "deposits": 3200.0
+    },
+    {
+      "date": "2023-09-06",
+      "value": 3034.11,
+      "deposits": 3200.0
+    },
+    {
+      "date": "2023-09-13",
+      "value": 3515.9,
+      "deposits": 3600.0
+    },
+    {
+      "date": "2023-09-20",
+      "value": 3445.06,
+      "deposits": 3600.0
+    },
+    {
+      "date": "2023-09-27",
+      "value": 3853.95,
+      "deposits": 4000.0
+    },
+    {
+      "date": "2023-10-04",
+      "value": 3743.61,
+      "deposits": 4000.0
+    },
+    {
+      "date": "2023-10-11",
+      "value": 4031.94,
+      "deposits": 4300.0
+    },
+    {
+      "date": "2023-10-18",
+      "value": 4139.0,
+      "deposits": 4300.0
+    },
+    {
+      "date": "2023-10-25",
+      "value": 4426.42,
+      "deposits": 4600.0
+    },
+    {
+      "date": "2023-11-01",
+      "value": 4358.11,
+      "deposits": 4600.0
+    },
+    {
+      "date": "2023-11-08",
+      "value": 4891.29,
+      "deposits": 5000.0
+    },
+    {
+      "date": "2023-11-15",
+      "value": 5020.5,
+      "deposits": 5000.0
+    },
+    {
+      "date": "2023-11-22",
+      "value": 5409.2,
+      "deposits": 5300.0
+    },
+    {
+      "date": "2023-11-29",
+      "value": 5337.12,
+      "deposits": 5300.0
+    },
+    {
+      "date": "2023-12-06",
+      "value": 5695.3,
+      "deposits": 5550.0
+    },
+    {
+      "date": "2023-12-13",
+      "value": 5598.04,
+      "deposits": 5550.0
+    },
+    {
+      "date": "2023-12-20",
+      "value": 5850.42,
+      "deposits": 5800.0
+    },
+    {
+      "date": "2023-12-27",
+      "value": 9828.14,
+      "deposits": 9800.0
+    },
+    {
+      "date": "2024-01-03",
+      "value": 10071.82,
+      "deposits": 10200.0
+    },
+    {
+      "date": "2024-01-10",
+      "value": 10343.05,
+      "deposits": 10200.0
+    },
+    {
+      "date": "2024-01-17",
+      "value": 10770.88,
+      "deposits": 10500.0
+    },
+    {
+      "date": "2024-01-24",
+      "value": 11018.08,
+      "deposits": 10500.0
+    },
+    {
+      "date": "2024-01-31",
+      "value": 11810.95,
+      "deposits": 10800.0
+    },
+    {
+      "date": "2024-02-07",
+      "value": 11513.83,
+      "deposits": 10800.0
+    },
+    {
+      "date": "2024-02-14",
+      "value": 12007.04,
+      "deposits": 11300.0
+    },
+    {
+      "date": "2024-02-21",
+      "value": 11668.98,
+      "deposits": 11300.0
+    },
+    {
+      "date": "2024-02-28",
+      "value": 11703.95,
+      "deposits": 11550.0
+    },
+    {
+      "date": "2024-03-06",
+      "value": 11813.29,
+      "deposits": 11550.0
+    },
+    {
+      "date": "2024-03-13",
+      "value": 12509.67,
+      "deposits": 11850.0
+    },
+    {
+      "date": "2024-03-20",
+      "value": 12573.88,
+      "deposits": 11850.0
+    },
+    {
+      "date": "2024-03-27",
+      "value": 13189.62,
+      "deposits": 12250.0
+    },
+    {
+      "date": "2024-04-03",
+      "value": 12827.57,
+      "deposits": 12250.0
+    },
+    {
+      "date": "2024-04-10",
+      "value": 12800.47,
+      "deposits": 12750.0
+    },
+    {
+      "date": "2024-04-17",
+      "value": 12987.08,
+      "deposits": 12750.0
+    },
+    {
+      "date": "2024-04-24",
+      "value": 13345.69,
+      "deposits": 13150.0
+    },
+    {
+      "date": "2024-05-01",
+      "value": 13155.77,
+      "deposits": 13150.0
+    },
+    {
+      "date": "2024-05-08",
+      "value": 13917.67,
+      "deposits": 13650.0
+    },
+    {
+      "date": "2024-05-15",
+      "value": 13705.81,
+      "deposits": 13650.0
+    },
+    {
+      "date": "2024-05-22",
+      "value": 14269.47,
+      "deposits": 14050.0
+    },
+    {
+      "date": "2024-05-29",
+      "value": 14235.84,
+      "deposits": 14050.0
+    },
+    {
+      "date": "2024-06-05",
+      "value": 14593.5,
+      "deposits": 14550.0
+    },
+    {
+      "date": "2024-06-12",
+      "value": 14641.15,
+      "deposits": 14550.0
+    },
+    {
+      "date": "2024-06-19",
+      "value": 14440.72,
+      "deposits": 15050.0
+    },
+    {
+      "date": "2024-06-26",
+      "value": 14617.73,
+      "deposits": 15050.0
+    },
+    {
+      "date": "2024-07-03",
+      "value": 15176.63,
+      "deposits": 15450.0
+    },
+    {
+      "date": "2024-07-10",
+      "value": 15717.39,
+      "deposits": 15450.0
+    },
+    {
+      "date": "2024-07-17",
+      "value": 20136.48,
+      "deposits": 19950.0
+    },
+    {
+      "date": "2024-07-24",
+      "value": 19838.6,
+      "deposits": 19950.0
+    },
+    {
+      "date": "2024-07-31",
+      "value": 20361.48,
+      "deposits": 20250.0
+    },
+    {
+      "date": "2024-08-07",
+      "value": 20033.15,
+      "deposits": 20250.0
+    },
+    {
+      "date": "2024-08-14",
+      "value": 20571.41,
+      "deposits": 20750.0
+    },
+    {
+      "date": "2024-08-21",
+      "value": 19843.19,
+      "deposits": 20750.0
+    },
+    {
+      "date": "2024-08-28",
+      "value": 19449.62,
+      "deposits": 21250.0
+    },
+    {
+      "date": "2024-09-04",
+      "value": 19042.51,
+      "deposits": 21250.0
+    },
+    {
+      "date": "2024-09-11",
+      "value": 19021.3,
+      "deposits": 21550.0
+    },
+    {
+      "date": "2024-09-18",
+      "value": 19254.94,
+      "deposits": 21550.0
+    },
+    {
+      "date": "2024-09-25",
+      "value": 20529.48,
+      "deposits": 21850.0
+    },
+    {
+      "date": "2024-10-02",
+      "value": 20981.35,
+      "deposits": 21850.0
+    },
+    {
+      "date": "2024-10-09",
+      "value": 21275.13,
+      "deposits": 22350.0
+    },
+    {
+      "date": "2024-10-16",
+      "value": 21940.98,
+      "deposits": 22350.0
+    },
+    {
+      "date": "2024-10-23",
+      "value": 22683.5,
+      "deposits": 22750.0
+    },
+    {
+      "date": "2024-10-30",
+      "value": 23219.47,
+      "deposits": 22750.0
+    },
+    {
+      "date": "2024-11-06",
+      "value": 24084.25,
+      "deposits": 23150.0
+    },
+    {
+      "date": "2024-11-13",
+      "value": 23363.91,
+      "deposits": 23150.0
+    },
+    {
+      "date": "2024-11-20",
+      "value": 23835.62,
+      "deposits": 23400.0
+    },
+    {
+      "date": "2024-11-27",
+      "value": 23682.96,
+      "deposits": 23400.0
+    },
+    {
+      "date": "2024-12-04",
+      "value": 24662.82,
+      "deposits": 23900.0
+    },
+    {
+      "date": "2024-12-11",
+      "value": 24491.07,
+      "deposits": 23900.0
+    },
+    {
+      "date": "2024-12-18",
+      "value": 24097.58,
+      "deposits": 24150.0
+    },
+    {
+      "date": "2024-12-25",
+      "value": 25122.74,
+      "deposits": 24150.0
+    },
+    {
+      "date": "2025-01-01",
+      "value": 24946.42,
+      "deposits": 24550.0
+    },
+    {
+      "date": "2025-01-08",
+      "value": 25305.83,
+      "deposits": 24550.0
+    },
+    {
+      "date": "2025-01-15",
+      "value": 26083.02,
+      "deposits": 24850.0
+    },
+    {
+      "date": "2025-01-22",
+      "value": 26369.9,
+      "deposits": 24850.0
+    },
+    {
+      "date": "2025-01-29",
+      "value": 27997.67,
+      "deposits": 25250.0
+    },
+    {
+      "date": "2025-02-05",
+      "value": 33597.22,
+      "deposits": 31250.0
+    },
+    {
+      "date": "2025-02-12",
+      "value": 35895.93,
+      "deposits": 31550.0
+    },
+    {
+      "date": "2025-02-19",
+      "value": 35965.78,
+      "deposits": 31550.0
+    },
+    {
+      "date": "2025-02-26",
+      "value": 36689.29,
+      "deposits": 32050.0
+    },
+    {
+      "date": "2025-03-05",
+      "value": 36249.72,
+      "deposits": 32050.0
+    },
+    {
+      "date": "2025-03-12",
+      "value": 36676.11,
+      "deposits": 32300.0
+    },
+    {
+      "date": "2025-03-19",
+      "value": 36210.84,
+      "deposits": 32300.0
+    },
+    {
+      "date": "2025-03-26",
+      "value": 38676.39,
+      "deposits": 32700.0
+    },
+    {
+      "date": "2025-04-02",
+      "value": 39854.04,
+      "deposits": 32700.0
+    },
+    {
+      "date": "2025-04-09",
+      "value": 39527.92,
+      "deposits": 32950.0
+    },
+    {
+      "date": "2025-04-16",
+      "value": 40490.0,
+      "deposits": 32950.0
+    },
+    {
+      "date": "2025-04-23",
+      "value": 42838.72,
+      "deposits": 33250.0
+    },
+    {
+      "date": "2025-04-30",
+      "value": 44669.55,
+      "deposits": 33250.0
+    },
+    {
+      "date": "2025-05-07",
+      "value": 44757.13,
+      "deposits": 33650.0
+    },
+    {
+      "date": "2025-05-14",
+      "value": 43003.47,
+      "deposits": 33650.0
+    },
+    {
+      "date": "2025-05-21",
+      "value": 42526.51,
+      "deposits": 33900.0
+    },
+    {
+      "date": "2025-05-28",
+      "value": 42415.36,
+      "deposits": 33900.0
+    },
+    {
+      "date": "2025-06-04",
+      "value": 41724.38,
+      "deposits": 34150.0
+    },
+    {
+      "date": "2025-06-11",
+      "value": 42435.3,
+      "deposits": 34150.0
+    },
+    {
+      "date": "2025-06-18",
+      "value": 43693.18,
+      "deposits": 34400.0
+    },
+    {
+      "date": "2025-06-25",
+      "value": 42801.62,
+      "deposits": 34400.0
+    },
+    {
+      "date": "2025-07-02",
+      "value": 41179.75,
+      "deposits": 34650.0
+    },
+    {
+      "date": "2025-07-09",
+      "value": 40677.2,
+      "deposits": 34650.0
+    }
+  ],
+  "twr": {
+    "series": [
+      {
+        "date": "2023-06-07",
+        "portfolio": 99.45,
+        "benchmark": 99.61
+      },
+      {
+        "date": "2023-06-14",
+        "portfolio": 98.98,
+        "benchmark": 97.88
+      },
+      {
+        "date": "2023-06-21",
+        "portfolio": 104.44,
+        "benchmark": 101.28
+      },
+      {
+        "date": "2023-06-28",
+        "portfolio": 103.28,
+        "benchmark": 101.42
+      },
+      {
+        "date": "2023-07-05",
+        "portfolio": 103.21,
+        "benchmark": 101.76
+      },
+      {
+        "date": "2023-07-12",
+        "portfolio": 101.78,
+        "benchmark": 101.5
+      },
+      {
+        "date": "2023-07-19",
+        "portfolio": 99.45,
+        "benchmark": 97.91
+      },
+      {
+        "date": "2023-07-26",
+        "portfolio": 95.32,
+        "benchmark": 96.04
+      },
+      {
+        "date": "2023-08-02",
+        "portfolio": 95.14,
+        "benchmark": 94.89
+      },
+      {
+        "date": "2023-08-09",
+        "portfolio": 94.88,
+        "benchmark": 95.68
+      },
+      {
+        "date": "2023-08-16",
+        "portfolio": 95.67,
+        "benchmark": 96.81
+      },
+      {
+        "date": "2023-08-23",
+        "portfolio": 96.05,
+        "benchmark": 96.57
+      },
+      {
+        "date": "2023-08-30",
+        "portfolio": 93.18,
+        "benchmark": 95.69
+      },
+      {
+        "date": "2023-09-06",
+        "portfolio": 93.38,
+        "benchmark": 95.1
+      },
+      {
+        "date": "2023-09-13",
+        "portfolio": 95.6,
+        "benchmark": 96.58
+      },
+      {
+        "date": "2023-09-20",
+        "portfolio": 93.67,
+        "benchmark": 95.77
+      },
+      {
+        "date": "2023-09-27",
+        "portfolio": 93.89,
+        "benchmark": 96.09
+      },
+      {
+        "date": "2023-10-04",
+        "portfolio": 91.2,
+        "benchmark": 94.07
+      },
+      {
+        "date": "2023-10-11",
+        "portfolio": 90.94,
+        "benchmark": 95.3
+      },
+      {
+        "date": "2023-10-18",
+        "portfolio": 93.35,
+        "benchmark": 96.76
+      },
+      {
+        "date": "2023-10-25",
+        "portfolio": 93.09,
+        "benchmark": 97.32
+      },
+      {
+        "date": "2023-11-01",
+        "portfolio": 91.65,
+        "benchmark": 96.58
+      },
+      {
+        "date": "2023-11-08",
+        "portfolio": 94.22,
+        "benchmark": 98.73
+      },
+      {
+        "date": "2023-11-15",
+        "portfolio": 96.71,
+        "benchmark": 100.22
+      },
+      {
+        "date": "2023-11-22",
+        "portfolio": 98.32,
+        "benchmark": 102.72
+      },
+      {
+        "date": "2023-11-29",
+        "portfolio": 97.01,
+        "benchmark": 101.51
+      },
+      {
+        "date": "2023-12-06",
+        "portfolio": 98.89,
+        "benchmark": 103.29
+      },
+      {
+        "date": "2023-12-13",
+        "portfolio": 97.2,
+        "benchmark": 101.62
+      },
+      {
+        "date": "2023-12-20",
+        "portfolio": 97.24,
+        "benchmark": 102.0
+      },
+      {
+        "date": "2023-12-27",
+        "portfolio": 97.02,
+        "benchmark": 101.11
+      },
+      {
+        "date": "2024-01-03",
+        "portfolio": 95.53,
+        "benchmark": 101.05
+      },
+      {
+        "date": "2024-01-10",
+        "portfolio": 98.11,
+        "benchmark": 105.18
+      },
+      {
+        "date": "2024-01-17",
+        "portfolio": 99.29,
+        "benchmark": 105.61
+      },
+      {
+        "date": "2024-01-24",
+        "portfolio": 101.56,
+        "benchmark": 107.97
+      },
+      {
+        "date": "2024-01-31",
+        "portfolio": 105.99,
+        "benchmark": 111.43
+      },
+      {
+        "date": "2024-02-07",
+        "portfolio": 103.32,
+        "benchmark": 109.22
+      },
+      {
+        "date": "2024-02-14",
+        "portfolio": 103.26,
+        "benchmark": 108.35
+      },
+      {
+        "date": "2024-02-21",
+        "portfolio": 100.36,
+        "benchmark": 107.41
+      },
+      {
+        "date": "2024-02-28",
+        "portfolio": 98.55,
+        "benchmark": 106.45
+      },
+      {
+        "date": "2024-03-06",
+        "portfolio": 99.47,
+        "benchmark": 106.82
+      },
+      {
+        "date": "2024-03-13",
+        "portfolio": 102.72,
+        "benchmark": 108.81
+      },
+      {
+        "date": "2024-03-20",
+        "portfolio": 103.25,
+        "benchmark": 107.8
+      },
+      {
+        "date": "2024-03-27",
+        "portfolio": 104.96,
+        "benchmark": 109.46
+      },
+      {
+        "date": "2024-04-03",
+        "portfolio": 102.08,
+        "benchmark": 106.97
+      },
+      {
+        "date": "2024-04-10",
+        "portfolio": 98.05,
+        "benchmark": 104.96
+      },
+      {
+        "date": "2024-04-17",
+        "portfolio": 99.48,
+        "benchmark": 105.88
+      },
+      {
+        "date": "2024-04-24",
+        "portfolio": 99.17,
+        "benchmark": 106.57
+      },
+      {
+        "date": "2024-05-01",
+        "portfolio": 97.76,
+        "benchmark": 105.28
+      },
+      {
+        "date": "2024-05-08",
+        "portfolio": 99.63,
+        "benchmark": 107.07
+      },
+      {
+        "date": "2024-05-15",
+        "portfolio": 98.11,
+        "benchmark": 107.82
+      },
+      {
+        "date": "2024-05-22",
+        "portfolio": 99.25,
+        "benchmark": 111.09
+      },
+      {
+        "date": "2024-05-29",
+        "portfolio": 99.02,
+        "benchmark": 110.62
+      },
+      {
+        "date": "2024-06-05",
+        "portfolio": 98.06,
+        "benchmark": 109.99
+      },
+      {
+        "date": "2024-06-12",
+        "portfolio": 98.38,
+        "benchmark": 110.95
+      },
+      {
+        "date": "2024-06-19",
+        "portfolio": 93.83,
+        "benchmark": 108.12
+      },
+      {
+        "date": "2024-06-26",
+        "portfolio": 94.98,
+        "benchmark": 107.78
+      },
+      {
+        "date": "2024-07-03",
+        "portfolio": 95.99,
+        "benchmark": 107.85
+      },
+      {
+        "date": "2024-07-10",
+        "portfolio": 99.41,
+        "benchmark": 111.16
+      },
+      {
+        "date": "2024-07-17",
+        "portfolio": 99.01,
+        "benchmark": 109.86
+      },
+      {
+        "date": "2024-07-24",
+        "portfolio": 97.54,
+        "benchmark": 109.28
+      },
+      {
+        "date": "2024-07-31",
+        "portfolio": 98.62,
+        "benchmark": 110.02
+      },
+      {
+        "date": "2024-08-07",
+        "portfolio": 97.03,
+        "benchmark": 108.57
+      },
+      {
+        "date": "2024-08-14",
+        "portfolio": 97.21,
+        "benchmark": 109.89
+      },
+      {
+        "date": "2024-08-21",
+        "portfolio": 93.77,
+        "benchmark": 106.23
+      },
+      {
+        "date": "2024-08-28",
+        "portfolio": 89.65,
+        "benchmark": 101.53
+      },
+      {
+        "date": "2024-09-04",
+        "portfolio": 87.78,
+        "benchmark": 100.78
+      },
+      {
+        "date": "2024-09-11",
+        "portfolio": 86.32,
+        "benchmark": 98.83
+      },
+      {
+        "date": "2024-09-18",
+        "portfolio": 87.38,
+        "benchmark": 99.9
+      },
+      {
+        "date": "2024-09-25",
+        "portfolio": 91.73,
+        "benchmark": 102.51
+      },
+      {
+        "date": "2024-10-02",
+        "portfolio": 93.75,
+        "benchmark": 103.52
+      },
+      {
+        "date": "2024-10-09",
+        "portfolio": 92.85,
+        "benchmark": 103.85
+      },
+      {
+        "date": "2024-10-16",
+        "portfolio": 95.76,
+        "benchmark": 105.65
+      },
+      {
+        "date": "2024-10-23",
+        "portfolio": 97.23,
+        "benchmark": 108.09
+      },
+      {
+        "date": "2024-10-30",
+        "portfolio": 99.53,
+        "benchmark": 109.48
+      },
+      {
+        "date": "2024-11-06",
+        "portfolio": 101.48,
+        "benchmark": 113.0
+      },
+      {
+        "date": "2024-11-13",
+        "portfolio": 98.45,
+        "benchmark": 108.93
+      },
+      {
+        "date": "2024-11-20",
+        "portfolio": 99.37,
+        "benchmark": 110.19
+      },
+      {
+        "date": "2024-11-27",
+        "portfolio": 98.74,
+        "benchmark": 106.9
+      },
+      {
+        "date": "2024-12-04",
+        "portfolio": 100.7,
+        "benchmark": 106.74
+      },
+      {
+        "date": "2024-12-11",
+        "portfolio": 99.99,
+        "benchmark": 105.41
+      },
+      {
+        "date": "2024-12-18",
+        "portfolio": 97.39,
+        "benchmark": 102.72
+      },
+      {
+        "date": "2024-12-25",
+        "portfolio": 101.54,
+        "benchmark": 105.7
+      },
+      {
+        "date": "2025-01-01",
+        "portfolio": 99.24,
+        "benchmark": 104.72
+      },
+      {
+        "date": "2025-01-08",
+        "portfolio": 100.67,
+        "benchmark": 106.28
+      },
+      {
+        "date": "2025-01-15",
+        "portfolio": 102.55,
+        "benchmark": 107.65
+      },
+      {
+        "date": "2025-01-22",
+        "portfolio": 103.68,
+        "benchmark": 108.07
+      },
+      {
+        "date": "2025-01-29",
+        "portfolio": 108.43,
+        "benchmark": 113.09
+      },
+      {
+        "date": "2025-02-05",
+        "portfolio": 107.16,
+        "benchmark": 111.83
+      },
+      {
+        "date": "2025-02-12",
+        "portfolio": 113.47,
+        "benchmark": 115.2
+      },
+      {
+        "date": "2025-02-19",
+        "portfolio": 113.7,
+        "benchmark": 115.36
+      },
+      {
+        "date": "2025-02-26",
+        "portfolio": 114.39,
+        "benchmark": 118.56
+      },
+      {
+        "date": "2025-03-05",
+        "portfolio": 113.02,
+        "benchmark": 118.08
+      },
+      {
+        "date": "2025-03-12",
+        "portfolio": 113.57,
+        "benchmark": 116.77
+      },
+      {
+        "date": "2025-03-19",
+        "portfolio": 112.13,
+        "benchmark": 115.7
+      },
+      {
+        "date": "2025-03-26",
+        "portfolio": 118.45,
+        "benchmark": 122.23
+      },
+      {
+        "date": "2025-04-02",
+        "portfolio": 122.06,
+        "benchmark": 124.31
+      },
+      {
+        "date": "2025-04-09",
+        "portfolio": 120.31,
+        "benchmark": 120.54
+      },
+      {
+        "date": "2025-04-16",
+        "portfolio": 123.23,
+        "benchmark": 123.89
+      },
+      {
+        "date": "2025-04-23",
+        "portfolio": 129.42,
+        "benchmark": 128.41
+      },
+      {
+        "date": "2025-04-30",
+        "portfolio": 134.96,
+        "benchmark": 134.52
+      },
+      {
+        "date": "2025-05-07",
+        "portfolio": 134.02,
+        "benchmark": 134.0
+      },
+      {
+        "date": "2025-05-14",
+        "portfolio": 128.77,
+        "benchmark": 129.36
+      },
+      {
+        "date": "2025-05-21",
+        "portfolio": 126.6,
+        "benchmark": 127.65
+      },
+      {
+        "date": "2025-05-28",
+        "portfolio": 126.27,
+        "benchmark": 126.71
+      },
+      {
+        "date": "2025-06-04",
+        "portfolio": 123.49,
+        "benchmark": 123.9
+      },
+      {
+        "date": "2025-06-11",
+        "portfolio": 125.59,
+        "benchmark": 125.78
+      },
+      {
+        "date": "2025-06-18",
+        "portfolio": 128.56,
+        "benchmark": 128.23
+      },
+      {
+        "date": "2025-06-25",
+        "portfolio": 125.94,
+        "benchmark": 126.41
+      },
+      {
+        "date": "2025-07-02",
+        "portfolio": 120.46,
+        "benchmark": 120.45
+      },
+      {
+        "date": "2025-07-09",
+        "portfolio": 118.99,
+        "benchmark": 119.59
+      }
+    ],
+    "benchmark_label": "S&P 500"
+  },
+  "drawdown": [
+    {
+      "date": "2023-06-07",
+      "drawdown_pct": -0.55
+    },
+    {
+      "date": "2023-06-14",
+      "drawdown_pct": -1.02
+    },
+    {
+      "date": "2023-06-21",
+      "drawdown_pct": 0.0
+    },
+    {
+      "date": "2023-06-28",
+      "drawdown_pct": -1.11
+    },
+    {
+      "date": "2023-07-05",
+      "drawdown_pct": -1.17
+    },
+    {
+      "date": "2023-07-12",
+      "drawdown_pct": -2.55
+    },
+    {
+      "date": "2023-07-19",
+      "drawdown_pct": -4.77
+    },
+    {
+      "date": "2023-07-26",
+      "drawdown_pct": -8.73
+    },
+    {
+      "date": "2023-08-02",
+      "drawdown_pct": -8.9
+    },
+    {
+      "date": "2023-08-09",
+      "drawdown_pct": -9.15
+    },
+    {
+      "date": "2023-08-16",
+      "drawdown_pct": -8.39
+    },
+    {
+      "date": "2023-08-23",
+      "drawdown_pct": -8.03
+    },
+    {
+      "date": "2023-08-30",
+      "drawdown_pct": -10.78
+    },
+    {
+      "date": "2023-09-06",
+      "drawdown_pct": -10.59
+    },
+    {
+      "date": "2023-09-13",
+      "drawdown_pct": -8.46
+    },
+    {
+      "date": "2023-09-20",
+      "drawdown_pct": -10.31
+    },
+    {
+      "date": "2023-09-27",
+      "drawdown_pct": -10.1
+    },
+    {
+      "date": "2023-10-04",
+      "drawdown_pct": -12.67
+    },
+    {
+      "date": "2023-10-11",
+      "drawdown_pct": -12.93
+    },
+    {
+      "date": "2023-10-18",
+      "drawdown_pct": -10.61
+    },
+    {
+      "date": "2023-10-25",
+      "drawdown_pct": -10.87
+    },
+    {
+      "date": "2023-11-01",
+      "drawdown_pct": -12.24
+    },
+    {
+      "date": "2023-11-08",
+      "drawdown_pct": -9.79
+    },
+    {
+      "date": "2023-11-15",
+      "drawdown_pct": -7.4
+    },
+    {
+      "date": "2023-11-22",
+      "drawdown_pct": -5.86
+    },
+    {
+      "date": "2023-11-29",
+      "drawdown_pct": -7.11
+    },
+    {
+      "date": "2023-12-06",
+      "drawdown_pct": -5.32
+    },
+    {
+      "date": "2023-12-13",
+      "drawdown_pct": -6.93
+    },
+    {
+      "date": "2023-12-20",
+      "drawdown_pct": -6.9
+    },
+    {
+      "date": "2023-12-27",
+      "drawdown_pct": -7.11
+    },
+    {
+      "date": "2024-01-03",
+      "drawdown_pct": -8.53
+    },
+    {
+      "date": "2024-01-10",
+      "drawdown_pct": -6.06
+    },
+    {
+      "date": "2024-01-17",
+      "drawdown_pct": -4.93
+    },
+    {
+      "date": "2024-01-24",
+      "drawdown_pct": -2.75
+    },
+    {
+      "date": "2024-01-31",
+      "drawdown_pct": 0.0
+    },
+    {
+      "date": "2024-02-07",
+      "drawdown_pct": -2.52
+    },
+    {
+      "date": "2024-02-14",
+      "drawdown_pct": -2.57
+    },
+    {
+      "date": "2024-02-21",
+      "drawdown_pct": -5.31
+    },
+    {
+      "date": "2024-02-28",
+      "drawdown_pct": -7.02
+    },
+    {
+      "date": "2024-03-06",
+      "drawdown_pct": -6.15
+    },
+    {
+      "date": "2024-03-13",
+      "drawdown_pct": -3.08
+    },
+    {
+      "date": "2024-03-20",
+      "drawdown_pct": -2.59
+    },
+    {
+      "date": "2024-03-27",
+      "drawdown_pct": -0.97
+    },
+    {
+      "date": "2024-04-03",
+      "drawdown_pct": -3.68
+    },
+    {
+      "date": "2024-04-10",
+      "drawdown_pct": -7.49
+    },
+    {
+      "date": "2024-04-17",
+      "drawdown_pct": -6.14
+    },
+    {
+      "date": "2024-04-24",
+      "drawdown_pct": -6.43
+    },
+    {
+      "date": "2024-05-01",
+      "drawdown_pct": -7.77
+    },
+    {
+      "date": "2024-05-08",
+      "drawdown_pct": -6.0
+    },
+    {
+      "date": "2024-05-15",
+      "drawdown_pct": -7.43
+    },
+    {
+      "date": "2024-05-22",
+      "drawdown_pct": -6.35
+    },
+    {
+      "date": "2024-05-29",
+      "drawdown_pct": -6.57
+    },
+    {
+      "date": "2024-06-05",
+      "drawdown_pct": -7.48
+    },
+    {
+      "date": "2024-06-12",
+      "drawdown_pct": -7.18
+    },
+    {
+      "date": "2024-06-19",
+      "drawdown_pct": -11.47
+    },
+    {
+      "date": "2024-06-26",
+      "drawdown_pct": -10.38
+    },
+    {
+      "date": "2024-07-03",
+      "drawdown_pct": -9.44
+    },
+    {
+      "date": "2024-07-10",
+      "drawdown_pct": -6.21
+    },
+    {
+      "date": "2024-07-17",
+      "drawdown_pct": -6.58
+    },
+    {
+      "date": "2024-07-24",
+      "drawdown_pct": -7.97
+    },
+    {
+      "date": "2024-07-31",
+      "drawdown_pct": -6.95
+    },
+    {
+      "date": "2024-08-07",
+      "drawdown_pct": -8.45
+    },
+    {
+      "date": "2024-08-14",
+      "drawdown_pct": -8.28
+    },
+    {
+      "date": "2024-08-21",
+      "drawdown_pct": -11.52
+    },
+    {
+      "date": "2024-08-28",
+      "drawdown_pct": -15.41
+    },
+    {
+      "date": "2024-09-04",
+      "drawdown_pct": -17.18
+    },
+    {
+      "date": "2024-09-11",
+      "drawdown_pct": -18.56
+    },
+    {
+      "date": "2024-09-18",
+      "drawdown_pct": -17.56
+    },
+    {
+      "date": "2024-09-25",
+      "drawdown_pct": -13.45
+    },
+    {
+      "date": "2024-10-02",
+      "drawdown_pct": -11.54
+    },
+    {
+      "date": "2024-10-09",
+      "drawdown_pct": -12.39
+    },
+    {
+      "date": "2024-10-16",
+      "drawdown_pct": -9.65
+    },
+    {
+      "date": "2024-10-23",
+      "drawdown_pct": -8.26
+    },
+    {
+      "date": "2024-10-30",
+      "drawdown_pct": -6.1
+    },
+    {
+      "date": "2024-11-06",
+      "drawdown_pct": -4.25
+    },
+    {
+      "date": "2024-11-13",
+      "drawdown_pct": -7.11
+    },
+    {
+      "date": "2024-11-20",
+      "drawdown_pct": -6.24
+    },
+    {
+      "date": "2024-11-27",
+      "drawdown_pct": -6.84
+    },
+    {
+      "date": "2024-12-04",
+      "drawdown_pct": -4.99
+    },
+    {
+      "date": "2024-12-11",
+      "drawdown_pct": -5.65
+    },
+    {
+      "date": "2024-12-18",
+      "drawdown_pct": -8.11
+    },
+    {
+      "date": "2024-12-25",
+      "drawdown_pct": -4.2
+    },
+    {
+      "date": "2025-01-01",
+      "drawdown_pct": -6.36
+    },
+    {
+      "date": "2025-01-08",
+      "drawdown_pct": -5.01
+    },
+    {
+      "date": "2025-01-15",
+      "drawdown_pct": -3.24
+    },
+    {
+      "date": "2025-01-22",
+      "drawdown_pct": -2.18
+    },
+    {
+      "date": "2025-01-29",
+      "drawdown_pct": 0.0
+    },
+    {
+      "date": "2025-02-05",
+      "drawdown_pct": -1.18
+    },
+    {
+      "date": "2025-02-12",
+      "drawdown_pct": 0.0
+    },
+    {
+      "date": "2025-02-19",
+      "drawdown_pct": 0.0
+    },
+    {
+      "date": "2025-02-26",
+      "drawdown_pct": 0.0
+    },
+    {
+      "date": "2025-03-05",
+      "drawdown_pct": -1.2
+    },
+    {
+      "date": "2025-03-12",
+      "drawdown_pct": -0.72
+    },
+    {
+      "date": "2025-03-19",
+      "drawdown_pct": -1.98
+    },
+    {
+      "date": "2025-03-26",
+      "drawdown_pct": 0.0
+    },
+    {
+      "date": "2025-04-02",
+      "drawdown_pct": 0.0
+    },
+    {
+      "date": "2025-04-09",
+      "drawdown_pct": -1.44
+    },
+    {
+      "date": "2025-04-16",
+      "drawdown_pct": 0.0
+    },
+    {
+      "date": "2025-04-23",
+      "drawdown_pct": 0.0
+    },
+    {
+      "date": "2025-04-30",
+      "drawdown_pct": 0.0
+    },
+    {
+      "date": "2025-05-07",
+      "drawdown_pct": -0.69
+    },
+    {
+      "date": "2025-05-14",
+      "drawdown_pct": -4.58
+    },
+    {
+      "date": "2025-05-21",
+      "drawdown_pct": -6.19
+    },
+    {
+      "date": "2025-05-28",
+      "drawdown_pct": -6.43
+    },
+    {
+      "date": "2025-06-04",
+      "drawdown_pct": -8.5
+    },
+    {
+      "date": "2025-06-11",
+      "drawdown_pct": -6.94
+    },
+    {
+      "date": "2025-06-18",
+      "drawdown_pct": -4.74
+    },
+    {
+      "date": "2025-06-25",
+      "drawdown_pct": -6.68
+    },
+    {
+      "date": "2025-07-02",
+      "drawdown_pct": -10.74
+    },
+    {
+      "date": "2025-07-09",
+      "drawdown_pct": -11.83
+    }
+  ],
+  "monthly_realized": [
+    {
+      "month": "2024-04",
+      "realized_pnl": 1212.36
+    },
+    {
+      "month": "2024-05",
+      "realized_pnl": 891.98
+    },
+    {
+      "month": "2024-06",
+      "realized_pnl": 774.5
+    },
+    {
+      "month": "2024-07",
+      "realized_pnl": 59.65
+    },
+    {
+      "month": "2024-08",
+      "realized_pnl": 897.18
+    },
+    {
+      "month": "2024-09",
+      "realized_pnl": 46.9
+    },
+    {
+      "month": "2024-10",
+      "realized_pnl": 848.98
+    },
+    {
+      "month": "2024-11",
+      "realized_pnl": -941.93
+    },
+    {
+      "month": "2024-12",
+      "realized_pnl": -392.98
+    },
+    {
+      "month": "2025-01",
+      "realized_pnl": 744.31
+    },
+    {
+      "month": "2025-02",
+      "realized_pnl": 37.35
+    },
+    {
+      "month": "2025-03",
+      "realized_pnl": -23.7
+    },
+    {
+      "month": "2025-04",
+      "realized_pnl": -469.15
+    },
+    {
+      "month": "2025-05",
+      "realized_pnl": 196.46
+    },
+    {
+      "month": "2025-06",
+      "realized_pnl": 362.01
+    },
+    {
+      "month": "2025-07",
+      "realized_pnl": 442.88
+    }
+  ],
+  "holdings": [
+    {
+      "symbol": "VTI",
+      "name": "Vanguard Total Stock Market ETF",
+      "market_value": 8704.36,
+      "unrealized_pnl": 1082.33,
+      "unrealized_pnl_pct": 14.2,
+      "pct_of_portfolio": 22.6,
+      "position_count": 1
+    },
+    {
+      "symbol": "MSFT",
+      "name": "Microsoft Corporation",
+      "market_value": 5906.53,
+      "unrealized_pnl": 1049.19,
+      "unrealized_pnl_pct": 21.6,
+      "pct_of_portfolio": 15.3,
+      "position_count": 2
+    },
+    {
+      "symbol": "GOOG",
+      "name": "Alphabet Inc.",
+      "market_value": 4792.58,
+      "unrealized_pnl": 1191.84,
+      "unrealized_pnl_pct": 33.1,
+      "pct_of_portfolio": 12.4,
+      "position_count": 1
+    },
+    {
+      "symbol": "AMZN",
+      "name": "Amazon.com, Inc.",
+      "market_value": 4196.74,
+      "unrealized_pnl": -211.6,
+      "unrealized_pnl_pct": -4.8,
+      "pct_of_portfolio": 10.9,
+      "position_count": 2
+    },
+    {
+      "symbol": "NVDA",
+      "name": "NVIDIA Corporation",
+      "market_value": 3782.25,
+      "unrealized_pnl": 1242.12,
+      "unrealized_pnl_pct": 48.9,
+      "pct_of_portfolio": 9.8,
+      "position_count": 1
+    },
+    {
+      "symbol": "COST",
+      "name": "Costco Wholesale Corporation",
+      "market_value": 2901.45,
+      "unrealized_pnl": 249.3,
+      "unrealized_pnl_pct": 9.4,
+      "pct_of_portfolio": 7.5,
+      "position_count": 1
+    },
+    {
+      "symbol": "JPM",
+      "name": "JPMorgan Chase & Co.",
+      "market_value": 2564.68,
+      "unrealized_pnl": 289.01,
+      "unrealized_pnl_pct": 12.7,
+      "pct_of_portfolio": 6.6,
+      "position_count": 1
+    },
+    {
+      "symbol": "V",
+      "name": "Visa Inc.",
+      "market_value": 1968.84,
+      "unrealized_pnl": 113.19,
+      "unrealized_pnl_pct": 6.1,
+      "pct_of_portfolio": 5.1,
+      "position_count": 1
+    },
+    {
+      "symbol": "SCHD",
+      "name": "Schwab US Dividend Equity ETF",
+      "market_value": 1632.07,
+      "unrealized_pnl": 36.69,
+      "unrealized_pnl_pct": 2.3,
+      "pct_of_portfolio": 4.2,
+      "position_count": 1
+    },
+    {
+      "symbol": "TSM",
+      "name": "Taiwan Semiconductor Manufacturing",
+      "market_value": 1243.48,
+      "unrealized_pnl": 268.2,
+      "unrealized_pnl_pct": 27.5,
+      "pct_of_portfolio": 3.2,
+      "position_count": 1
+    },
+    {
+      "symbol": "DIS",
+      "name": "The Walt Disney Company",
+      "market_value": 906.7,
+      "unrealized_pnl": -122.47,
+      "unrealized_pnl_pct": -11.9,
+      "pct_of_portfolio": 2.3,
+      "position_count": 1
+    }
+  ],
+  "realized": {
+    "total": 2865.32,
+    "by_security": [
+      {
+        "symbol": "SHOP",
+        "realized_pnl": 1743.7
+      },
+      {
+        "symbol": "ASML",
+        "realized_pnl": 1732.86
+      },
+      {
+        "symbol": "AMZN",
+        "realized_pnl": 1052.89
+      },
+      {
+        "symbol": "JPM",
+        "realized_pnl": 903.58
+      },
+      {
+        "symbol": "VTI",
+        "realized_pnl": 776.2
+      },
+      {
+        "symbol": "SCHD",
+        "realized_pnl": 283.27
+      },
+      {
+        "symbol": "MSFT",
+        "realized_pnl": 272.28
+      },
+      {
+        "symbol": "COST",
+        "realized_pnl": 204.82
+      },
+      {
+        "symbol": "GOOG",
+        "realized_pnl": 106.41
+      },
+      {
+        "symbol": "LLY",
+        "realized_pnl": 20.76
+      },
+      {
+        "symbol": "DIS",
+        "realized_pnl": -139.54
+      },
+      {
+        "symbol": "NVDA",
+        "realized_pnl": -479.91
+      },
+      {
+        "symbol": "V",
+        "realized_pnl": -487.77
+      },
+      {
+        "symbol": "ISRG",
+        "realized_pnl": -582.85
+      },
+      {
+        "symbol": "AAPL",
+        "realized_pnl": -802.42
+      },
+      {
+        "symbol": "UNH",
+        "realized_pnl": -863.92
+      },
+      {
+        "symbol": "TSM",
+        "realized_pnl": -875.04
+      }
+    ]
+  },
+  "win_rate": {
+    "closed_trades": 48,
+    "wins": 31,
+    "losses": 17,
+    "win_rate_pct": 64.6,
+    "avg_win": 288.15,
+    "avg_loss": -164.02,
+    "avg_holding_days": 97.3
+  },
+  "bad_trades": [
+    {
+      "account_id": "demo-account-1",
+      "symbol": "DIS",
+      "buy_date": "2024-08-19",
+      "sell_date": "2025-03-11",
+      "realized_pnl": -412.6,
+      "realized_pnl_pct": -21.4,
+      "flags": "big_loss: -21.4% realized loss; bad_entry: DIS dropped -15.2% in the 30d after you bought",
+      "roundtrips": null,
+      "window_start": null,
+      "window_end": null
+    },
+    {
+      "account_id": "demo-account-1",
+      "symbol": "NVDA",
+      "buy_date": "2024-10-28",
+      "sell_date": "2025-01-06",
+      "realized_pnl": 604.2,
+      "realized_pnl_pct": 38.9,
+      "flags": "sold_too_early: NVDA rose 41.3% in the 30d after you sold",
+      "roundtrips": null,
+      "window_start": null,
+      "window_end": null
+    },
+    {
+      "account_id": "demo-account-2",
+      "symbol": "TSM",
+      "buy_date": "2025-02-03",
+      "sell_date": "2025-02-24",
+      "realized_pnl": -138.75,
+      "realized_pnl_pct": -8.1,
+      "flags": "quick_loss: closed at -8.1% after only 21 days",
+      "roundtrips": null,
+      "window_start": null,
+      "window_end": null
+    },
+    {
+      "account_id": "demo-account-2",
+      "symbol": "AMZN",
+      "buy_date": null,
+      "sell_date": null,
+      "realized_pnl": null,
+      "realized_pnl_pct": null,
+      "flags": "overtrading: 5 round-trips in 22d",
+      "roundtrips": 5.0,
+      "window_start": "2025-04-02",
+      "window_end": "2025-04-24"
+    }
+  ],
+  "dips": {
+    "benchmarks": [
+      {
+        "symbol": "^GSPC",
+        "dip_start": "2024-03-23",
+        "dip_low_date": "2024-05-15",
+        "dip_low_pct": -17.4,
+        "recovered_date": "2024-09-02",
+        "your_activity": "no trades during this dip"
+      },
+      {
+        "symbol": "^GSPTSE",
+        "dip_start": "2024-04-02",
+        "dip_low_date": "2024-05-15",
+        "dip_low_pct": -11.9,
+        "recovered_date": "2024-09-08",
+        "your_activity": "no trades during this dip"
+      }
+    ],
+    "dips_with_activity": [
+      {
+        "symbol": "NVDA",
+        "dip_start": "2024-05-22",
+        "dip_low_date": "2024-08-13",
+        "dip_low_pct": -34.2,
+        "recovered_date": "2024-11-06",
+        "your_activity": "BUY 6.0 on 2024-11-04; BUY 4.0 on 2024-10-28"
+      },
+      {
+        "symbol": "AMZN",
+        "dip_start": "2024-07-19",
+        "dip_low_date": "2024-10-12",
+        "dip_low_pct": -28.7,
+        "recovered_date": "2025-01-01",
+        "your_activity": "BUY 12.0 on 2025-01-16"
+      },
+      {
+        "symbol": "DIS",
+        "dip_start": "2024-11-09",
+        "dip_low_date": "2024-12-11",
+        "dip_low_pct": -24.1,
+        "recovered_date": null,
+        "your_activity": "SELL 20.0 on 2025-03-11"
+      },
+      {
+        "symbol": "MSFT",
+        "dip_start": "2024-12-13",
+        "dip_low_date": "2025-02-09",
+        "dip_low_pct": -19.6,
+        "recovered_date": "2025-03-12",
+        "your_activity": "BUY 3.0 on 2025-05-19; BUY 2.0 on 2025-05-12"
+      },
+      {
+        "symbol": "TSM",
+        "dip_start": "2025-02-19",
+        "dip_low_date": "2025-04-10",
+        "dip_low_pct": -15.2,
+        "recovered_date": null,
+        "your_activity": "BUY 8.0 on 2025-07-22"
+      }
+    ],
+    "notable_dips_missed": [
+      {
+        "symbol": "AAPL",
+        "dip_start": "2024-03-23",
+        "dip_low_date": "2024-06-14",
+        "dip_low_pct": -26.3,
+        "recovered_date": "2024-10-09",
+        "your_activity": "no trades during this dip"
+      },
+      {
+        "symbol": "ISRG",
+        "dip_start": "2024-08-21",
+        "dip_low_date": "2024-09-12",
+        "dip_low_pct": -22.8,
+        "recovered_date": "2024-11-18",
+        "your_activity": "no trades during this dip"
+      },
+      {
+        "symbol": "SHOP",
+        "dip_start": "2024-11-07",
+        "dip_low_date": "2025-01-10",
+        "dip_low_pct": -31.5,
+        "recovered_date": null,
+        "your_activity": "no trades during this dip"
+      }
+    ],
+    "dips_bought": 14,
+    "dips_sold_into": 6,
+    "dips_sat_out": 31
+  },
+  "watchlist": [
+    {
+      "symbol": "VTI",
+      "name": "Vanguard Total Stock Market ETF",
+      "sector": null,
+      "held": true,
+      "price": 142.65,
+      "pct_from_52w_high": -21.7,
+      "pct_above_52w_low": 73.8,
+      "vs_ma50_pct": 9.0,
+      "vs_ma200_pct": 15.8,
+      "trailing_pe": null,
+      "forward_pe": null,
+      "peg": null,
+      "price_to_book": null,
+      "dividend_yield_pct": 0.57,
+      "revenue_growth_pct": null,
+      "earnings_growth_pct": null,
+      "profit_margin_pct": null,
+      "market_cap": null,
+      "analyst_target": null,
+      "pe_percentile": null,
+      "pe_low": null,
+      "pe_high": null,
+      "pe_median": null,
+      "pe_used": null,
+      "valuation_label": "no P/E history",
+      "analyst_upside_pct": null
+    },
+    {
+      "symbol": "MSFT",
+      "name": "Microsoft Corporation",
+      "sector": "Technology",
+      "held": true,
+      "price": 298.7,
+      "pct_from_52w_high": -1.8,
+      "pct_above_52w_low": 43.5,
+      "vs_ma50_pct": 4.2,
+      "vs_ma200_pct": -6.4,
+      "trailing_pe": 60.4,
+      "forward_pe": 39.5,
+      "peg": 2.54,
+      "price_to_book": 18.1,
+      "dividend_yield_pct": 0.5,
+      "revenue_growth_pct": 9.0,
+      "earnings_growth_pct": 9.0,
+      "profit_margin_pct": 25.2,
+      "market_cap": 3042631730103,
+      "analyst_target": 332.82,
+      "pe_percentile": 99.7,
+      "pe_low": 17.6,
+      "pe_high": 53.6,
+      "pe_median": 35.6,
+      "pe_used": 53.5,
+      "valuation_label": "near its priciest",
+      "analyst_upside_pct": 11.4
+    },
+    {
+      "symbol": "GOOG",
+      "name": "Alphabet Inc.",
+      "sector": "Communication Services",
+      "held": true,
+      "price": 118.61,
+      "pct_from_52w_high": -30.3,
+      "pct_above_52w_low": 89.8,
+      "vs_ma50_pct": -5.1,
+      "vs_ma200_pct": 23.3,
+      "trailing_pe": 29.6,
+      "forward_pe": 19.5,
+      "peg": 3.05,
+      "price_to_book": 22.5,
+      "dividend_yield_pct": 2.28,
+      "revenue_growth_pct": 11.9,
+      "earnings_growth_pct": 41.9,
+      "profit_margin_pct": 21.7,
+      "market_cap": 2234873585971,
+      "analyst_target": 157.84,
+      "pe_percentile": 37.4,
+      "pe_low": 19.6,
+      "pe_high": 49.3,
+      "pe_median": 34.5,
+      "pe_used": 30.7,
+      "valuation_label": "below its usual",
+      "analyst_upside_pct": 33.1
+    },
+    {
+      "symbol": "AMZN",
+      "name": "Amazon.com, Inc.",
+      "sector": "Consumer Cyclical",
+      "held": true,
+      "price": 426.28,
+      "pct_from_52w_high": -22.9,
+      "pct_above_52w_low": 76.7,
+      "vs_ma50_pct": 8.4,
+      "vs_ma200_pct": 16.2,
+      "trailing_pe": 36.0,
+      "forward_pe": 19.3,
+      "peg": 1.48,
+      "price_to_book": 5.5,
+      "dividend_yield_pct": 1.76,
+      "revenue_growth_pct": 9.5,
+      "earnings_growth_pct": 56.7,
+      "profit_margin_pct": 29.4,
+      "market_cap": 1214844407227,
+      "analyst_target": 467.26,
+      "pe_percentile": 41.6,
+      "pe_low": 16.7,
+      "pe_high": 68.9,
+      "pe_median": 42.8,
+      "pe_used": 38.4,
+      "valuation_label": "around its usual",
+      "analyst_upside_pct": 9.6
+    },
+    {
+      "symbol": "NVDA",
+      "name": "NVIDIA Corporation",
+      "sector": "Technology",
+      "held": true,
+      "price": 513.36,
+      "pct_from_52w_high": -3.0,
+      "pct_above_52w_low": 76.6,
+      "vs_ma50_pct": -2.3,
+      "vs_ma200_pct": -12.7,
+      "trailing_pe": 18.4,
+      "forward_pe": 33.3,
+      "peg": 2.59,
+      "price_to_book": 25.2,
+      "dividend_yield_pct": 1.66,
+      "revenue_growth_pct": 29.1,
+      "earnings_growth_pct": -35.0,
+      "profit_margin_pct": 27.7,
+      "market_cap": 1889795473945,
+      "analyst_target": 652.06,
+      "pe_percentile": 23.4,
+      "pe_low": 13.1,
+      "pe_high": 36.6,
+      "pe_median": 24.9,
+      "pe_used": 18.6,
+      "valuation_label": "below its usual",
+      "analyst_upside_pct": 27.0
+    },
+    {
+      "symbol": "COST",
+      "name": "Costco Wholesale Corporation",
+      "sector": "Consumer Defensive",
+      "held": true,
+      "price": 266.08,
+      "pct_from_52w_high": -30.3,
+      "pct_above_52w_low": 31.8,
+      "vs_ma50_pct": 0.6,
+      "vs_ma200_pct": -3.7,
+      "trailing_pe": 52.4,
+      "forward_pe": 27.9,
+      "peg": 1.96,
+      "price_to_book": 19.8,
+      "dividend_yield_pct": 2.3,
+      "revenue_growth_pct": 25.7,
+      "earnings_growth_pct": 50.6,
+      "profit_margin_pct": 45.8,
+      "market_cap": 1401233138723,
+      "analyst_target": 277.11,
+      "pe_percentile": 47.5,
+      "pe_low": 24.9,
+      "pe_high": 77.9,
+      "pe_median": 51.4,
+      "pe_used": 50.1,
+      "valuation_label": "around its usual",
+      "analyst_upside_pct": 4.1
+    },
+    {
+      "symbol": "JPM",
+      "name": "JPMorgan Chase & Co.",
+      "sector": "Financial Services",
+      "held": true,
+      "price": 191.41,
+      "pct_from_52w_high": -7.4,
+      "pct_above_52w_low": 24.0,
+      "vs_ma50_pct": -9.4,
+      "vs_ma200_pct": 7.7,
+      "trailing_pe": 18.5,
+      "forward_pe": 14.6,
+      "peg": 0.82,
+      "price_to_book": 25.8,
+      "dividend_yield_pct": 0.2,
+      "revenue_growth_pct": 29.3,
+      "earnings_growth_pct": 6.7,
+      "profit_margin_pct": 36.3,
+      "market_cap": 1456918366087,
+      "analyst_target": 201.87,
+      "pe_percentile": 35.4,
+      "pe_low": 11.8,
+      "pe_high": 27.6,
+      "pe_median": 19.7,
+      "pe_used": 17.4,
+      "valuation_label": "below its usual",
+      "analyst_upside_pct": 5.5
+    },
+    {
+      "symbol": "V",
+      "name": "Visa Inc.",
+      "sector": "Financial Services",
+      "held": true,
+      "price": 307.18,
+      "pct_from_52w_high": -10.7,
+      "pct_above_52w_low": 23.2,
+      "vs_ma50_pct": 8.9,
+      "vs_ma200_pct": -7.4,
+      "trailing_pe": 23.0,
+      "forward_pe": 39.7,
+      "peg": 1.67,
+      "price_to_book": 3.5,
+      "dividend_yield_pct": 1.0,
+      "revenue_growth_pct": 17.6,
+      "earnings_growth_pct": 54.3,
+      "profit_margin_pct": 35.2,
+      "market_cap": 1623423276118,
+      "analyst_target": 376.69,
+      "pe_percentile": 20.2,
+      "pe_low": 24.4,
+      "pe_high": 80.9,
+      "pe_median": 52.7,
+      "pe_used": 35.8,
+      "valuation_label": "below its usual",
+      "analyst_upside_pct": 22.6
+    },
+    {
+      "symbol": "SCHD",
+      "name": "Schwab US Dividend Equity ETF",
+      "sector": null,
+      "held": true,
+      "price": 390.31,
+      "pct_from_52w_high": -11.4,
+      "pct_above_52w_low": 16.5,
+      "vs_ma50_pct": 6.3,
+      "vs_ma200_pct": 6.0,
+      "trailing_pe": null,
+      "forward_pe": null,
+      "peg": null,
+      "price_to_book": null,
+      "dividend_yield_pct": 2.59,
+      "revenue_growth_pct": null,
+      "earnings_growth_pct": null,
+      "profit_margin_pct": null,
+      "market_cap": null,
+      "analyst_target": null,
+      "pe_percentile": null,
+      "pe_low": null,
+      "pe_high": null,
+      "pe_median": null,
+      "pe_used": null,
+      "valuation_label": "no P/E history",
+      "analyst_upside_pct": null
+    },
+    {
+      "symbol": "TSM",
+      "name": "Taiwan Semiconductor Manufacturing",
+      "sector": "Technology",
+      "held": true,
+      "price": 587.04,
+      "pct_from_52w_high": -12.5,
+      "pct_above_52w_low": 73.3,
+      "vs_ma50_pct": -0.1,
+      "vs_ma200_pct": -3.2,
+      "trailing_pe": 51.9,
+      "forward_pe": 31.4,
+      "peg": 2.07,
+      "price_to_book": 19.9,
+      "dividend_yield_pct": 1.33,
+      "revenue_growth_pct": 6.8,
+      "earnings_growth_pct": 1.6,
+      "profit_margin_pct": 35.4,
+      "market_cap": 126102479814,
+      "analyst_target": 566.03,
+      "pe_percentile": 74.6,
+      "pe_low": 24.3,
+      "pe_high": 52.3,
+      "pe_median": 38.3,
+      "pe_used": 45.2,
+      "valuation_label": "above its usual",
+      "analyst_upside_pct": -3.6
+    },
+    {
+      "symbol": "DIS",
+      "name": "The Walt Disney Company",
+      "sector": "Communication Services",
+      "held": true,
+      "price": 558.69,
+      "pct_from_52w_high": -7.9,
+      "pct_above_52w_low": 41.2,
+      "vs_ma50_pct": -0.5,
+      "vs_ma200_pct": 2.8,
+      "trailing_pe": 33.8,
+      "forward_pe": 29.8,
+      "peg": 2.48,
+      "price_to_book": 12.8,
+      "dividend_yield_pct": 1.97,
+      "revenue_growth_pct": 11.6,
+      "earnings_growth_pct": 33.4,
+      "profit_margin_pct": 22.3,
+      "market_cap": 2906328649106,
+      "analyst_target": 602.87,
+      "pe_percentile": 67.3,
+      "pe_low": 11.1,
+      "pe_high": 52.4,
+      "pe_median": 31.8,
+      "pe_used": 38.9,
+      "valuation_label": "above its usual",
+      "analyst_upside_pct": 7.9
+    },
+    {
+      "symbol": "AAPL",
+      "name": "Apple Inc.",
+      "sector": "Technology",
+      "held": false,
+      "price": 125.62,
+      "pct_from_52w_high": -15.9,
+      "pct_above_52w_low": 13.7,
+      "vs_ma50_pct": -5.4,
+      "vs_ma200_pct": 11.2,
+      "trailing_pe": 47.3,
+      "forward_pe": 38.1,
+      "peg": 1.54,
+      "price_to_book": 23.3,
+      "dividend_yield_pct": 1.65,
+      "revenue_growth_pct": 4.4,
+      "earnings_growth_pct": 98.0,
+      "profit_margin_pct": 19.2,
+      "market_cap": 2751358677379,
+      "analyst_target": 157.69,
+      "pe_percentile": 87.9,
+      "pe_low": 11.4,
+      "pe_high": 46.1,
+      "pe_median": 28.8,
+      "pe_used": 41.9,
+      "valuation_label": "near its priciest",
+      "analyst_upside_pct": 25.5
+    },
+    {
+      "symbol": "LLY",
+      "name": "Eli Lilly and Company",
+      "sector": "Healthcare",
+      "held": false,
+      "price": 471.61,
+      "pct_from_52w_high": -15.3,
+      "pct_above_52w_low": 38.2,
+      "vs_ma50_pct": 1.0,
+      "vs_ma200_pct": -0.5,
+      "trailing_pe": 23.5,
+      "forward_pe": 14.7,
+      "peg": 2.66,
+      "price_to_book": 15.3,
+      "dividend_yield_pct": 0.55,
+      "revenue_growth_pct": 5.1,
+      "earnings_growth_pct": 36.7,
+      "profit_margin_pct": 11.5,
+      "market_cap": 1440385010329,
+      "analyst_target": 571.83,
+      "pe_percentile": 36.5,
+      "pe_low": 27.7,
+      "pe_high": 46.6,
+      "pe_median": 37.1,
+      "pe_used": 34.6,
+      "valuation_label": "below its usual",
+      "analyst_upside_pct": 21.3
+    },
+    {
+      "symbol": "UNH",
+      "name": "UnitedHealth Group Inc.",
+      "sector": "Healthcare",
+      "held": false,
+      "price": 469.03,
+      "pct_from_52w_high": -12.0,
+      "pct_above_52w_low": 20.8,
+      "vs_ma50_pct": 3.0,
+      "vs_ma200_pct": 24.0,
+      "trailing_pe": 27.0,
+      "forward_pe": 12.3,
+      "peg": 2.65,
+      "price_to_book": 12.5,
+      "dividend_yield_pct": 0.95,
+      "revenue_growth_pct": 23.6,
+      "earnings_growth_pct": 16.8,
+      "profit_margin_pct": 17.4,
+      "market_cap": 1487555973451,
+      "analyst_target": 630.48,
+      "pe_percentile": 82.2,
+      "pe_low": 18.0,
+      "pe_high": 50.6,
+      "pe_median": 34.3,
+      "pe_used": 44.8,
+      "valuation_label": "near its priciest",
+      "analyst_upside_pct": 34.4
+    },
+    {
+      "symbol": "ASML",
+      "name": "ASML Holding N.V.",
+      "sector": "Technology",
+      "held": false,
+      "price": 159.32,
+      "pct_from_52w_high": -7.2,
+      "pct_above_52w_low": 7.3,
+      "vs_ma50_pct": 4.9,
+      "vs_ma200_pct": 2.4,
+      "trailing_pe": 44.9,
+      "forward_pe": 30.1,
+      "peg": 1.16,
+      "price_to_book": 10.5,
+      "dividend_yield_pct": 1.89,
+      "revenue_growth_pct": 14.6,
+      "earnings_growth_pct": -38.4,
+      "profit_margin_pct": 30.8,
+      "market_cap": 1648187202131,
+      "analyst_target": 214.59,
+      "pe_percentile": 27.4,
+      "pe_low": 11.4,
+      "pe_high": 35.5,
+      "pe_median": 23.4,
+      "pe_used": 18.0,
+      "valuation_label": "below its usual",
+      "analyst_upside_pct": 34.7
+    },
+    {
+      "symbol": "SHOP",
+      "name": "Shopify Inc.",
+      "sector": "Technology",
+      "held": false,
+      "price": 555.05,
+      "pct_from_52w_high": -15.1,
+      "pct_above_52w_low": 87.1,
+      "vs_ma50_pct": 4.1,
+      "vs_ma200_pct": -2.4,
+      "trailing_pe": 46.7,
+      "forward_pe": 26.6,
+      "peg": 1.81,
+      "price_to_book": 6.1,
+      "dividend_yield_pct": 2.58,
+      "revenue_growth_pct": 11.2,
+      "earnings_growth_pct": 18.6,
+      "profit_margin_pct": 15.9,
+      "market_cap": 1045113112797,
+      "analyst_target": 588.09,
+      "pe_percentile": 96.4,
+      "pe_low": 14.5,
+      "pe_high": 70.2,
+      "pe_median": 42.4,
+      "pe_used": 68.2,
+      "valuation_label": "near its priciest",
+      "analyst_upside_pct": 6.0
+    },
+    {
+      "symbol": "ISRG",
+      "name": "Intuitive Surgical, Inc.",
+      "sector": "Healthcare",
+      "held": false,
+      "price": 445.42,
+      "pct_from_52w_high": -16.0,
+      "pct_above_52w_low": 88.2,
+      "vs_ma50_pct": -12.5,
+      "vs_ma200_pct": -10.6,
+      "trailing_pe": 57.8,
+      "forward_pe": 33.1,
+      "peg": 2.51,
+      "price_to_book": 15.1,
+      "dividend_yield_pct": 0.12,
+      "revenue_growth_pct": 11.2,
+      "earnings_growth_pct": 21.9,
+      "profit_margin_pct": 31.2,
+      "market_cap": 2086577060043,
+      "analyst_target": 592.58,
+      "pe_percentile": 21.7,
+      "pe_low": 29.7,
+      "pe_high": 50.9,
+      "pe_median": 40.3,
+      "pe_used": 34.3,
+      "valuation_label": "below its usual",
+      "analyst_upside_pct": 33.0
+    }
+  ],
+  "earnings": {
+    "upcoming": [
+      {
+        "symbol": "AAPL",
+        "date": "2025-07-21",
+        "upcoming": true,
+        "eps_estimate": 2.56,
+        "reported_eps": null,
+        "surprise_pct": null
+      },
+      {
+        "symbol": "AMZN",
+        "date": "2025-07-24",
+        "upcoming": true,
+        "eps_estimate": 0.54,
+        "reported_eps": null,
+        "surprise_pct": null
+      },
+      {
+        "symbol": "ASML",
+        "date": "2025-07-27",
+        "upcoming": true,
+        "eps_estimate": 8.11,
+        "reported_eps": null,
+        "surprise_pct": null
+      },
+      {
+        "symbol": "COST",
+        "date": "2025-07-30",
+        "upcoming": true,
+        "eps_estimate": 6.05,
+        "reported_eps": null,
+        "surprise_pct": null
+      },
+      {
+        "symbol": "DIS",
+        "date": "2025-08-02",
+        "upcoming": true,
+        "eps_estimate": 0.68,
+        "reported_eps": null,
+        "surprise_pct": null
+      },
+      {
+        "symbol": "GOOG",
+        "date": "2025-08-05",
+        "upcoming": true,
+        "eps_estimate": 6.0,
+        "reported_eps": null,
+        "surprise_pct": null
+      },
+      {
+        "symbol": "ISRG",
+        "date": "2025-08-08",
+        "upcoming": true,
+        "eps_estimate": 1.71,
+        "reported_eps": null,
+        "surprise_pct": null
+      },
+      {
+        "symbol": "JPM",
+        "date": "2025-08-11",
+        "upcoming": true,
+        "eps_estimate": 4.88,
+        "reported_eps": null,
+        "surprise_pct": null
+      },
+      {
+        "symbol": "LLY",
+        "date": "2025-08-14",
+        "upcoming": true,
+        "eps_estimate": 8.4,
+        "reported_eps": null,
+        "surprise_pct": null
+      },
+      {
+        "symbol": "MSFT",
+        "date": "2025-08-17",
+        "upcoming": true,
+        "eps_estimate": 7.86,
+        "reported_eps": null,
+        "surprise_pct": null
+      },
+      {
+        "symbol": "NVDA",
+        "date": "2025-08-20",
+        "upcoming": true,
+        "eps_estimate": 7.98,
+        "reported_eps": null,
+        "surprise_pct": null
+      },
+      {
+        "symbol": "SHOP",
+        "date": "2025-08-23",
+        "upcoming": true,
+        "eps_estimate": 6.79,
+        "reported_eps": null,
+        "surprise_pct": null
+      },
+      {
+        "symbol": "TSM",
+        "date": "2025-08-26",
+        "upcoming": true,
+        "eps_estimate": 0.43,
+        "reported_eps": null,
+        "surprise_pct": null
+      },
+      {
+        "symbol": "UNH",
+        "date": "2025-08-29",
+        "upcoming": true,
+        "eps_estimate": 6.95,
+        "reported_eps": null,
+        "surprise_pct": null
+      },
+      {
+        "symbol": "V",
+        "date": "2025-09-01",
+        "upcoming": true,
+        "eps_estimate": 1.73,
+        "reported_eps": null,
+        "surprise_pct": null
+      }
+    ],
+    "recent_surprises": [
+      {
+        "symbol": "AAPL",
+        "beats": 2,
+        "of": 4,
+        "last_date": "2025-06-19",
+        "last_surprise_pct": 12.6,
+        "last_reported_eps": 7.63,
+        "last_estimate": 6.78
+      },
+      {
+        "symbol": "AMZN",
+        "beats": 1,
+        "of": 4,
+        "last_date": "2025-06-15",
+        "last_surprise_pct": -10.4,
+        "last_reported_eps": 5.21,
+        "last_estimate": 5.81
+      },
+      {
+        "symbol": "ASML",
+        "beats": 1,
+        "of": 4,
+        "last_date": "2025-06-11",
+        "last_surprise_pct": 17.8,
+        "last_reported_eps": 4.1,
+        "last_estimate": 3.48
+      },
+      {
+        "symbol": "COST",
+        "beats": 2,
+        "of": 4,
+        "last_date": "2025-06-07",
+        "last_surprise_pct": 8.7,
+        "last_reported_eps": 7.44,
+        "last_estimate": 6.84
+      },
+      {
+        "symbol": "DIS",
+        "beats": 2,
+        "of": 4,
+        "last_date": "2025-06-03",
+        "last_surprise_pct": 17.2,
+        "last_reported_eps": 1.21,
+        "last_estimate": 1.03
+      },
+      {
+        "symbol": "GOOG",
+        "beats": 4,
+        "of": 4,
+        "last_date": "2025-05-30",
+        "last_surprise_pct": -7.8,
+        "last_reported_eps": 4.54,
+        "last_estimate": 4.92
+      },
+      {
+        "symbol": "ISRG",
+        "beats": 2,
+        "of": 4,
+        "last_date": "2025-05-26",
+        "last_surprise_pct": 11.2,
+        "last_reported_eps": 6.69,
+        "last_estimate": 6.02
+      },
+      {
+        "symbol": "JPM",
+        "beats": 4,
+        "of": 4,
+        "last_date": "2025-05-22",
+        "last_surprise_pct": -4.7,
+        "last_reported_eps": 2.82,
+        "last_estimate": 2.96
+      },
+      {
+        "symbol": "LLY",
+        "beats": 1,
+        "of": 4,
+        "last_date": "2025-05-18",
+        "last_surprise_pct": 9.6,
+        "last_reported_eps": 8.44,
+        "last_estimate": 7.7
+      },
+      {
+        "symbol": "MSFT",
+        "beats": 3,
+        "of": 4,
+        "last_date": "2025-05-14",
+        "last_surprise_pct": 11.9,
+        "last_reported_eps": 4.26,
+        "last_estimate": 3.81
+      },
+      {
+        "symbol": "NVDA",
+        "beats": 2,
+        "of": 4,
+        "last_date": "2025-05-10",
+        "last_surprise_pct": 9.7,
+        "last_reported_eps": 6.81,
+        "last_estimate": 6.21
+      },
+      {
+        "symbol": "SHOP",
+        "beats": 3,
+        "of": 4,
+        "last_date": "2025-05-06",
+        "last_surprise_pct": -3.5,
+        "last_reported_eps": 1.26,
+        "last_estimate": 1.31
+      },
+      {
+        "symbol": "TSM",
+        "beats": 1,
+        "of": 4,
+        "last_date": "2025-05-02",
+        "last_surprise_pct": 1.4,
+        "last_reported_eps": 5.17,
+        "last_estimate": 5.1
+      },
+      {
+        "symbol": "UNH",
+        "beats": 4,
+        "of": 4,
+        "last_date": "2025-04-28",
+        "last_surprise_pct": -19.4,
+        "last_reported_eps": 3.01,
+        "last_estimate": 3.74
+      },
+      {
+        "symbol": "V",
+        "beats": 3,
+        "of": 4,
+        "last_date": "2025-04-24",
+        "last_surprise_pct": -13.3,
+        "last_reported_eps": 1.25,
+        "last_estimate": 1.44
+      }
+    ]
+  }
+}
