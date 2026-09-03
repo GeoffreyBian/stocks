@@ -9,9 +9,10 @@ the index once my deposits are stripped out? which of my exits look bad in
 hindsight? when a stock I own fell 30%, did I buy, sell, or sit there? is this
 company expensive compared to how the market usually prices it?*
 
-**[See the dashboard with demo data →](dashboard/demo.html)**
+**[See the dashboard with demo data →](https://htmlpreview.github.io/?https://raw.githubusercontent.com/GeoffreyBian/stocks/main/dashboard/demo.html)**
 (every figure on that page is randomly generated — see
-[Demo mode](#demo-mode))
+[Demo mode](#demo-mode). Or clone and open `dashboard/demo.html` directly;
+it's one self-contained file with no build step.)
 
 > Read-only and local. The OAuth scope is `invest.read trade.read tax.read`,
 > so nothing here can place a trade or move money, and no financial data is
