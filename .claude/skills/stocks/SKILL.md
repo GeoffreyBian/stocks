@@ -160,6 +160,17 @@ committing or pushing it.
   -69% "crash" when real performance drawdown was about -11%.
 - Dips are filtered to those bottoming on/after the first-funded date — the
   user explicitly does not want dips from before they started investing.
+- A dip's reference high is **frozen when the dip starts**, not recomputed off
+  the rolling 252-day max. Using the rolling high lets a long dip "recover"
+  purely because the old peak ages out of the window — SOXL was reported
+  recovered while still 38% below the peak it fell from. Freezing it is the
+  standard drawdown definition.
+- "Bought the dip" means buying on the **decline leg** (dip_start → bottom).
+  Counting the whole window through recovery inflated it roughly 3x, since
+  two thirds of those fills landed after the bottom at higher prices.
+- The dip buckets (bought / sold / both / recovery-only / sat out) are a
+  partition and must sum to the total. An earlier version tested the activity
+  string for "BUY" and "SELL" separately, so dips with both were counted twice.
 - Trade `symbol` comes from the activity's `assetSymbol`, not
   `api.security_id_to_symbol()` — that call is case-sensitive against a
   differently-cased `securityId` and silently returns a `[securityId]`
