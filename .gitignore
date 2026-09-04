@@ -11,3 +11,7 @@ dashboard/dashboard.html
 # Just in case anything credential-shaped ends up on disk.
 .env
 *.session
+
+# Encrypted web-dashboard blob. Published by force-push to the website repo,
+# never committed here.
+dashboard/portfolio.enc.json

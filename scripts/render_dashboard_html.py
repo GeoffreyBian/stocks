@@ -23,6 +23,9 @@ def render(data_path: Path, out_path: Path) -> None:
     template = TEMPLATE_PATH.read_text()
     data = data_path.read_text().replace("</script>", "<\\/script>")
     out = template.replace("__DASHBOARD_DATA_JSON__", data)
+    # The artifact build inlines its data, so the passphrase gate in the shared
+    # template never activates and has no blob to point at.
+    out = out.replace("__ENCRYPTED_DATA_URL__", "")
     out_path.write_text(out)
     try:
         shown = out_path.relative_to(ROOT)

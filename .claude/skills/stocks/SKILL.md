@@ -65,6 +65,11 @@ ask them to re-run it — never attempt a workaround.
 The OAuth scope is read-only (`invest.read trade.read tax.read`). Keep it
 that way: nothing here should ever be able to place a trade or move money.
 
+The same applies to the **web dashboard passphrase** (Keychain account
+`dashboard-passphrase`). Never generate one in chat, never read it back, never
+type it on the user's behalf. If it isn't set, hand them the `!` command for
+`scripts/dashboard_key.py` and wait.
+
 ## Data layout
 
 ```
@@ -82,6 +87,8 @@ stocks/
     build_watchlist.py            # valuation percentiles, dips, earnings
     build_dashboard_snapshot.py   # everything -> dashboard/dashboard_data.json
     render_dashboard_html.py      # template + data -> dashboard/dashboard.html
+    dashboard_key.py              # sets the web passphrase (USER runs this)
+    publish_web_dashboard.py      # encrypts + publishes to a GitHub Pages repo
   data/raw/         # timestamped raw API snapshots - gitignored
   data/processed/   # derived CSVs - gitignored
   journal/notes.md  # freeform trade rationale, newest on top
@@ -93,6 +100,12 @@ stocks/
 
 `data/` and anything with real dollar figures is gitignored. Never suggest
 committing or pushing it.
+
+## Publishing to a public site
+
+`publish_web_dashboard.py` encrypts the snapshot and force-pushes the blob to
+a dedicated branch of the website repo, then rewrites the standalone page.
+Commit that page only when the template changed — it holds no data.
 
 ## Other workflows
 
@@ -130,6 +143,16 @@ committing or pushing it.
 
 ## Standing rules & hard-won gotchas
 
+- The web dashboard's ciphertext branch is force-pushed as a single orphan
+  commit on purpose. Never "fix" that into a normal commit history: the target
+  repo is public, so ordinary commits would leave every past snapshot
+  permanently fetchable, and rotating the passphrase would stop meaning
+  anything. Same reason `render_dashboard_html.py` blanks
+  `__ENCRYPTED_DATA_URL__` — the artifact build must not point at the blob.
+- `dashboard_template.html` serves two builds. Its JS is a top-level
+  `renderDashboard(data)` plus a bootstrap that either reads the inlined
+  snapshot (artifact) or runs the passphrase gate (website). Keep it one
+  function; don't fork the template.
 - Real personal financial data. Never fabricate a number. If a script errors
   or a CSV is missing, show the error — don't fill the gap with a plausible
   figure.

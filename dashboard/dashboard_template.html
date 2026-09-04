@@ -226,9 +226,44 @@
     padding: 9px 13px; margin-bottom: 18px; font-size: 12.5px; font-weight: 600;
     color: var(--status-warning-text);
   }
+
+  /* Passphrase gate. Only the website build reaches this: the artifact build
+     inlines its snapshot and unlocks nothing. */
+  .gate {
+    max-width: 380px; margin: 12vh auto 0; padding: 22px;
+    background: var(--surface-1); border: 1px solid var(--border);
+    border-radius: 12px;
+  }
+  .gate h1 { font-size: 17px; font-weight: 600; margin: 0 0 6px; }
+  .gate p.gate-intro { color: var(--text-muted); font-size: 12.5px; margin: 0 0 16px; }
+  .gate input {
+    width: 100%; padding: 9px 11px; font: inherit; color: var(--text-primary);
+    background: var(--page); border: 1px solid var(--border); border-radius: 8px;
+  }
+  .gate input:focus { outline: 2px solid var(--s1); outline-offset: -1px; }
+  .gate button {
+    width: 100%; margin-top: 10px; padding: 9px 11px; font: inherit;
+    font-weight: 600; color: var(--surface-1); background: var(--text-primary);
+    border: 0; border-radius: 8px; cursor: pointer;
+  }
+  .gate button[disabled] { opacity: .55; cursor: default; }
+  .gate .gate-msg { margin: 12px 0 0; font-size: 12.5px; min-height: 1.2em; }
+  .gate .gate-msg.err { color: var(--status-critical); }
 </style>
 
-<div class="wrap">
+<div class="gate" id="gate" hidden>
+  <h1>Portfolio</h1>
+  <p class="gate-intro">This page is encrypted. The passphrase never leaves your
+    browser, and nothing readable is stored anywhere it could be fetched from.</p>
+  <form id="gate-form">
+    <input type="password" id="gate-pass" aria-label="Passphrase"
+           autocomplete="current-password" autofocus>
+    <button type="submit" id="gate-btn">Unlock</button>
+  </form>
+  <p class="gate-msg" id="gate-msg" role="status"></p>
+</div>
+
+<div class="wrap" id="wrap">
   <div class="demo-banner" id="demo-banner" hidden></div>
   <header class="page-head">
     <h1>Portfolio Dashboard</h1>
@@ -368,8 +403,7 @@
 
 <script id="dashboard-data" type="application/json">__DASHBOARD_DATA_JSON__</script>
 <script>
-(function () {
-  const data = JSON.parse(document.getElementById('dashboard-data').textContent);
+function renderDashboard(data) {
   const cssVar = (n) => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
 
   const money = (n, d = 0) => n == null ? '—'
@@ -817,5 +851,73 @@
       <td>${esc(d.recovered_date || 'ongoing')}</td></tr>`).join('')
       : `<tr><td colspan="5" class="empty">Nothing notable.</td></tr>`}
     </tbody>`;
+}
+</script>
+
+<script>
+(function () {
+  // Two builds share this template. render_dashboard_html.py inlines the
+  // snapshot above and this bootstrap just hands it straight over.
+  // publish_web_dashboard.py leaves it empty and points ENC_URL at an
+  // AES-256-GCM blob, so on the public web the figures exist only in memory,
+  // only after someone types the passphrase.
+  const ENC_URL = '__ENCRYPTED_DATA_URL__';
+  const holder = document.getElementById('dashboard-data');
+  const inline = holder ? holder.textContent.trim() : '';
+  if (inline.charAt(0) === '{') { renderDashboard(JSON.parse(inline)); return; }
+
+  const wrap = document.getElementById('wrap');
+  const gate = document.getElementById('gate');
+  const msg = document.getElementById('gate-msg');
+  const btn = document.getElementById('gate-btn');
+  const input = document.getElementById('gate-pass');
+  wrap.hidden = true;
+  gate.hidden = false;
+
+  const b64 = (s) => Uint8Array.from(atob(s), c => c.charCodeAt(0));
+  let blob = null;
+
+  async function load() {
+    if (!blob) {
+      const res = await fetch(ENC_URL, { cache: 'no-cache' });
+      if (!res.ok) throw new Error('Could not load the data file (' + res.status + ').');
+      blob = await res.json();
+    }
+    return blob;
+  }
+
+  async function decrypt(pass, b) {
+    const base = await crypto.subtle.importKey(
+      'raw', new TextEncoder().encode(pass), 'PBKDF2', false, ['deriveKey']);
+    const key = await crypto.subtle.deriveKey(
+      { name: 'PBKDF2', salt: b64(b.salt), iterations: b.iterations, hash: 'SHA-256' },
+      base, { name: 'AES-GCM', length: 256 }, false, ['decrypt']);
+    const plain = await crypto.subtle.decrypt(
+      { name: 'AES-GCM', iv: b64(b.iv) }, key, b64(b.ciphertext));
+    return JSON.parse(new TextDecoder().decode(plain));
+  }
+
+  document.getElementById('gate-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (!input.value) return;
+    btn.disabled = true;
+    msg.className = 'gate-msg';
+    msg.textContent = 'Decrypting\u2026';
+    try {
+      const data = await decrypt(input.value, await load());
+      input.value = '';
+      gate.hidden = true;
+      wrap.hidden = false;
+      renderDashboard(data);
+    } catch (err) {
+      // GCM authenticates as it decrypts, so a failure here is a wrong key
+      // rather than a corrupt file - unless the fetch itself was the problem.
+      msg.className = 'gate-msg err';
+      msg.textContent = /Could not load/.test(err.message)
+        ? err.message : 'Wrong passphrase.';
+      btn.disabled = false;
+      input.select();
+    }
+  });
 })();
 </script>

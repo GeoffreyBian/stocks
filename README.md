@@ -129,6 +129,7 @@ data/raw/                       # timestamped full API snapshots
 data/processed/                 # every derived CSV
 dashboard/dashboard_data.json   # the generated snapshot
 dashboard/dashboard.html        # the rendered page, data inlined
+dashboard/portfolio.enc.json    # the encrypted blob (see below)
 ```
 
 What *is* tracked: the scripts, the empty dashboard template, `watchlist.txt`,
@@ -138,6 +139,30 @@ tooling and a fake portfolio — never anyone's holdings.
 If you fork this and publish it, note that `journal/notes.md` **is** tracked.
 It's meant for trade rationale, so either keep it free of figures or add it to
 your own `.gitignore`.
+
+### Publishing to a public site
+
+`publish_web_dashboard.py` puts the dashboard on a GitHub Pages site without
+putting the numbers there. The snapshot is encrypted locally with AES-256-GCM
+under a key derived from a passphrase (PBKDF2-SHA256, 600k iterations); the
+published page ships no data at all and decrypts in the browser via Web Crypto
+after you type the passphrase. The passphrase lives in the macOS Keychain and
+is never committed.
+
+Two details that matter more than they look:
+
+- The blob goes to a dedicated branch as a **fresh orphan commit, force-pushed
+  every time**. Normal commits would leave every past snapshot readable forever
+  in a public repo's history, which would make rotating the passphrase
+  pointless — old ciphertext would still be sitting there under the old key.
+- Because the blob is public, an attacker gets unlimited offline guesses with
+  no server to rate-limit them. The passphrase is the whole security model, so
+  `dashboard_key.py` generates a high-entropy one rather than trusting you to
+  invent it.
+
+This is encryption, not access control. GitHub Pages has no access control to
+offer — private Pages is Enterprise-only. If you want real authentication,
+host the page somewhere that can put an identity provider in front of it.
 
 ## How it's structured
 
